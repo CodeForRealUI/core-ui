@@ -1,7 +1,7 @@
 import React from 'react';
 
 import FormScreen from '../../components/FormScreen/Loadable';
-import { email, password } from '../../validators';
+import { emailValidator, passwordValidator } from '../../validators';
 const FIELDS = [
   {
     name: 'email',
@@ -9,7 +9,7 @@ const FIELDS = [
     label: 'Email',
     placeholder: 'Enter email',
     value: '',
-    validation: email,
+    validation: emailValidator,
 
   },
   {
@@ -18,11 +18,11 @@ const FIELDS = [
     label: 'Password',
     placeholder: 'Enter password',
     value: '',
-    validation: password,
+    validation: passwordValidator,
   },
 ];
 
-function Signin() {
+function SignIn() {
   const onSubmit = async ({ email, password }) => {
     console.log(email, password);
   };
@@ -41,4 +41,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SignIn;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Responsive, Container, Grid } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 import ScreenHeader from '../ScreenHeader/Loadable';
 import AbstractForm from '../AbstractForm/Loadable';
@@ -33,5 +34,9 @@ function FormScreen({ screenHeader, abstractForm }) {
     </div>
   );
 }
+FormScreen.propTypes = {
+  screenHeader: PropTypes.element,
+  abstractForm: PropTypes.object,
+};
 
 export default FormScreen;

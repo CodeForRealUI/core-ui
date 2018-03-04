@@ -3,12 +3,11 @@ import { Formik } from 'formik';
 import Yup from 'yup';
 import {
   Form,
-  Divider,
   Menu,
   Segment,
   Message,
-  Dropdown,
 } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 function AbstractFormField({
   field,
@@ -16,8 +15,6 @@ function AbstractFormField({
   touched,
   errors,
   handleChange,
-  setFieldValue,
-  validation,
 }) {
   const inputProps = {
     ...field,
@@ -25,9 +22,6 @@ function AbstractFormField({
     value: values[field.name],
     onChange: handleChange,
   };
-  const handleSelect = (event, { value }) =>
-    setFieldValue(inputProps.name, value);
-
   return (
     <Segment key={field.name} inverted>
       <Form.Input className="seethrough" {...inputProps} />
@@ -39,7 +33,7 @@ function AbstractFormField({
   );
 }
 
-function AbstractForm({ fields, onSubmit, sendText }) {
+function AbstractForm({ fields, onSubmit }) {
   const initialValues = fields.reduce(
     (values, field) => ({ ...values, [field.name]: field.value }),
     {}
@@ -67,9 +61,9 @@ function AbstractForm({ fields, onSubmit, sendText }) {
         <Form onSubmit={handleSubmit} inverted>
           <Segment attached="top" className="fieldview">
             <Segment.Group>
-              {fields.map((field, index) => (
+              {fields.map((field) => (
                 <AbstractFormField
-                  key={index}
+                  key={field.name}
                   {...{
                     field,
                     values,
@@ -84,7 +78,7 @@ function AbstractForm({ fields, onSubmit, sendText }) {
           </Segment>
           <Menu attached="top" inverted widths={2}>
             <Menu.Item
-              content={sendText || 'Login'}
+              content={'Login'}
               onClick={handleSubmit}
               disabled={isSubmitting}
             />
@@ -95,5 +89,17 @@ function AbstractForm({ fields, onSubmit, sendText }) {
   );
 }
 
+AbstractFormField.propTypes = {
+  field: PropTypes.arrayOf(PropTypes.object),
+  values: PropTypes.object,
+  touched: PropTypes.bool,
+  errors: PropTypes.object,
+  handleChange: PropTypes.func,
+};
+
+AbstractForm.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.object),
+  onSubmit: PropTypes.func,
+};
 
 export default AbstractForm;
