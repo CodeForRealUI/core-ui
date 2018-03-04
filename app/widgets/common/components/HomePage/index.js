@@ -15,7 +15,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   render() {
     return (
       <h1>
-        welcome to code for real
+        welcome to code for real, bitches!
       </h1>
     );
   }
