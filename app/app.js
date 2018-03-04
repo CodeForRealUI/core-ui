@@ -22,7 +22,7 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.nginx.conf';
 
 // Import root app
-import App from './widgets/common/components/HomePage';
+import Layout from './widgets/common/components/Layout/Loadable';
 
 /* eslint-enable import/no-unresolved, import/extensions */
 
@@ -41,7 +41,7 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <App />
+        <Layout />
       </ConnectedRouter>
     </Provider>,
     MOUNT_NODE
