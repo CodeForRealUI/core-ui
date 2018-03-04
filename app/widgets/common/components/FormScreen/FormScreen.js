@@ -10,7 +10,7 @@ function FormScreen({ screenHeader, abstractForm }) {
   const form = <AbstractForm {...abstractForm} />;
 
   return (
-    <div>
+    <Container fluid>
       <Responsive as={Container} maxWidth={Responsive.onlyTablet.maxWidth}>
         <div className="mobile">
           {header}
@@ -31,7 +31,7 @@ function FormScreen({ screenHeader, abstractForm }) {
           </Grid.Row>
         </Grid>
       </Responsive>
-    </div>
+    </Container>
   );
 }
 FormScreen.propTypes = {

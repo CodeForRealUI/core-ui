@@ -8,6 +8,7 @@ import {
   Message,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { omit } from 'lodash';
 
 function AbstractFormField({
   field,
@@ -16,8 +17,9 @@ function AbstractFormField({
   errors,
   handleChange,
 }) {
+  const fieldElement = omit(field, ['validation']);
   const inputProps = {
-    ...field,
+    ...fieldElement,
     error: !!(touched[field.name] && errors[field.name]),
     value: values[field.name],
     onChange: handleChange,
@@ -27,7 +29,7 @@ function AbstractFormField({
       <Form.Input className="seethrough" {...inputProps} />
       {touched[field.name] &&
         errors[field.name] && (
-          <Message icon="warning sign" header={errors[field.name]} negative />
+          <Message header={errors[field.name]} negative />
       )}
     </Segment>
   );
@@ -53,7 +55,6 @@ function AbstractForm({ fields, onSubmit }) {
         values,
         errors,
         touched,
-        setFieldValue,
         handleChange,
         handleSubmit,
         isSubmitting,
@@ -70,7 +71,6 @@ function AbstractForm({ fields, onSubmit }) {
                     touched,
                     errors,
                     handleChange,
-                    setFieldValue,
                   }}
                 />
               ))}
@@ -90,9 +90,9 @@ function AbstractForm({ fields, onSubmit }) {
 }
 
 AbstractFormField.propTypes = {
-  field: PropTypes.arrayOf(PropTypes.object),
+  field: PropTypes.object,
   values: PropTypes.object,
-  touched: PropTypes.bool,
+  touched: PropTypes.object,
   errors: PropTypes.object,
   handleChange: PropTypes.func,
 };
