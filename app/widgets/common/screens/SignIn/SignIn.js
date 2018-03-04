@@ -1,7 +1,7 @@
 import React from 'react';
 
 import FormScreen from '../../components/FormScreen/Loadable';
-
+import { email, password } from '../../validators';
 const FIELDS = [
   {
     name: 'email',
@@ -9,6 +9,8 @@ const FIELDS = [
     label: 'Email',
     placeholder: 'Enter email',
     value: '',
+    validation: email,
+
   },
   {
     name: 'password',
@@ -16,6 +18,7 @@ const FIELDS = [
     label: 'Password',
     placeholder: 'Enter password',
     value: '',
+    validation: password,
   },
 ];
 

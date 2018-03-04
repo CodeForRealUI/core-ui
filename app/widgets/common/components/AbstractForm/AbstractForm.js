@@ -17,6 +17,7 @@ function AbstractFormField({
   errors,
   handleChange,
   setFieldValue,
+  validation,
 }) {
   const inputProps = {
     ...field,
@@ -24,49 +25,21 @@ function AbstractFormField({
     value: values[field.name],
     onChange: handleChange,
   };
-  const [, options] = inputProps.options || [];
-  const inputTypes = {
-    textarea: () => (
-      <Form.Field
-        className="textareaWrapper"
-        control="textarea"
-        {...inputProps}
-      />
-    ),
-    select: () => (
-      <Form.Field>
-        <label>{inputProps.label}</label>
-        <Dropdown
-          inverted
-          placeholder={inputProps.placeholder}
-          search
-          selection
-          value={inputProps.value}
-          options={options}
-          onChange={handleSelect}
-        />
-      </Form.Field>
-    ),
-  };
   const handleSelect = (event, { value }) =>
     setFieldValue(inputProps.name, value);
 
   return (
     <Segment key={field.name} inverted>
-      {inputTypes[field.type] ? (
-        inputTypes[field.type]()
-      ) : (
-        <Form.Input className="seethrough" {...inputProps} />
-      )}
+      <Form.Input className="seethrough" {...inputProps} />
       {touched[field.name] &&
         errors[field.name] && (
           <Message icon="warning sign" header={errors[field.name]} negative />
-        )}
+      )}
     </Segment>
   );
 }
 
-function AbstractForm({ fields, onSubmit, actions, sendText }) {
+function AbstractForm({ fields, onSubmit, sendText }) {
   const initialValues = fields.reduce(
     (values, field) => ({ ...values, [field.name]: field.value }),
     {}
@@ -89,7 +62,6 @@ function AbstractForm({ fields, onSubmit, actions, sendText }) {
         setFieldValue,
         handleChange,
         handleSubmit,
-        handleReset,
         isSubmitting,
       }) => (
         <Form onSubmit={handleSubmit} inverted>
@@ -110,27 +82,13 @@ function AbstractForm({ fields, onSubmit, actions, sendText }) {
               ))}
             </Segment.Group>
           </Segment>
-          <Divider hidden />
           <Menu attached="top" inverted widths={2}>
             <Menu.Item
-              icon="send outline"
-              content={sendText || 'Send'}
+              content={sendText || 'Login'}
               onClick={handleSubmit}
               disabled={isSubmitting}
             />
-            <Menu.Item
-              icon="refresh"
-              onClick={handleReset}
-              content="Reset"
-              disabled={isSubmitting}
-            />
           </Menu>
-          {actions &&
-            actions.map((action, index) => (
-              <Menu attached="bottom" inverted widths={1}>
-                <Menu.Item {...action} />
-              </Menu>
-            ))}
         </Form>
       )}
     />
