@@ -1,13 +1,15 @@
 import React from 'react';
+import { Divider } from 'semantic-ui-react';
 
 import FormScreen from '../../components/FormScreen/Loadable';
 import { emailValidator, passwordValidator } from '../../validators';
+import './SignIn.less';
+
 const FIELDS = [
   {
     name: 'email',
     type: 'email',
-    label: 'Email',
-    placeholder: 'Enter email',
+    placeholder: 'Email Address',
     value: '',
     validation: emailValidator,
 
@@ -15,8 +17,7 @@ const FIELDS = [
   {
     name: 'password',
     type: 'password',
-    label: 'Password',
-    placeholder: 'Enter password',
+    placeholder: 'Password',
     value: '',
     validation: passwordValidator,
   },
@@ -33,11 +34,14 @@ function SignIn() {
   };
 
   return (
-    <FormScreen
-      {...{
-        abstractForm,
-      }}
-    />
+    <div>
+      <FormScreen
+        {...{
+          abstractForm,
+        }}
+      />
+      <Divider className="divider" horizontal>or connect with</Divider>
+    </div>
   );
 }
 

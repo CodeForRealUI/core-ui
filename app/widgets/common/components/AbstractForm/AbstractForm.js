@@ -6,6 +6,7 @@ import {
   Menu,
   Segment,
   Message,
+  Divider,
 } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
@@ -25,13 +26,17 @@ function AbstractFormField({
     onChange: handleChange,
   };
   return (
-    <Segment key={field.name} inverted>
-      <Form.Input className="seethrough" {...inputProps} />
-      {touched[field.name] &&
+    <div>
+      <Segment key={field.name} inverted>
+        <Form.Input className="seethrough" {...inputProps} />
+        {touched[field.name] &&
         errors[field.name] && (
           <Message header={errors[field.name]} negative />
       )}
-    </Segment>
+
+      </Segment>
+      <Divider horizontal />
+    </div>
   );
 }
 
@@ -78,7 +83,7 @@ function AbstractForm({ fields, onSubmit }) {
           </Segment>
           <Menu attached="top" inverted widths={2}>
             <Menu.Item
-              content={'Login'}
+              content={'Log In'}
               onClick={handleSubmit}
               disabled={isSubmitting}
             />
