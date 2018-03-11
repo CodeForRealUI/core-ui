@@ -1165,7 +1165,7 @@ babel-register@^6.24.1, babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.25.0, babel-runtime@^6.26.0:
+babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -5767,6 +5767,12 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+material-ui-icons@^1.0.0-beta.36:
+  version "1.0.0-beta.36"
+  resolved "https://registry.yarnpkg.com/material-ui-icons/-/material-ui-icons-1.0.0-beta.36.tgz#86390a61f4c83f718eaba77ccce575834f2cf2a8"
+  dependencies:
+    recompose "^0.26.0"
+
 material-ui@^1.0.0-beta.37:
   version "1.0.0-beta.37"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.37.tgz#19097dd05e61936d2d8449874aeed1c9ae9ceb8a"
@@ -7818,16 +7824,6 @@ semantic-ui-less@^2.3.0:
   resolved "https://registry.yarnpkg.com/semantic-ui-less/-/semantic-ui-less-2.3.0.tgz#241b02a73722317c419d874ea02f6e2b1019c6e0"
   dependencies:
     jquery x.*
-
-semantic-ui-react@^0.78.3:
-  version "0.78.3"
-  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-0.78.3.tgz#c45ca374c8f1b61bc4fbe29e564a5fe6af5403f8"
-  dependencies:
-    babel-runtime "^6.25.0"
-    classnames "^2.2.5"
-    fbjs "^0.8.16"
-    lodash "^4.17.4"
-    prop-types "^15.5.10"
 
 semver-regex@^1.0.0:
   version "1.0.0"

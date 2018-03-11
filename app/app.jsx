@@ -24,7 +24,7 @@ import 'file-loader?name=[name].[ext]!./.nginx.conf';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
-
+import Layout from './src/shared/components/Layout';
 
 // Create redux store with history
 const initialState = {};
@@ -36,6 +36,7 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
+        <Layout />
       </ConnectedRouter>
     </Provider>,
     MOUNT_NODE
