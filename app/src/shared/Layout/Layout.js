@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
-import routes, { RecursiveRoutes } from '../../../../routes';
+import routes, { RecursiveRoutes } from '../../../routes';
 import NavBar from '../NavBar';
 class Layout extends Component {
 
