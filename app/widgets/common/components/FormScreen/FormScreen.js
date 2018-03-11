@@ -1,5 +1,6 @@
 import React from 'react';
 import { Responsive, Container, Grid } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 import ScreenHeader from '../ScreenHeader/Loadable';
 import AbstractForm from '../AbstractForm/Loadable';
@@ -9,7 +10,7 @@ function FormScreen({ screenHeader, abstractForm }) {
   const form = <AbstractForm {...abstractForm} />;
 
   return (
-    <div>
+    <Container fluid>
       <Responsive as={Container} maxWidth={Responsive.onlyTablet.maxWidth}>
         <div className="mobile">
           {header}
@@ -30,8 +31,12 @@ function FormScreen({ screenHeader, abstractForm }) {
           </Grid.Row>
         </Grid>
       </Responsive>
-    </div>
+    </Container>
   );
 }
+FormScreen.propTypes = {
+  screenHeader: PropTypes.element,
+  abstractForm: PropTypes.object,
+};
 
 export default FormScreen;

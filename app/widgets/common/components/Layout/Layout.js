@@ -10,9 +10,8 @@ import routes, { RecursiveRoutes } from '../../routes';
 
 class Layout extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    const { location: { pathname: currentPathname } } = this.props;
-    const { location: { pathname: nextPathname } } = nextProps;
+  static propTypes = {
+    location: PropTypes.object,
   }
 
   render() {
@@ -21,9 +20,9 @@ class Layout extends Component {
     );
 
     const viewport =
-        routes.map((route, i) => (
+        routes.map((route) => (
           <RecursiveRoutes
-            key={i}
+            key={route.path}
             {...route}
           />
         ));

@@ -3,12 +3,13 @@ import { Formik } from 'formik';
 import Yup from 'yup';
 import {
   Form,
-  Divider,
   Menu,
   Segment,
   Message,
-  Dropdown,
+  Divider,
 } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { omit } from 'lodash';
 
 function AbstractFormField({
   field,
@@ -16,30 +17,30 @@ function AbstractFormField({
   touched,
   errors,
   handleChange,
-  setFieldValue,
-  validation,
 }) {
+  const fieldElement = omit(field, ['validation']);
   const inputProps = {
-    ...field,
+    ...fieldElement,
     error: !!(touched[field.name] && errors[field.name]),
     value: values[field.name],
     onChange: handleChange,
   };
-  const handleSelect = (event, { value }) =>
-    setFieldValue(inputProps.name, value);
-
   return (
-    <Segment key={field.name} inverted>
-      <Form.Input className="seethrough" {...inputProps} />
-      {touched[field.name] &&
+    <div>
+      <Segment key={field.name} inverted>
+        <Form.Input className="seethrough" {...inputProps} />
+        {touched[field.name] &&
         errors[field.name] && (
-          <Message icon="warning sign" header={errors[field.name]} negative />
+          <Message header={errors[field.name]} negative />
       )}
-    </Segment>
+
+      </Segment>
+      <Divider horizontal />
+    </div>
   );
 }
 
-function AbstractForm({ fields, onSubmit, sendText }) {
+function AbstractForm({ fields, onSubmit }) {
   const initialValues = fields.reduce(
     (values, field) => ({ ...values, [field.name]: field.value }),
     {}
@@ -59,7 +60,6 @@ function AbstractForm({ fields, onSubmit, sendText }) {
         values,
         errors,
         touched,
-        setFieldValue,
         handleChange,
         handleSubmit,
         isSubmitting,
@@ -67,16 +67,15 @@ function AbstractForm({ fields, onSubmit, sendText }) {
         <Form onSubmit={handleSubmit} inverted>
           <Segment attached="top" className="fieldview">
             <Segment.Group>
-              {fields.map((field, index) => (
+              {fields.map((field) => (
                 <AbstractFormField
-                  key={index}
+                  key={field.name}
                   {...{
                     field,
                     values,
                     touched,
                     errors,
                     handleChange,
-                    setFieldValue,
                   }}
                 />
               ))}
@@ -84,7 +83,7 @@ function AbstractForm({ fields, onSubmit, sendText }) {
           </Segment>
           <Menu attached="top" inverted widths={2}>
             <Menu.Item
-              content={sendText || 'Login'}
+              content={'Log In'}
               onClick={handleSubmit}
               disabled={isSubmitting}
             />
@@ -95,5 +94,17 @@ function AbstractForm({ fields, onSubmit, sendText }) {
   );
 }
 
+AbstractFormField.propTypes = {
+  field: PropTypes.object,
+  values: PropTypes.object,
+  touched: PropTypes.object,
+  errors: PropTypes.object,
+  handleChange: PropTypes.func,
+};
+
+AbstractForm.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.object),
+  onSubmit: PropTypes.func,
+};
 
 export default AbstractForm;
