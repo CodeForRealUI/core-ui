@@ -20,15 +20,11 @@ import 'sanitize.css/sanitize.css';
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.nginx.conf';
 
-// Import root app
-import Layout from './widgets/common/components/Layout/Loadable';
 
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
 
-// Import CSS reset and Global Styles
-import './global-styles';
 
 // Create redux store with history
 const initialState = {};
@@ -40,7 +36,6 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <Layout />
       </ConnectedRouter>
     </Provider>,
     MOUNT_NODE

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import HOME_SCREENS from './homeScreens';
+import BASIC_SCREENS from './basicScreens';
 
 export const RecursiveRoutes = (route) => (
   <Route
@@ -17,4 +17,4 @@ export const RecursiveRoutes = (route) => (
   />
   );
 
-export default [...HOME_SCREENS];
+export default [...BASIC_SCREENS];

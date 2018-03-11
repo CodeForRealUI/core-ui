@@ -4,7 +4,6 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Remove this line once the following warning goes away (it was meant for webpack loader authors not users):
 // 'DeprecationWarning: loaderUtils.parseQuery() received a non-string value which can be problematic,
@@ -32,18 +31,9 @@ module.exports = (options) => ({
         // Preprocess our own .css files
         // This is the place to add your own loaders (e.g. sass/less etc.)
         // for a list of loaders, see https://webpack.js.org/loaders/#styling
-        test: /\.less$/,
+        test: /\.scss$/,
         exclude: /node_modules/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
-          'less-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         // Preprocess 3rd party .css files located in node_modules
@@ -107,14 +97,8 @@ module.exports = (options) => ({
       },
     }),
     new webpack.NamedModulesPlugin(),
-    new ExtractTextPlugin({
-      filename: '[name].[contenthash].css',
-    }),
   ]),
   resolve: {
-    alias: {
-      '../../theme.config$': path.join(__dirname, 'theme/theme.config'),
-    },
     modules: ['app', 'node_modules'],
     extensions: [
       '.js',
