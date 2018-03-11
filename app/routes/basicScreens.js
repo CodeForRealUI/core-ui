@@ -3,7 +3,7 @@
  * "Basic screens" are screens that do not require authorization
  * and are unrelated to the core functionality of the product.
  */
-import NotFound from '../src/shared/components/NotFound';
+import NotFound from '../src/shared/NotFound';
 
 export default [
   {
