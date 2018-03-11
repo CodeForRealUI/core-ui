@@ -22,7 +22,6 @@ import 'file-loader?name=[name].[ext]!./.nginx.conf';
 
 
 /* eslint-enable import/no-unresolved, import/extensions */
-
 import configureStore from './configureStore';
 import Layout from './src/shared/Layout';
 
