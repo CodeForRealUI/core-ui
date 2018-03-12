@@ -5,6 +5,7 @@
  */
 import NotFound from '../src/shared/NotFound';
 import SignIn from '../src/SignIn';
+import Dashboard from '../src/Dashboard';
 
 export default [
   {
@@ -16,4 +17,9 @@ export default [
     path: '/404',
     component: NotFound,
   },
+  {
+    path: '/dashboard',
+    component: Dashboard,
+    exact: true
+  }
 ];

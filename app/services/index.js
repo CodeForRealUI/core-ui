@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://codeforreal.herokuapp.com/';
+
 class AppService {
     constructor(baseURL) {
         this.client = axios.create({
-            baseURL
+            baseURL: baseURL || BASE_URL
         });
     }
 

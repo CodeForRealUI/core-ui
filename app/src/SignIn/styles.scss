@@ -1,3 +1,5 @@
+@import '~sass/variables';
+@import '~sass/colors';
 
 .sign-in-container {
     background: linear-gradient(134.94deg, #FF5E21 0%, #5E5FEE 100%);
@@ -16,5 +18,20 @@
     .sign-in-box {
         text-align: center;
         padding: 40px;
+
+        .forgot-password-link {
+            padding: 15px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .test {
+            background: $button-background;
+            color: $white-01;
+            width: 100%;
+            text-transform: none;
+            padding: 15px;
+            font-size: 20px;
+        }
     }
 }
