@@ -23,7 +23,7 @@ import 'file-loader?name=[name].[ext]!./.nginx.conf';
 
 /* eslint-enable import/no-unresolved, import/extensions */
 import configureStore from './configureStore';
-import Layout from './src/shared/Layout';
+import Layout from './src/Layout';
 
 // Create redux store with history
 const initialState = {};

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch } from 'react-router-dom';
 
-import routes, { RecursiveRoutes } from '../../../routes';
-import NavBar from '../NavBar';
+import routes, { RecursiveRoutes } from '../../routes';
 import './styles.scss';
 class Layout extends Component {
 
@@ -24,7 +23,6 @@ class Layout extends Component {
 
     return (
       <div>
-        <NavBar />
         {viewport}
       </div>
     );

@@ -4,7 +4,7 @@
  * and are unrelated to the core functionality of the product.
  */
 import NotFound from '../src/shared/NotFound';
-import SignIn from '../src/shared/SignIn';
+import SignIn from '../src/SignIn';
 
 export default [
   {
@@ -13,7 +13,7 @@ export default [
     component: SignIn,
   },
   {
-    path: '',
+    path: '/404',
     component: NotFound,
   },
 ];
