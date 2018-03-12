@@ -4,16 +4,16 @@
  * and are unrelated to the core functionality of the product.
  */
 import NotFound from '../src/shared/NotFound';
+import SignIn from '../src/shared/SignIn';
 
 export default [
   {
     path: '/sign-in',
     exact: true,
-    // component: SignIn,
+    component: SignIn,
   },
   {
     path: '',
-    exact: true,
     component: NotFound,
   },
 ];
