@@ -1,3 +1,20 @@
-.sign-in {
+
+.sign-in-container {
     background: linear-gradient(134.94deg, #FF5E21 0%, #5E5FEE 100%);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1000;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .sign-in-box {
+        text-align: center;
+        padding: 40px;
+    }
 }
