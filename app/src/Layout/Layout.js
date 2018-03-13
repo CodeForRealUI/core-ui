@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch } from 'react-router-dom';
 
-import routes, { RecursiveRoutes } from '../../../routes';
-import NavBar from '../NavBar';
-import './styles.scss';
+import routes, { RecursiveRoutes } from '../../routes';
 class Layout extends Component {
 
   render() {
     const viewport = (
-      <div className="viewport-wrapper">
         <Switch>
           { routes.map((route) => (
             <RecursiveRoutes
@@ -18,13 +15,11 @@ class Layout extends Component {
             />
         ))}
         </Switch>
-      </div>
     );
 
 
     return (
       <div>
-        <NavBar />
         {viewport}
       </div>
     );

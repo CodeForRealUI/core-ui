@@ -100,6 +100,9 @@ module.exports = (options) => ({
   ]),
   resolve: {
     modules: ['app', 'node_modules'],
+    alias: {
+      sass: path.resolve(__dirname, '../../app/sass')
+    },
     extensions: [
       '.js',
       '.jsx',
