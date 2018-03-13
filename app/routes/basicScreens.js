@@ -14,12 +14,12 @@ export default [
     component: SignIn,
   },
   {
-    path: '/404',
-    component: NotFound,
-  },
-  {
     path: '/dashboard',
     component: Dashboard,
     exact: true
+  },
+  {
+    path: '',
+    component: NotFound,
   }
 ];
