@@ -1,8 +1,10 @@
 import React from 'react';
-import { CircularProgress } from 'material-ui/Progress'
+import { CircularProgress } from 'material-ui/Progress';
+
+import './styles.scss';
 
 const Spinner = () => (
-    <CircularProgress size={50} color="secondary" thickness={7} />
+  <CircularProgress className="spinner" size={50} color="secondary" thickness={7} />
 );
 
 export default Spinner;

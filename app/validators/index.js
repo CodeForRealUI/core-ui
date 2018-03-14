@@ -12,8 +12,9 @@ export const passwordValidator = Yup.string()
 export const passwordAgainValidator = Yup.mixed().test(
   'match',
   'Passwords must match',
-  function (currentPassword) {
-    return currentPassword === this.options.parent.newPassword;
+  (password, confirmedPassword) => {
+    console.log(confirmedPassword);
+    return password == confirmedPassword;
   }
 );
 

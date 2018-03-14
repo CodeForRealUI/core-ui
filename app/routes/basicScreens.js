@@ -5,6 +5,7 @@
  */
 import NotFound from '../src/shared/NotFound';
 import SignIn from '../src/SignIn';
+import SignUp from '../src/SignIn/SignUp';
 import Dashboard from '../src/Dashboard';
 
 export default [
@@ -12,6 +13,11 @@ export default [
     path: '/sign-in',
     exact: true,
     component: SignIn,
+  },
+  {
+    path: '/sign-up',
+    exact: true,
+    component: SignUp,
   },
   {
     path: '',

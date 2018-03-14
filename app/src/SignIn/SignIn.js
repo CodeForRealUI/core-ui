@@ -106,6 +106,9 @@ class SignIn extends Component {
           <h1>Sign In</h1>
           {this.renderForm()}
         </Paper>
+        <Link className="sign-up-link" to="/sign-up">
+        Create an Account
+        </Link>
       </div>
     );
   }
