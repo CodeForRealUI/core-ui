@@ -1,7 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import ApiService from 'services';
 import { SIGNUP_REQUEST, signupRequestSuccess, signupRequestFailure } from 'data/actions/signup';
-import { push } from 'react-router-redux';
 
 
 export function* signupFlow({ signupData }) {

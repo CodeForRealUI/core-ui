@@ -114,7 +114,9 @@ class SignIn extends Component {
   }
 }
 
-SignIn.propTypes = {};
+SignIn.propTypes = {
+  login: PropTypes.func.isRequired,
+};
 
 export default connect(null, (dispatch) => ({
   login: (email, password) =>
