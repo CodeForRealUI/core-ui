@@ -18,12 +18,17 @@ class Layout extends Component {
   render() {
     return (
       <div>
-        <Route path={first(routes).path} component={first(routes).component} />
-        <RenderIf predicate={this.isAuthenticated()}>
-          {tail(routes).map(({ path, component, ...props }) => (
-            <Route key={path} path={path} component={component} {...props} />
-          ))}
-        </RenderIf>
+        <Switch>
+          <Route path={first(routes).path} component={first(routes).component} />
+          <RenderIf predicate={this.isAuthenticated()}>
+            <Switch>
+              {tail(routes).map(({ path, component, ...props }) => (
+                <Route key={path} path={path} component={component} {...props} />
+              ))}
+              <Route path="" component={NotFound} />              
+            </Switch>
+          </RenderIf>
+        </Switch>
       </div>
     );
   }
