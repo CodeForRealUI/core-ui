@@ -5,7 +5,7 @@
  */
 import NotFound from '../src/shared/NotFound';
 import SignIn from '../src/SignIn';
-import SignUp from '../src/SignIn/SignUp';
+import SignUp from '../src/SignUp';
 import Dashboard from '../src/Dashboard';
 
 export default [

@@ -300,7 +300,6 @@
     "url-loader": "0.5.8",
     "webpack": "3.5.5",
     "webpack-dev-middleware": "1.11.0",
-    "webpack-hot-middleware": "2.18.0",
-    "yup": "^0.24.1"
+    "webpack-hot-middleware": "2.18.0"
   }
 }
