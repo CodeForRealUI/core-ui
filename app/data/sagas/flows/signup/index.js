@@ -1,11 +1,12 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery, call } from 'redux-saga/effects';
 import { SIGNUP_REQUEST, signupRequestSuccess, signupRequestFailure } from 'data/actions/signup';
-
+import ApiService from 'services';
 
 export function* signupFlow({ signupData }) {
   try {
-      // TODO call signup
-    yield put(signupRequestSuccess());
+    const service = new ApiService('https://damp-beyond-45634.herokuapp.com');
+    const response = yield call([service, 'signup'], signupData);
+    yield put(signupRequestSuccess(response));
   } catch (exception) {
     yield put(signupRequestFailure(exception));
   }

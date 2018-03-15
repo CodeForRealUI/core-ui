@@ -9,4 +9,4 @@ export const required = (text) => {
 
 export const mustMatch = (field, fieldName) => (text, state) => state[field] === text ? null : ErrorMessages.mustMatch(fieldName);
 
-export const minLength = (length) => (text) => text.length >= length ? null : ErrorMessages.minLength(length);
+export const minLength = (length) => (text) => text && text.length >= length ? null : ErrorMessages.minLength(length);

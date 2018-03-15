@@ -15,6 +15,10 @@ class AppService {
       password,
     }).then((response) => response.data);
   }
+  async signup(signupData) {
+    const { response } = await this.client.post('/auth', signupData);
+    return response;
+  }
 }
 
 export default AppService;

@@ -10,7 +10,7 @@ import { signupRequest } from "../../data/actions/signup";
 import "./styles.scss";
 
 const fieldValidations = [
-  ruleRunner("password1", "password", minLength(6)),
+  ruleRunner("password1", "password", minLength(8)),
   ruleRunner("password2", "passwords", mustMatch("password1", "Password"))
 ];
 
@@ -38,7 +38,14 @@ class SignUp extends Component {
     if (!isEmpty(this.state.validationErrors)) {
       return null;
     }
-    this.props.signup();
+    const { password1, password2, firstName, lastName, email } = this.state
+    const signUpData = {
+      name: `${firstName} ${lastName}`,
+      email,
+      password: password1,
+      password_confirmation: password2
+    }
+    this.props.signup(signUpData);
   };
 
   handleFieldChanged(field) {
@@ -61,34 +68,33 @@ class SignUp extends Component {
       <form onSubmit={this.handleSignUp}>
         <FormGroup>
           <TextField
+            onChange={this.handleFieldChanged("firstName")}
             id="first-name"
             fullWidth
             label="First name"
             required
-            margin="normal"
           />
           <TextField
+            onChange={this.handleFieldChanged("lastName")}
             id="last-name"
             fullWidth
             label="Last Name"
             required
-            margin="normal"
           />
           <TextField
+            onChange={this.handleFieldChanged("email")}
             id="email-address"
             fullWidth
             label="Email Address"
             type="email"
             required
-            margin="normal"
           />
           <TextField
+            onChange={this.handleFieldChanged("phone")}
             id="mobile-number"
             type="tel"
             fullWidth
             label="Mobile Number"
-            required
-            margin="normal"
           />
           <Grid container>
             <Grid item xs={6}>
