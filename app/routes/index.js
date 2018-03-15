@@ -1,20 +1,26 @@
+/**
+ * @overview
+ * "Basic screens" are screens that do not require authorization
+ * and are unrelated to the core functionality of the product.
+ */
+import SignIn from '../src/SignIn';
+import Dashboard from '../src/Dashboard';
 
-import React from 'react';
-import { Route } from 'react-router-dom';
 
-import BASIC_SCREENS from './basicScreens';
+export const PATHS = {
+  SIGN_IN: '/sign-in',
+  DASHBOARD: '/dashboard'
+};
 
-export const RecursiveRoutes = (route) => (
-  <Route
-    path={route.path}
-    render={(props) => (
-      <route.component
-        {...props}
-        {...route.additionalProps}
-        routes={route.routes}
-      />
-      )}
-  />
-  );
-
-export default [...BASIC_SCREENS];
+export default [
+  {
+    path: PATHS.SIGN_IN,
+    component: SignIn,
+    exact: true
+  },
+  {
+    path: PATHS.DASHBOARD,
+    component: Dashboard,
+    exact: true
+  },
+];

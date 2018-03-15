@@ -9,11 +9,9 @@ class AppService {
         });
     }
 
-    login(email, password) {
-        return this.client.post('/api/login', {
-            email,
-            password
-        }).then(response => response.data);
+    async login(email, password) {
+        const response = await this.client.post('/api/login', { email, password });
+        return response.data;
     }
 }
 
