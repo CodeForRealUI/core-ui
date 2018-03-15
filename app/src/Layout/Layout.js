@@ -7,14 +7,14 @@ class Layout extends Component {
 
   render() {
     const viewport = (
-        <Switch>
-          { routes.map((route) => (
-            <RecursiveRoutes
-              key={route.path}
-              {...route}
-            />
+      <Switch>
+        { routes.map((route) => (
+          <RecursiveRoutes
+            key={route.path}
+            {...route}
+          />
         ))}
-        </Switch>
+      </Switch>
     );
 
 

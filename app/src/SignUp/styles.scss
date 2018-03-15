@@ -1,7 +1,7 @@
 @import '~sass/variables';
 @import '~sass/colors';
 
-.sign-in-container {
+.sign-up-container {
     background: $sign-in-background;
     position: fixed;
     top: 0px;
@@ -12,36 +12,26 @@
     padding: 0px;
     margin: 0px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 
-    .sign-up-link {
-        color: white;
-        font-size: 18px;
-        text-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
-        padding: 30px;
-        text-decoration: none;
-    }
-
-    .sign-in-box {
+    .sign-up-box {
         text-align: center;
         padding: 40px;
 
-        .forgot-password-link {
-            padding: 15px;
-            color: black;
-            text-decoration: none;
-        }
-
-        .test {
+        .sign-up-button {
             background: $button-background;
             color: $white-01;
             width: 100%;
+            margin-top:30px;
             text-transform: none;
             padding: 15px;
             font-size: 20px;
             border-radius: 3px;
+        }
+        button:disabled {
+            opacity:0.5
         }
         .sign-in-with-facebook-button {
             color: $white-01;
@@ -62,6 +52,7 @@
             font-size: 14px;
             background-color: #FFFFFE;	
         }
+     
     }
   
 }
