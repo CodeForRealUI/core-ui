@@ -3,5 +3,5 @@ import Spinner from '../shared/Spinner';
 
 export default Loadable({
   loader: () => import('./SignUp'),
-  loading: Spinner,
+  loading: () => null,
 });

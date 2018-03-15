@@ -7,9 +7,8 @@ import { push } from 'react-router-redux';
 function* authenticate(email, password) {
   try {
     const service = new ApiService();
-    const response = yield call([service, 'login'], email, password);
-    yield put(loginRequestSuccess(response));
-    return response;
+    const { data } = yield call([service, 'login'], email, password);
+    yield put(loginRequestSuccess(data));
   } catch (error) {
     yield put(loginRequestFailure(error));
   }
