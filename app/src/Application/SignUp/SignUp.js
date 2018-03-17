@@ -80,7 +80,7 @@ class SignUp extends Component {
           />
           <TextField
             onChange={this.handleFieldChanged('lastName')}
-            error={!!this.errorFor('firstName')}
+            error={!!this.errorFor('lastName')}
             value={this.state.lastName}
             id="last-name"
             fullWidth
