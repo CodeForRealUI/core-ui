@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { Paper, TextField, FormGroup, Grid } from "material-ui";
 import { isEmpty } from "lodash";
 
-import { mustMatch, minLength } from "src/validators";
-import { run, ruleRunner } from "src/validators/ruleRunner.js";
+import { mustMatch, minLength } from "_validators";
+import { run, ruleRunner } from "_validators/ruleRunner.js";
 import { signupRequest } from "../../../data/actions/signup";
 import "./styles.scss";
 

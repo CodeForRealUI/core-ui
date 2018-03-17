@@ -102,6 +102,7 @@ module.exports = (options) => ({
     modules: ['app', 'node_modules'],
     alias: {
       sass: path.resolve(__dirname, '../../app/sass'),
+      _validators: path.resolve(__dirname, '../../app/validators')
     },
     extensions: [
       '.js',
