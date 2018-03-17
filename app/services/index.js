@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://codeforreal.herokuapp.com/';
+const BASE_URL = 'https://damp-beyond-45634.herokuapp.com/';
 
 class AppService {
   constructor(baseURL) {
@@ -10,11 +10,12 @@ class AppService {
   }
 
   login(email, password) {
-    return this.client.post('/api/login', {
+    return this.client.post('/auth/sign_in', {
       email,
       password,
-    }).then((response) => response.data);
+    });
   }
+
   signup(signupData) {
     return this.client.post('/auth', signupData);
   }
