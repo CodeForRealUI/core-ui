@@ -1,7 +1,7 @@
 import Loadable from 'react-loadable';
-import Spinner from '../shared/Spinner';
+import Spinner from 'src/shared/Spinner';
 
 export default Loadable({
-  loader: () => import('./SignIn'),
+  loader: () => import('./Dashboard'),
   loading: Spinner,
 });
