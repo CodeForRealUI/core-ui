@@ -1,4 +1,5 @@
 export const ruleRunner = (field, name, ...validations) => (state) => {
+
   for (const v of validations) {
     const errorMessageFunc = v(state[field], state);
     if (errorMessageFunc) {

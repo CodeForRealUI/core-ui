@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
+
+import NotFound from 'src/shared/NotFound';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
-import NotFound from 'src/shared/NotFound';
+
 
 // Compose the root level routes here
 class Application extends Component {
 
   isAuthenticated() {
-    const token = localStorage.getItem("c4r-auth-token"); // TODO, move the localStorage key to config
+    const token = localStorage.getItem('c4r-auth-token'); // TODO, move the localStorage key to config
     return !!token;
   }
 

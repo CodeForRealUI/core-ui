@@ -17,7 +17,8 @@ class AppService {
   }
 
   signup(signupData) {
-    return this.client.post('/auth', signupData);
+    return this.client.post('/auth', signupData).then((response) => response,
+      (error) => Promise.reject(error.response));
   }
 }
 
