@@ -54,6 +54,7 @@ class SignIn extends Component {
       <div>
         <FormGroup row>
           <TextField
+            autoFocus
             id="email"
             defaultValue={this.getLocalStorageEmail()}
             onChange={this.handleEmailChange}

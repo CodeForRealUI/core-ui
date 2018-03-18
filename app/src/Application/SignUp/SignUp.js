@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Paper, TextField, FormGroup, Grid } from 'material-ui';
 import { isEmpty } from 'lodash';
+import { Link } from 'react-router-dom';
 
 import { mustMatch, minLength, validName } from '_validators';
 import { run, ruleRunner } from '_validators/ruleRunner.js';
@@ -70,6 +71,7 @@ class SignUp extends Component {
       <form onSubmit={this.handleSignUp}>
         <FormGroup>
           <TextField
+            autoFocus
             onChange={this.handleFieldChanged('firstName')}
             value={this.state.firstName}
             id="first-name"
@@ -146,6 +148,9 @@ class SignUp extends Component {
           <h1>Sign Up</h1>
           {this.renderForm()}
         </Paper>
+        <Link className="sign-in-link" to="/sign-in">
+        Log In Instead
+        </Link>
       </div>
     );
   }
