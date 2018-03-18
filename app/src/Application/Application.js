@@ -6,6 +6,7 @@ import NotFound from 'src/shared/NotFound';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Dashboard from './Dashboard';
+import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 
 
@@ -23,7 +24,10 @@ class Application extends Component {
         <Switch>
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
-          <Route path="/forgot-password" component={ResetPassword} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+          {// todo move reset-password to isUathenticatned
+          }
+          <Route path="/reset-password" component={ResetPassword} />
           {/* Routes not requiring authentication above this line */}
           {!this.isAuthenticated() && (<Redirect to="sign-in" />)}
           <Route path="/dashboard" component={Dashboard} />
