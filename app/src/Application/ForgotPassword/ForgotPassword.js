@@ -48,7 +48,7 @@ class ForgotPassword extends Component {
           {this.renderForm()}
         </Paper>
         <Link className="sign-in-link" to="/sign-in">
-        Log In Instead
+          Log In Instead
         </Link>
       </div>
     );
