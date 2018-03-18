@@ -30,6 +30,7 @@ class AppService {
       })
       .then((response) => response, (error) => Promise.reject(error.response));
   }
+  // TODO Move to browser utils
   passwordReset(password1, password2) {
     function getJsonFromUrl() {
       const query = location.search.substr(1);
