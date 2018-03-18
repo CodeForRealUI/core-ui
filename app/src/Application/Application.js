@@ -18,7 +18,7 @@ class Application extends Component {
 
   render() {
     return (
-      <div>
+      <div className="application-container">
         <Switch>
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-up" component={SignUp} />
