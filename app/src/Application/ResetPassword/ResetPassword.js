@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import './styles.scss';
 
-class SignUp extends Component {
+class ResetPassword extends Component {
 
   handleResetPassword(e) {
     this.props.resetPassword();
@@ -52,10 +52,10 @@ class SignUp extends Component {
   }
 }
 
-SignUp.propTypes = {
-  signup: PropTypes.func.isRequired,
+ResetPassword.propTypes = {
+  resetPassword: PropTypes.func.isRequired,
 };
 
 export default connect(null, (dispatch) => ({
   resetPassword: (email) => {},
-}))(SignUp);
+}))(ResetPassword);
