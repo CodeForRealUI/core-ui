@@ -1,3 +1,40 @@
-.menuButton {
-  background: blue
+@import '~sass/colors';
+
+.nav-container {
+    flex-grow: 1;
+}
+
+.dashboard-title {
+    line-height: 19px;
+    flex: 1;
+}
+
+.dashboard-type {
+    color: $purple-01;
+}
+
+.logo-placeholder {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+    .logo {
+        background-color: grey;
+        color: white;
+        border-radius: 100px;
+        font-size: 12px;
+        width: 55px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        padding: 21px;
+    }
+}
+
+.nav-bar-link {
+    color: $dark-grey-01;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 15px;
 }
