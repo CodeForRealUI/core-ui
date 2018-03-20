@@ -11,7 +11,7 @@ import {
 import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
 import ApiService from 'services';
 import { get } from 'lodash';
-import swal from 'sweetalert2/dist/sweetalert2.all.min.js';
+import swal from 'sweetalert2';
 
 export function* passwordResetEmailRequest({ email }) {
   try {
