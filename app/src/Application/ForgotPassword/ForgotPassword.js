@@ -7,16 +7,15 @@ import { Link } from 'react-router-dom';
 import { passwordResetEmailRequest } from '../../../data/actions/forgotPassword';
 import './styles.scss';
 
-class ForgotPassword extends Component {
-
-  handleForgotPassword = (e) => {
+const ForgotPassword = ({ handlePasswordResetEmailRequest }) => {
+  const handleForgotPassword = (e) => {
     e.preventDefault();
-    this.props.passwordResetEmailRequest(e.target.email.value);
-  }
+    handlePasswordResetEmailRequest(e.target.email.value);
+  };
 
-  renderForm = () => (
+  const renderForm = () => (
     <div className="forgot-password-fields">
-      <form onSubmit={this.handleForgotPassword}>
+      <form onSubmit={handleForgotPassword}>
         <FormGroup>
           <TextField
             autoFocus
@@ -26,39 +25,34 @@ class ForgotPassword extends Component {
             required
             type="email"
           />
-          <button
-            className="forgot-password-button"
-          >
-            Reset
-          </button>
+          <button className="forgot-password-button">Reset</button>
         </FormGroup>
       </form>
     </div>
   );
 
-  render() {
-    return (
-      <div className="forgot-password-container">
-        <Paper className="forgot-password-box" elevation={24}>
-          <h1>Reset Password</h1>
-          <div className="information-text">
-            Please enter your email address and we will
-            send you a link to reset your password.
-          </div>
-          {this.renderForm()}
-        </Paper>
-        <Link className="sign-in-link" to="/sign-in">
-          Log In Instead
-        </Link>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="forgot-password-container">
+      <Paper className="forgot-password-box" elevation={24}>
+        <h1>Reset Password</h1>
+        <div className="information-text">
+          Please enter your email address and we will send you a link to reset
+          your password.
+        </div>
+        {renderForm()}
+      </Paper>
+      <Link className="sign-in-link" to="/sign-in">
+        Log In Instead
+      </Link>
+    </div>
+  );
+};
 
 ForgotPassword.propTypes = {
-  passwordResetEmailRequest: PropTypes.func.isRequired,
+  handlePasswordResetEmailRequest: PropTypes.func.isRequired,
 };
 
 export default connect(null, (dispatch) => ({
-  passwordResetEmailRequest: (email) => dispatch(passwordResetEmailRequest(email)),
+  handlePasswordResetEmailRequest: (email) =>
+    dispatch(passwordResetEmailRequest(email)),
 }))(ForgotPassword);

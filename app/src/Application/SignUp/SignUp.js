@@ -5,8 +5,8 @@ import { Paper, TextField, FormGroup, Grid } from 'material-ui';
 import { isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
 
-import { mustMatch, minLength, validName } from '_validators';
-import { run, ruleRunner } from '_validators/ruleRunner.js';
+import { mustMatch, minLength, validName } from '~/validators';
+import { run, ruleRunner } from '~/validators/ruleRunner.js';
 import { signupRequest } from '../../../data/actions/signup';
 import './styles.scss';
 

@@ -7,8 +7,8 @@ import { isEmpty } from 'lodash';
 
 import './styles.scss';
 import { passwordResetRequest } from '../../../data/actions/forgotPassword';
-import { mustMatch, minLength } from '_validators';
-import { run, ruleRunner } from '_validators/ruleRunner.js';
+import { mustMatch, minLength } from '~/validators';
+import { run, ruleRunner } from '~/validators/ruleRunner.js';
 
 const fieldValidations = [
   ruleRunner('password', 'password', minLength(8)),

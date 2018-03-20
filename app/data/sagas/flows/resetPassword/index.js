@@ -8,6 +8,8 @@ import {
     passwordResetRequestFailure,
 
 } from 'data/actions/forgotPassword';
+
+import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
 import ApiService from 'services';
 import { get } from 'lodash';
 import swal from 'sweetalert2/dist/sweetalert2.all.min.js';
@@ -19,7 +21,7 @@ export function* passwordResetEmailRequest({ email }) {
     yield put(passwordResetEmailRequestSuccess(response));
     swal('Success', 'An email has been sent to reset your password', 'success');
   } catch (exception) {
-    const errorMessage = get(exception, 'data.errors[0]', 'Something went wrong');
+    const errorMessage = get(exception, 'data.errors[0]', DEFAULT_ERROR_MESSAGE);
     swal('Oops', errorMessage, 'error');
     yield put(passwordResetEmailRequestFailure(exception));
   }
@@ -32,7 +34,7 @@ export function* passwordReset({ password, confirmedPassword }) {
     yield put(passwordResetRequestSuccess(response));
     swal('Success', 'Your password has been reset', 'success');
   } catch (exception) {
-    const errorMessage = get(exception, 'data.errors[0]', 'Something went wrong');
+    const errorMessage = get(exception, 'data.errors[0]', DEFAULT_ERROR_MESSAGE);
     swal('Oops', errorMessage, 'error');
     yield put(passwordResetRequestFailure(exception));
   }
