@@ -6,7 +6,7 @@ import { isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import { mustMatch, minLength, validName } from '~/validators';
-import { run, ruleRunner } from '~/validators/ruleRunner.js';
+import { run, ruleRunner } from '~/validators/ruleRunner';
 import { signupRequest } from '../../../data/actions/signup';
 import './styles.scss';
 

@@ -51,7 +51,7 @@ export function* passwordReset({ password, confirmedPassword }) {
   }
 }
 
-export default function*() {
+export default function* () {
   yield [
     takeEvery(PASSWORD_RESET_EMAIL_REQUEST, passwordResetEmailRequest),
     takeEvery(PASSWORD_RESET_REQUEST, passwordReset),
