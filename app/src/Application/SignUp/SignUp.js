@@ -1,17 +1,20 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { Paper, TextField, FormGroup, Grid } from "material-ui";
-import { isEmpty } from "lodash";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Paper, TextField, FormGroup, Grid } from 'material-ui';
+import { isEmpty } from 'lodash';
+import { Link } from 'react-router-dom';
 
-import { mustMatch, minLength } from "_validators";
-import { run, ruleRunner } from "_validators/ruleRunner.js";
-import { signupRequest } from "../../../data/actions/signup";
-import "./styles.scss";
+import { mustMatch, minLength, validName } from '~/validators';
+import { run, ruleRunner } from '~/validators/ruleRunner';
+import { signupRequest } from '../../../data/actions/signup';
+import './styles.scss';
 
 const fieldValidations = [
-  ruleRunner("password1", "password", minLength(8)),
-  ruleRunner("password2", "passwords", mustMatch("password1", "Password"))
+  ruleRunner('firstName', 'name', validName),
+  ruleRunner('lastName', 'lastName', validName),
+  ruleRunner('password1', 'password', minLength(8)),
+  ruleRunner('password2', 'passwords', mustMatch('password1', 'Password')),
 ];
 
 class SignUp extends Component {
@@ -19,7 +22,7 @@ class SignUp extends Component {
     super(props);
     this.state = {
       showErrors: false,
-      validationErrors: {}
+      validationErrors: {},
     };
   }
 
@@ -30,29 +33,30 @@ class SignUp extends Component {
     if (!this.state.password1 || !this.state.password2) {
       return true;
     }
+    return false;
   };
 
-  handleSignUp = e => {
+  handleSignUp = (e) => {
     e.preventDefault();
     this.setState({ showErrors: true });
     if (!isEmpty(this.state.validationErrors)) {
       return null;
     }
-    const { password1, password2, firstName, lastName, email } = this.state
+    const { password1, password2, firstName, lastName, email } = this.state;
     const signUpData = {
       name: `${firstName} ${lastName}`,
       email,
       password: password1,
-      password_confirmation: password2
-    }
-    this.props.signup(signUpData);
+      password_confirmation: password2,
+    };
+    return this.props.signup(signUpData);
   };
 
   handleFieldChanged(field) {
-    return e => {
-      let newState = {
+    return (e) => {
+      const newState = {
         ...this.state,
-        [field]: e.target.value
+        [field]: e.target.value.trim(),
       };
       newState.validationErrors = run(newState, fieldValidations);
       this.setState(newState);
@@ -60,7 +64,7 @@ class SignUp extends Component {
   }
 
   errorFor(field) {
-    return this.state.validationErrors[field] || "";
+    return this.state.validationErrors[field];
   }
 
   renderForm = () => (
@@ -68,21 +72,27 @@ class SignUp extends Component {
       <form onSubmit={this.handleSignUp}>
         <FormGroup>
           <TextField
-            onChange={this.handleFieldChanged("firstName")}
+            autoFocus
+            onChange={this.handleFieldChanged('firstName')}
+            value={this.state.firstName}
             id="first-name"
             fullWidth
             label="First name"
+            error={!!this.errorFor('firstName')}
             required
           />
           <TextField
-            onChange={this.handleFieldChanged("lastName")}
+            onChange={this.handleFieldChanged('lastName')}
+            error={!!this.errorFor('lastName')}
+            value={this.state.lastName}
             id="last-name"
             fullWidth
             label="Last Name"
             required
           />
           <TextField
-            onChange={this.handleFieldChanged("email")}
+            onChange={this.handleFieldChanged('email')}
+            value={this.state.email}
             id="email-address"
             fullWidth
             label="Email Address"
@@ -90,7 +100,8 @@ class SignUp extends Component {
             required
           />
           <TextField
-            onChange={this.handleFieldChanged("phone")}
+            onChange={this.handleFieldChanged('phone')}
+            value={this.state.phone}
             id="mobile-number"
             type="tel"
             fullWidth
@@ -103,8 +114,9 @@ class SignUp extends Component {
                 type="password"
                 label="Password"
                 required
-                onChange={this.handleFieldChanged("password1")}
-                error={!!this.errorFor("password1")}
+                onChange={this.handleFieldChanged('password1')}
+                error={!!this.errorFor('password1')}
+                value={this.state.password1}
               />
             </Grid>
             <Grid item xs={6}>
@@ -113,8 +125,9 @@ class SignUp extends Component {
                 type="password"
                 label="Confirm"
                 required
-                onChange={this.handleFieldChanged("password2")}
-                error={!!this.errorFor("password2")}
+                onChange={this.handleFieldChanged('password2')}
+                error={!!this.errorFor('password2')}
+                value={this.state.password2}
               />
             </Grid>
           </Grid>
@@ -136,15 +149,18 @@ class SignUp extends Component {
           <h1>Sign Up</h1>
           {this.renderForm()}
         </Paper>
+        <Link className="sign-in-link" to="/sign-in">
+          Log In Instead
+        </Link>
       </div>
     );
   }
 }
 
 SignUp.propTypes = {
-  signup: PropTypes.func.isRequired
+  signup: PropTypes.func.isRequired,
 };
 
-export default connect(null, dispatch => ({
-  signup: signupData => dispatch(signupRequest(signupData))
+export default connect(null, (dispatch) => ({
+  signup: (signupData) => dispatch(signupRequest(signupData)),
 }))(SignUp);

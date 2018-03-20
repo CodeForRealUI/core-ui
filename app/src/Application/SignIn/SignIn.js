@@ -11,7 +11,6 @@ import {
 } from 'material-ui';
 import { Link } from 'react-router-dom';
 
-import DividerWithText from './DividerWithText';
 import './styles.scss';
 
 class SignIn extends Component {
@@ -30,15 +29,15 @@ class SignIn extends Component {
     checked && this.setState({ rememberMe: true });
   };
 
-  handlePasswordChange = (e) => {
+  handlePasswordChange = e => {
     this.setState({ password: e.target.value });
   };
 
-  handleRememberMe = (email) => {
+  handleRememberMe = email => {
     localStorage.setItem('codeforrealemail', email);
   };
 
-  handleEmailChange = (e) => {
+  handleEmailChange = e => {
     this.setState({ email: e.target.value });
   };
 
@@ -48,12 +47,12 @@ class SignIn extends Component {
     this.props.login(email, password);
   };
 
-
   renderForm() {
     return (
       <div>
         <FormGroup row>
           <TextField
+            autoFocus
             id="email"
             defaultValue={this.getLocalStorageEmail()}
             onChange={this.handleEmailChange}
@@ -107,7 +106,7 @@ class SignIn extends Component {
           {this.renderForm()}
         </Paper>
         <Link className="sign-up-link" to="/sign-up">
-        Create an Account
+          Create an Account
         </Link>
       </div>
     );
@@ -118,7 +117,7 @@ SignIn.propTypes = {
   login: PropTypes.func.isRequired,
 };
 
-export default connect(null, (dispatch) => ({
+export default connect(null, dispatch => ({
   login: (email, password) =>
     dispatch({ type: 'LOGIN_REQUEST', email, password }),
 }))(SignIn);

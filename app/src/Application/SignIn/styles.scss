@@ -1,20 +1,15 @@
 @import '~sass/variables';
 @import '~sass/colors';
+@import '~sass/mixins';
 
-.sign-in-container {
+html, body {
     background: $sign-in-background;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: -1000;
-    height: 100%;
     width: 100%;
-    padding: 0px;
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    height: 100%;
+    margin: 0;
+}
+.sign-in-container {
+    @include center-item();
 
     .sign-up-link {
         color: white;

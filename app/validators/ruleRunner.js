@@ -1,4 +1,4 @@
-export const ruleRunner = (field, name, ...validations) => (state) => {
+export const ruleRunner = (field, name, ...validations) => state => {
   for (const v of validations) {
     const errorMessageFunc = v(state[field], state);
     if (errorMessageFunc) {
@@ -8,5 +8,5 @@ export const ruleRunner = (field, name, ...validations) => (state) => {
   return null;
 };
 
-export const run = (state, runners) => runners.reduce((memo, runner) => Object.assign(memo, runner(state)), {});
-
+export const run = (state, runners) =>
+  runners.reduce((memo, runner) => Object.assign(memo, runner(state)), {});
