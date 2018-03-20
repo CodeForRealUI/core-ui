@@ -33,6 +33,7 @@ class SignUp extends Component {
     if (!this.state.password1 || !this.state.password2) {
       return true;
     }
+    return false;
   };
 
   handleSignUp = (e) => {
@@ -48,7 +49,7 @@ class SignUp extends Component {
       password: password1,
       password_confirmation: password2,
     };
-    this.props.signup(signUpData);
+    return this.props.signup(signUpData);
   };
 
   handleFieldChanged(field) {
@@ -149,7 +150,7 @@ class SignUp extends Component {
           {this.renderForm()}
         </Paper>
         <Link className="sign-in-link" to="/sign-in">
-        Log In Instead
+          Log In Instead
         </Link>
       </div>
     );

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Paper, TextField, FormGroup } from 'material-ui';
 import { Link } from 'react-router-dom';
 
-import { passwordResetEmailRequest } from '../../../data/actions/forgotPassword';
+import { passwordResetEmailRequest } from '~/data/actions/forgotPassword';
 import './styles.scss';
 
 const ForgotPassword = ({ handlePasswordResetEmailRequest }) => {
-  const handleForgotPassword = (e) => {
+  const handleForgotPassword = e => {
     e.preventDefault();
     handlePasswordResetEmailRequest(e.target.email.value);
   };
@@ -52,7 +52,7 @@ ForgotPassword.propTypes = {
   handlePasswordResetEmailRequest: PropTypes.func.isRequired,
 };
 
-export default connect(null, (dispatch) => ({
-  handlePasswordResetEmailRequest: (email) =>
+export default connect(null, dispatch => ({
+  handlePasswordResetEmailRequest: email =>
     dispatch(passwordResetEmailRequest(email)),
 }))(ForgotPassword);

@@ -5,19 +5,21 @@ import { Paper, TextField, FormGroup, Grid } from 'material-ui';
 import { Link } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
-import './styles.scss';
-import { passwordResetRequest } from '../../../data/actions/forgotPassword';
+import { passwordResetRequest } from '~/data/actions/forgotPassword';
 import { mustMatch, minLength } from '~/validators';
-import { run, ruleRunner } from '~/validators/ruleRunner.js';
+import { run, ruleRunner } from '~/validators/ruleRunner';
+import './styles.scss';
 
 const fieldValidations = [
   ruleRunner('password', 'password', minLength(8)),
-  ruleRunner('confirmedPassword', 'passwords', mustMatch('password', 'Password')),
+  ruleRunner(
+    'confirmedPassword',
+    'passwords',
+    mustMatch('password', 'Password'),
+  ),
 ];
 
-
 class ResetPassword extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +28,6 @@ class ResetPassword extends Component {
     };
   }
 
-
   getIfShouldDisableResetButton = () => {
     if (!isEmpty(this.state.validationErrors)) {
       return true;
@@ -34,20 +35,21 @@ class ResetPassword extends Component {
     if (!this.state.password || !this.state.confirmedPassword) {
       return true;
     }
+    return false;
   };
 
-  handleResetPassword = (e) => {
+  handleResetPassword = e => {
     e.preventDefault();
     this.setState({ showErrors: true });
     if (!isEmpty(this.state.validationErrors)) {
       return null;
     }
     const { password, confirmedPassword } = this.state;
-    this.props.resetPassword(password, confirmedPassword);
+    return this.props.resetPassword(password, confirmedPassword);
   };
 
   handleFieldChanged(field) {
-    return (e) => {
+    return e => {
       const newState = {
         ...this.state,
         [field]: e.target.value.trim(),
@@ -108,7 +110,7 @@ class ResetPassword extends Component {
           {this.renderForm()}
         </Paper>
         <Link className="sign-in-link" to="/sign-in">
-        Log In Instead
+          Log In Instead
         </Link>
       </div>
     );
@@ -119,6 +121,7 @@ ResetPassword.propTypes = {
   resetPassword: PropTypes.func.isRequired,
 };
 
-export default connect(null, (dispatch) => ({
-  resetPassword: (password, confirmedPassword) => dispatch(passwordResetRequest(password, confirmedPassword)),
+export default connect(null, dispatch => ({
+  resetPassword: (password, confirmedPassword) =>
+    dispatch(passwordResetRequest(password, confirmedPassword)),
 }))(ResetPassword);
