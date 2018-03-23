@@ -7,29 +7,68 @@ import SignUp from './SignUp';
 import Dashboard from './Dashboard';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
-
+import AlreadySignedIn from './AlreadySignedIn';
 // Compose the root level routes here
 class Application extends Component {
   isAuthenticated() {
-    const token = localStorage.getItem('c4r-auth-token'); // TODO, move the localStorage key to config
+    const token = localStorage.getItem('c4r-token'); // TODO, move the localStorage key to config
     return !!token;
   }
+
+  PublicRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        this.isAuthenticated() ? (
+          <Redirect
+            to={{
+              pathname: '/already-signed-in',
+              state: { from: props.location },
+            }}
+          />
+        ) : (
+          <Component {...props} />
+        )
+      }
+    />
+  );
+
+  PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        this.isAuthenticated() ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/sign-in',
+              state: { from: props.location },
+            }}
+          />
+        )
+      }
+    />
+  );
 
   render() {
     return (
       <div className="application-container">
         <Switch>
-          <Route path="/sign-in" component={SignIn} />
-          <Route path="/sign-up" component={SignUp} />
-          <Route path="/forgot-password" component={ForgotPassword} />
+          <this.PublicRoute path="/sign-in" component={SignIn} />
+          <this.PublicRoute path="/sign-up" component={SignUp} />
+          <this.PublicRoute
+            path="/forgot-password"
+            component={ForgotPassword}
+          />
           {
             // todo move reset-password to isUathenticatned
           }
-          <Route path="/reset-password" component={ResetPassword} />
+          <this.PublicRoute path="/reset-password" component={ResetPassword} />
           {/* Routes not requiring authentication above this line */}
-          {!this.isAuthenticated() && <Redirect to="sign-in" />}
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="" component={NotFound} />
+          <this.PrivateRoute path="/already-signed-in" component={AlreadySignedIn} />
+          <this.PrivateRoute path="/dashboard" component={Dashboard} />
+          <this.PrivateRoute path="" component={NotFound} />
         </Switch>
       </div>
     );
