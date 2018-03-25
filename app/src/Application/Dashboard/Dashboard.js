@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import NavBar from 'src/shared/NavBar';
+import LeftFilterBar from './LeftFilterBar';
 import './styles.scss';
 
-class Dashboard extends Component {
-  render() {
-    return (
-      <div>
-        <Route path="/" component={NavBar} />
-      </div>
-    );
-  }
-}
+const Dashboard = () => (
+  <div>
+    <Route path="/" component={NavBar} />
+    <Route path="/" component={LeftFilterBar} />
+  </div>
+);
 
 export default Dashboard;
