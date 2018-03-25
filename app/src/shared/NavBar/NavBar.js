@@ -6,7 +6,7 @@ import './styles.scss';
 function NavBar() {
   return (
     <div className="nav-container">
-      <AppBar position="static" color="white">
+      <AppBar position="static" color="inherit" elevation={2}>
         <Toolbar>
           <div className="logo-placeholder">
             <div className="logo">LOGO</div>
