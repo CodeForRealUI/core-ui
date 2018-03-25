@@ -3,15 +3,17 @@ import { SIGNOUT_REQUEST, signoutRequestSuccess, signoutRequestFailure } from 'd
 import ApiService from 'services';
 import { push } from 'react-router-redux';
 
+import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
+
 export function* signoutFlow() {
   try {
     const service = new ApiService();
     const response = yield call([service, 'signout']);
-    localStorage.removeItem('c4r-token');
+    LocalStorage.remove(KEYS.TOKEN);
     yield put(push('/sign-in'));
     yield put(signoutRequestSuccess(response));
   } catch (exception) {
-    localStorage.removeItem('c4r-token');
+    LocalStorage.remove(KEYS.TOKEN);
     yield put(push('/sign-in'));
     yield put(signoutRequestFailure(exception));
   }

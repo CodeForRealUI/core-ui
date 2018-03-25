@@ -11,6 +11,8 @@ import {
 } from 'material-ui';
 import { Link } from 'react-router-dom';
 
+
+import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 import './styles.scss';
 
 class SignIn extends Component {
@@ -23,8 +25,6 @@ class SignIn extends Component {
     };
   }
 
-  getLocalStorageEmail = () => localStorage.getItem('codeforrealemail') || '';
-
   setRememberMe = (e, checked) => {
     checked && this.setState({ rememberMe: true });
   };
@@ -34,7 +34,7 @@ class SignIn extends Component {
   };
 
   handleRememberMe = email => {
-    localStorage.setItem('codeforrealemail', email);
+    LocalStorage.set(KEYS.EMAIL, email);
   };
 
   handleEmailChange = e => {
@@ -54,7 +54,7 @@ class SignIn extends Component {
           <TextField
             autoFocus
             id="email"
-            defaultValue={this.getLocalStorageEmail()}
+            defaultValue={LocalStorage.get(KEYS.EMAIL)}
             onChange={this.handleEmailChange}
             fullWidth
             label="Email"
