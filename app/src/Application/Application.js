@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 
+import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 import NotFound from 'src/shared/NotFound';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -8,11 +9,12 @@ import Dashboard from './Dashboard';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import AlreadySignedIn from './AlreadySignedIn';
+
+
 // Compose the root level routes here
 class Application extends Component {
   isAuthenticated() {
-    const token = localStorage.getItem('c4r-token'); // TODO, move the localStorage key to config
-    return !!token;
+    return LocalStorage.has(KEYS.TOKEN);
   }
 
   PublicRoute = ({ component: Component, ...rest }) => (

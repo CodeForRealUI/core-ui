@@ -1,17 +1,19 @@
 import axios from 'axios';
 
+import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 import { getJsonFromUrl } from '../utilities/browser';
 
 const BASE_URL = 'https://damp-beyond-45634.herokuapp.com/';
 
 class AppService {
   constructor(baseURL) {
+    const [token, client, uid] = LocalStorage.getAll([KEYS.TOKEN, KEYS.CLIENT, KEYS.UID]);
     this.client = axios.create({
       baseURL: baseURL || BASE_URL,
       headers: {
-        'access-token': localStorage.getItem('c4r-token'),
-        client: localStorage.getItem('c4r-client'),
-        uid: localStorage.getItem('c4r-uid'),
+        'access-token': token,
+        client,
+        uid,
       },
     });
   }
