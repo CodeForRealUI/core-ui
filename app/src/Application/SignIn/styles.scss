@@ -12,11 +12,7 @@ html, body {
     @include center-item();
 
     .sign-up-link {
-        color: white;
-        font-size: 18px;
-        text-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
-        padding: 30px;
-        text-decoration: none;
+        @include link()
     }
 
     .sign-in-box {
@@ -29,14 +25,8 @@ html, body {
             text-decoration: none;
         }
 
-        .test {
-            background: $button-background;
-            color: $white-01;
-            width: 100%;
-            text-transform: none;
-            padding: 15px;
-            font-size: 20px;
-            border-radius: 3px;
+        .login-button {
+            @include button()
         }
         .sign-in-with-facebook-button {
             color: $white-01;

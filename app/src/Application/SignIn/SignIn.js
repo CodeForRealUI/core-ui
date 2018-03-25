@@ -81,7 +81,7 @@ class SignIn extends Component {
           </Link>
         </FormGroup>
         <FormGroup row>
-          <Button variant="raised" className="test" onClick={this.handleLogIn}>
+          <Button variant="raised" className="login-button " onClick={this.handleLogIn}>
             Log In
           </Button>
         </FormGroup>
