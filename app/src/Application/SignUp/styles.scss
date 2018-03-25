@@ -13,11 +13,7 @@ html, body {
 
     
     .sign-in-link {
-        color: white;
-        font-size: 18px;
-        text-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
-        padding: 30px;
-        text-decoration: none;
+        @include link();
     }
 
     .sign-up-box {
@@ -25,14 +21,7 @@ html, body {
         padding: 40px;
 
         .sign-up-button {
-            background: $button-background;
-            color: $white-01;
-            width: 100%;
-            margin-top:30px;
-            text-transform: none;
-            padding: 15px;
-            font-size: 20px;
-            border-radius: 3px;
+           @include button();
         }
         button:disabled {
             opacity:0.5

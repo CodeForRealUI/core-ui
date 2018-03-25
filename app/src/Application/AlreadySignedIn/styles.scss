@@ -11,12 +11,19 @@ html, body {
 .already-signed-in-container {
     @include center-item();
 
+    .sign-out-link {
+        @include link();
+    }
     .already-signed-in-box {
         text-align: center;
         padding: 40px;
 
         .continue-to-dashboard-button {
-            @include button
+            @include button;
+
+            .continue-to-dashboard-link{
+                @include link();
+            }
         }
     }
   

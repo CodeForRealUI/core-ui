@@ -13,11 +13,7 @@ html, body {
      @include center-item();
 
     .sign-in-link {
-        color: white;
-        font-size: 18px;
-        text-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
-        padding: 30px;
-        text-decoration: none;
+        @include link;
     }
 
     .reset-password-box {
