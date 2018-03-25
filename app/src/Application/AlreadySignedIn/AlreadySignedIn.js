@@ -11,11 +11,9 @@ const AlreadySignedIn = ({ handleSignoutRequest }) => (
   <div className="already-signed-in-container">
     <Paper className="already-signed-in-box" elevation={24}>
       <h1>You are already signed in</h1>
-      <p>
-        <button className="continue-to-dashboard-button">
-          <Link className="continue-to-dashboard-link"to="/dashboard"> Continue to Dashboard</Link>
-        </button>
-      </p>
+      <button className="continue-to-dashboard-button">
+        <Link className="continue-to-dashboard-link"to="/dashboard"> Continue to Dashboard</Link>
+      </button>
     </Paper>
     <Link
       onClick={handleSignoutRequest}
