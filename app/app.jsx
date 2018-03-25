@@ -14,13 +14,15 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
+import { MuiThemeProvider } from 'material-ui/styles';
+import theme from './theme';
+
 import 'sanitize.css/sanitize.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.nginx.conf';
-
 
 /* eslint-enable import/no-unresolved, import/extensions */
 import configureStore from './configureStore';
@@ -36,15 +38,16 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <Application />
+        <MuiThemeProvider theme={theme}>
+          <Application />
+        </MuiThemeProvider>
       </ConnectedRouter>
     </Provider>,
-    MOUNT_NODE
+    MOUNT_NODE,
   );
 };
 
 render();
-
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
