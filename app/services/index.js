@@ -1,25 +1,44 @@
 import axios from 'axios';
 
+import { getJsonFromUrl } from '../utilities/browser';
+
 const BASE_URL = 'https://damp-beyond-45634.herokuapp.com/';
 
 class AppService {
   constructor(baseURL) {
     this.client = axios.create({
       baseURL: baseURL || BASE_URL,
+      headers: {
+        'access-token': localStorage.getItem('c4r-token'),
+        client: localStorage.getItem('c4r-client'),
+        uid: localStorage.getItem('c4r-uid'),
+      },
     });
   }
 
   login(email, password) {
-    return this.client.post('/auth/sign_in', {
-      email,
-      password,
-    });
+    return this.client
+      .post('/auth/sign_in', {
+        user: {
+          email,
+          password,
+        },
+      })
+      .then(response => response, error => Promise.reject(error.response));
   }
 
   signup(signupData) {
     return this.client
-      .post('/auth', signupData)
-      .then((response) => response, (error) => Promise.reject(error.response));
+      .post('/auth', {
+        user: signupData,
+      })
+      .then(response => response, error => Promise.reject(error.response));
+  }
+
+  signout() {
+    return this.client
+      .delete('/auth/sign_out')
+      .then(response => response, error => Promise.reject(error.response));
   }
 
   passwordResetEmail(email) {
@@ -28,27 +47,18 @@ class AppService {
         email,
         redirect_url: 'http://localhost:3000/reset-password',
       })
-      .then((response) => response, (error) => Promise.reject(error.response));
+      .then(response => response, error => Promise.reject(error.response));
   }
-  // TODO Move to browser utils
+
   passwordReset(password1, password2) {
-    function getJsonFromUrl() {
-      const query = location.search.substr(1);
-      const result = {};
-      query.split('&').forEach((part) => {
-        const item = part.split('=');
-        result[item[0]] = decodeURIComponent(item[1]);
-      });
-      return result;
-    }
     const queryParams = getJsonFromUrl();
     return this.client
-    .put('/auth/password', {
-      password: password1,
-      password_confirmation: password2,
-      ...queryParams,
-    })
-    .then((response) => response, (error) => Promise.reject(error.response));
+      .put('/auth/password', {
+        password: password1,
+        password_confirmation: password2,
+        ...queryParams,
+      })
+      .then(response => response, error => Promise.reject(error.response));
   }
 }
 
