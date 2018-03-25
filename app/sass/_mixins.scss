@@ -1,3 +1,5 @@
+@import '~sass/variables';
+
 @mixin center-item() {
     position: fixed;
     top: 0px;
@@ -10,4 +12,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+@mixin button(){
+    background: $button-background;
+    color: $white-01;
+    width: 100%;
+    margin-top:30px;
+    text-transform: none;
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 3px;
 }
