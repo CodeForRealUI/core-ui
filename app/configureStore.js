@@ -3,10 +3,10 @@
  */
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
-import createReducer from './reducers';
+import createReducer from './data/reducers';
+import rootSaga from './data/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -39,19 +39,20 @@ export default function configureStore(initialState = {}, history) {
 
   const store = createStore(
     createReducer(),
-    fromJS(initialState),
+    initialState,
     composeEnhancers(...enhancers)
   );
 
+  sagaMiddleware.run(rootSaga);
   // Extensions
-  store.runSaga = sagaMiddleware.run;
-  store.injectedReducers = {}; // Reducer registry
-  store.injectedSagas = {}; // Saga registry
+  // store.runSaga = sagaMiddleware.run;
+  // store.injectedReducers = {}; // Reducer registry
+  // store.injectedSagas = {}; // Saga registry
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
   if (module.hot) {
-    module.hot.accept('./reducers', () => {
+    module.hot.accept('./data/reducers', () => {
       store.replaceReducer(createReducer(store.injectedReducers));
     });
   }
