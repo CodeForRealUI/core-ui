@@ -4,6 +4,7 @@ export const KEYS = {
   CLIENT: 'c4r-client',
   TOKEN: 'c4r-token',
   UID: 'c4r-uid',
+  EMAIL: 'codeforrealemail',
 };
 
 const LocalStorage = {
@@ -56,6 +57,13 @@ const LocalStorage = {
    */
   has(key) {
     return this.get(key) !== null;
+  },
+
+   /**
+   * @return boolean
+   */
+  isAuthenticated() {
+    return this.has(KEYS.TOKEN);
   },
 };
 
