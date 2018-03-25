@@ -10,11 +10,18 @@ import './styles.scss';
 const AlreadySignedIn = ({ handleSignoutRequest }) => (
   <div className="already-signed-in-container">
     <Paper className="already-signed-in-box" elevation={24}>
-      <Link className="continue-to-dashboard-link" to="/dashboard">
-        Continue to Dashboard
-      </Link>
-      <button onClick={handleSignoutRequest}>Sign Out Instead</button>
+      <h1>You are already signed in</h1>
+      <button className="continue-to-dashboard-button">
+        <Link className="continue-to-dashboard-link"to="/dashboard"> Continue to Dashboard</Link>
+      </button>
     </Paper>
+    <Link
+      onClick={handleSignoutRequest}
+      className="sign-out-link"
+      to="/sign-in"
+    >
+      Sign Out Instead
+    </Link>
   </div>
 );
 AlreadySignedIn.propTypes = {
