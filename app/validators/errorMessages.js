@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export const isRequired = fieldName => `${fieldName} is required`;
 
 export const mustMatch = (otherFieldName) => fieldName =>

@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-syntax */
+// todo rewrite this
+
 export const ruleRunner = (field, name, ...validations) => state => {
   for (const v of validations) {
     const errorMessageFunc = v(state[field], state);
