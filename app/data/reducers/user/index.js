@@ -6,7 +6,7 @@ import { LOGIN_REQUEST_SUCCESS } from 'data/actions/login';
 function data(state = {}, { type, response }) {
   switch (type) {
     case LOGIN_REQUEST_SUCCESS:
-      return omit(get(response, 'user'), ['token']);
+      return omit(get(response, 'data.user'), ['token']);
     default:
       return state;
   }

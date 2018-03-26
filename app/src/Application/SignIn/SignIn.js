@@ -19,7 +19,7 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      email: LocalStorage.get(KEYS.EMAIL),
       password: '',
       rememberMe: false,
     };
@@ -54,7 +54,7 @@ class SignIn extends Component {
           <TextField
             autoFocus
             id="email"
-            defaultValue={LocalStorage.get(KEYS.EMAIL)}
+            value={LocalStorage.get(KEYS.EMAIL)}
             onChange={this.handleEmailChange}
             fullWidth
             label="Email"
