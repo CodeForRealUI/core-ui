@@ -19,7 +19,7 @@ function* authenticate(email, password) {
     yield put(loginRequestSuccess());
     return response;
   } catch (error) {
-    const errorMessage = get(error, 'data.errors[0]', DEFAULT_ERROR_MESSAGE);
+    const errorMessage = get(error, 'data.errors.full_messages[0]', DEFAULT_ERROR_MESSAGE);
     swal('Oops', errorMessage, 'error');
     yield put(loginRequestFailure(error));
     return false;
