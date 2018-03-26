@@ -3,7 +3,7 @@ import { SIGNUP_REQUEST, signupRequestSuccess, signupRequestFailure } from 'data
 import ApiService from 'services';
 import { push } from 'react-router-redux';
 import { get } from 'lodash';
-import swal from 'sweetalert2/dist/sweetalert2.js';
+import swal from 'sweetalert2/dist/sweetalert2';
 
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 

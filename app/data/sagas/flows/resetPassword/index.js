@@ -11,7 +11,7 @@ import {
 import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
 import ApiService from 'services';
 import { get } from 'lodash';
-import swal from 'sweetalert2/dist/sweetalert2.js';
+import swal from 'sweetalert2/dist/sweetalert2';
 
 export function* passwordResetEmailRequest({ email }) {
   try {
@@ -22,7 +22,7 @@ export function* passwordResetEmailRequest({ email }) {
   } catch (exception) {
     const errorMessage = get(
       exception,
-      'data.errors[0]',
+      'data.errors.full_messages[0]',
       DEFAULT_ERROR_MESSAGE,
     );
     swal('Oops', errorMessage, 'error');
@@ -43,7 +43,7 @@ export function* passwordReset({ password, confirmedPassword }) {
   } catch (exception) {
     const errorMessage = get(
       exception,
-      'data.errors[0]',
+      'data.errors.full_messages[0]',
       DEFAULT_ERROR_MESSAGE,
     );
     swal('Oops', errorMessage, 'error');
@@ -51,7 +51,7 @@ export function* passwordReset({ password, confirmedPassword }) {
   }
 }
 
-export default function* () {
+export default function*() {
   yield [
     takeEvery(PASSWORD_RESET_EMAIL_REQUEST, passwordResetEmailRequest),
     takeEvery(PASSWORD_RESET_REQUEST, passwordReset),
