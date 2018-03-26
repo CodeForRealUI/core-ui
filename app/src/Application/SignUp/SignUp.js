@@ -42,12 +42,14 @@ class SignUp extends Component {
     if (!isEmpty(this.state.validationErrors)) {
       return null;
     }
-    const { password1, password2, firstName, lastName, email } = this.state;
+    const { password1, password2, firstName, lastName, email, phone } = this.state;
+    // todo removing the +1 hack whenever we go international - this is to pass the backend validation.
     const signUpData = {
       name: `${firstName} ${lastName}`,
       email,
       password: password1,
       password_confirmation: password2,
+      mobile_number: `1${phone}`,
     };
     return this.props.signup(signUpData);
   };
