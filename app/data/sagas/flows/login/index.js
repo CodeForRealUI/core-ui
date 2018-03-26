@@ -1,7 +1,7 @@
 import { take, call, put } from 'redux-saga/effects';
 import { get } from 'lodash';
 import { push } from 'react-router-redux';
-import swal from 'sweetalert2/dist/sweetalert2.js';
+import swal from 'sweetalert2/dist/sweetalert2';
 
 import ApiService from 'services';
 import {
