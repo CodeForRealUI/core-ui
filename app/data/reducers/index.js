@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import user from './user';
+import user, * as fromUser from './user';
 import routeReducer from './route';
 
 
@@ -11,3 +11,6 @@ export default function createReducer(injectedReducers) {
     ...injectedReducers,
   });
 }
+
+
+export const getFirstName = state => fromUser.getFirstName(state.user);

@@ -16,7 +16,7 @@ function* authenticate(email, password) {
   try {
     const service = new ApiService();
     const response = yield call([service, 'login'], email, password);
-    yield put(loginRequestSuccess());
+    yield put(loginRequestSuccess(response));
     return response;
   } catch (error) {
     const errorMessage = get(error, 'data.errors.full_messages[0]', DEFAULT_ERROR_MESSAGE);

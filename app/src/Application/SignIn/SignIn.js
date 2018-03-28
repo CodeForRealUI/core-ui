@@ -54,7 +54,7 @@ class SignIn extends Component {
           <TextField
             autoFocus
             id="email"
-            value={LocalStorage.get(KEYS.EMAIL)}
+            value={this.state.email}
             onChange={this.handleEmailChange}
             fullWidth
             label="Email"
