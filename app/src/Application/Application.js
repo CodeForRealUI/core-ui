@@ -9,6 +9,7 @@ import Dashboard from './Dashboard';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import AlreadySignedIn from './AlreadySignedIn';
+import RolePicker from './RolePicker';
 import { PublicRoute, PrivateRoute } from './Routes';
 
 // Compose the root level routes here
@@ -27,6 +28,7 @@ const Application = () => (
         path="/already-signed-in"
         component={AlreadySignedIn}
       />
+      <PrivateRoute path="/verify-role" component={RolePicker} />
       <PrivateRoute path="/dashboard" component={Dashboard} />
       <PrivateRoute path="" component={NotFound} />
     </Switch>

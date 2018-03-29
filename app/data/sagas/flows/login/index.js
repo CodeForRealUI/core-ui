@@ -1,7 +1,7 @@
 import { take, call, put } from 'redux-saga/effects';
 import { get } from 'lodash';
 import { push } from 'react-router-redux';
-import swal from 'sweetalert2';
+import swal from 'sweetalert2/dist/sweetalert2';
 
 import ApiService from 'services';
 import {
@@ -16,10 +16,10 @@ function* authenticate(email, password) {
   try {
     const service = new ApiService();
     const response = yield call([service, 'login'], email, password);
-    yield put(loginRequestSuccess());
+    yield put(loginRequestSuccess(response));
     return response;
   } catch (error) {
-    const errorMessage = get(error, 'data.errors[0]', DEFAULT_ERROR_MESSAGE);
+    const errorMessage = get(error, 'data.errors.full_messages[0]', DEFAULT_ERROR_MESSAGE);
     swal('Oops', errorMessage, 'error');
     yield put(loginRequestFailure(error));
     return false;
