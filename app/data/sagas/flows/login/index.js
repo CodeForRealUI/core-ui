@@ -12,7 +12,7 @@ import {
 import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 
-function* authenticate(email, password) {
+export function* authenticate(email, password) {
   try {
     const service = new ApiService();
     const response = yield call([service, 'login'], email, password);

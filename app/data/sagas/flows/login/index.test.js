@@ -1,31 +1,39 @@
 /* eslint-disable */
 import { take, call, put } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-import { LOGIN_REQUEST, loginRequestSuccess, loginRequestFailure } from '~/data/actions/login';
+import { identity } from 'lodash';
+import {
+  LOGIN_REQUEST,
+  loginRequestSuccess,
+  loginRequestFailure,
+} from '~/data/actions/login';
 import loginFlow, { authenticate } from './index';
 import LocalStorage, { KEYS } from '../../../../utilities/LocalStorage';
 import ApiService from 'services';
 import sinon from 'sinon';
+import { expectSaga, testSaga } from 'redux-saga-test-plan';
+import * as matchers from 'redux-saga-test-plan/matchers';
 
 describe('Login flow', () => {
   const credentials = {
     email: 'test',
     password: 'test',
   };
-  let gen,
-    sandBox = sinon.sandbox.create();
+  let sandBox = sinon.sandbox.create();
 
-  beforeEach(() => {
-    gen = loginFlow();
+  afterEach(() => {
     sandBox.restore();
   });
 
   it('should yield the expected effects when a response is NOT recieved', () => {
-    expect(gen.next().value).toEqual(take(LOGIN_REQUEST));
-    expect(gen.next(credentials).value).toEqual(
-      call(authenticate, credentials.email, credentials.password),
-    );
-    expect(gen.next().value).toEqual(take(LOGIN_REQUEST));
+    return expectSaga(loginFlow)
+      .call(authenticate, credentials.email, credentials.password)
+      .dispatch({
+        type: LOGIN_REQUEST,
+        email: credentials.email,
+        password: credentials.password,
+      })
+      .run();
   });
 
   it('should yield the expected effects when a response is recieved', () => {
@@ -41,11 +49,15 @@ describe('Login flow', () => {
       },
     };
     const stub = sandBox.stub(LocalStorage, 'setAll');
-    expect(gen.next().value).toEqual(take(LOGIN_REQUEST));
-    expect(gen.next(credentials).value).toEqual(
-      call(authenticate, credentials.email, credentials.password),
-    );
-    expect(gen.next(response).value).toEqual(put(push('/dashboard')));
+
+    testSaga(loginFlow)
+      .next()
+      .take(LOGIN_REQUEST)
+      .next({ email: credentials.email, password: credentials.password })
+      .call(authenticate, credentials.email, credentials.password)
+      .next(response)
+      .put(push('/dashboard'));
+
     sinon.assert.callCount(stub, 1);
     sinon.assert.calledWith(stub, {
       [KEYS.TOKEN]: response.headers['access-token'],
@@ -55,33 +67,47 @@ describe('Login flow', () => {
   });
 
   describe('authenticate', () => {
-    let authGenerator;
-
     beforeEach(() => {
-      authGenerator = authenticate(credentials.email, credentials.password);
+      sandBox.stub(LocalStorage, 'getAll').returns([]);
+    });
+
+    afterEach(() => {
+      sandBox.restore();
     });
 
     it('should yield the expected effects on happy path', () => {
-      sandBox.stub(LocalStorage, 'getAll').returns([]);
-
       const stub = sandBox.stub(ApiService.prototype, 'login');
-      // TODO: fix this hacky json stringify stuff
-      expect(JSON.stringify(authGenerator.next().value)).toEqual(
-        JSON.stringify(
-          call(
-            [new ApiService(), 'login'],
-            credentials.email,
-            credentials.password,
-          ),
-        ),
-      );
-      expect(authGenerator.next().value).toEqual(put(loginRequestSuccess()));
-      expect(authGenerator.next().done).toBe(true);
+      const response = { test: 'test' };
+      return expectSaga(authenticate, credentials.email, credentials.password)
+        .provide({
+          call(effect, next) {
+            return [
+              effect.fn === ApiService.prototype.login,
+              effect.args[0] === credentials.email,
+              effect.args[1] === credentials.password,
+            ].every(identity)
+              ? response
+              : next();
+          },
+        })
+        .returns(response)
+        .run();
     });
 
     it('should yield the expected effects on failure path', () => {
-        const error = { test: 'test' };
-        expect(authGenerator.next().value).toEqual(put(loginRequestFailure(error)));
+      const error = { test: 'test' };
+      return expectSaga(authenticate)
+        .provide({
+          call({ fn }) {
+            if (fn === ApiService.prototype.login) {
+              throw error;
+            }
+            return next();
+          }
+        })
+        .put(loginRequestFailure(error))
+        .returns(false)
+        .run();
     });
   });
 });

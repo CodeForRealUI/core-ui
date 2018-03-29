@@ -119,8 +119,7 @@
     "moduleNameMapper": {
       "^~(.*)$": "<rootDir>/app$1",
       ".*\\.(css|less|styl|scss|sass)$": "<rootDir>/internals/mocks/cssModule.js",
-      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/image.js",
-      "^~(.*)$": "<rootDir>/app$1"
+      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/image.js"
     },
     "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js"
   },
@@ -153,6 +152,7 @@
     "react-router-redux": "5.0.0-alpha.6",
     "redux": "3.6.0",
     "redux-saga": "0.15.3",
+    "redux-saga-test-plan": "^3.6.0",
     "reselect": "3.0.1",
     "sanitize.css": "4.1.0",
     "sass-loader": "^6.0.7",
