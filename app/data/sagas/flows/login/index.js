@@ -27,7 +27,7 @@ export function* authenticate(email, password) {
 }
 
 export default function* loginFlow() {
-  while (true) {
+  while (true) { // eslint-disable-line
     const { email, password } = yield take(LOGIN_REQUEST);
     const response = yield call(authenticate, email, password);
 

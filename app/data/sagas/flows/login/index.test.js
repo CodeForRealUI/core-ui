@@ -1,40 +1,39 @@
-/* eslint-disable */
-import { take, call, put } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { identity } from 'lodash';
+import ApiService from 'services';
+import sinon from 'sinon';
+import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import {
   LOGIN_REQUEST,
   loginRequestSuccess,
   loginRequestFailure,
 } from '~/data/actions/login';
-import loginFlow, { authenticate } from './index';
-import LocalStorage, { KEYS } from '../../../../utilities/LocalStorage';
-import ApiService from 'services';
-import sinon from 'sinon';
-import { expectSaga, testSaga } from 'redux-saga-test-plan';
-import * as matchers from 'redux-saga-test-plan/matchers';
+import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
+
+import loginFlow, { authenticate } from './';
+
 
 describe('Login flow', () => {
   const credentials = {
     email: 'test',
     password: 'test',
   };
-  let sandBox = sinon.sandbox.create();
+  const sandBox = sinon.sandbox.create();
 
   afterEach(() => {
     sandBox.restore();
   });
 
-  it('should yield the expected effects when a response is NOT recieved', () => {
-    return expectSaga(loginFlow)
+  it('should yield the expected effects when a response is NOT recieved', () =>
+    expectSaga(loginFlow)
       .call(authenticate, credentials.email, credentials.password)
       .dispatch({
         type: LOGIN_REQUEST,
         email: credentials.email,
         password: credentials.password,
       })
-      .run();
-  });
+      .run()
+  );
 
   it('should yield the expected effects when a response is recieved', () => {
     const response = {
@@ -76,7 +75,6 @@ describe('Login flow', () => {
     });
 
     it('should yield the expected effects on happy path', () => {
-      const stub = sandBox.stub(ApiService.prototype, 'login');
       const response = { test: 'test' };
       return expectSaga(authenticate, credentials.email, credentials.password)
         .provide({
@@ -90,6 +88,7 @@ describe('Login flow', () => {
               : next();
           },
         })
+        .put(loginRequestSuccess(response))
         .returns(response)
         .run();
     });
@@ -102,8 +101,7 @@ describe('Login flow', () => {
             if (fn === ApiService.prototype.login) {
               throw error;
             }
-            return next();
-          }
+          },
         })
         .put(loginRequestFailure(error))
         .returns(false)
