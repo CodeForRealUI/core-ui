@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { CardMedia, CardContent, Typography, Card } from 'material-ui';
+import { CardContent, Typography, Card } from 'material-ui';
 import { Link } from 'react-router-dom';
 
+import npo from '~/public/images/npo.png';
+import dev from '~/public/images/dev.png';
 import { getFirstName } from '~/data/reducers';
 import './styles.scss';
+
 
 const RolePicker = ({ firstName }) => (
   <div className="verify-role-container">
@@ -13,27 +16,21 @@ const RolePicker = ({ firstName }) => (
     <div className="role-cards">
       <Link to="/bootcamp-grad-verify">
         <Card className="role-card" >
-          <CardMedia
-            image="~/public/images/npo.png"
-            title="Contemplative Reptile"
-          />
           <CardContent>
+            <img className="image" src={dev} alt="non profit" />
             <Typography component="p">
-          Im a bootcamp grad
-          </Typography>
+              <p className="link" >{"I'm a Bootcamp graduate"}</p>
+            </Typography>
           </CardContent>
         </Card>
       </Link>
       <Link to="/non-profit-verify">
         <Card className="role-card">
-          <CardMedia
-            image="~/public/images/npo.png"
-            title="Contemplative Reptile"
-          />
           <CardContent>
-            <Typography component="p">
-          Im a non profit
-          </Typography>
+            <img className="image" src={npo} alt="bootcamp graduate" />
+            <Typography className="link" component="p">
+              <p>{"I'm a Non-Profit organization"}</p>
+            </Typography>
           </CardContent>
         </Card>
       </Link>
