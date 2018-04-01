@@ -1,0 +1,23 @@
+@import '~sass/variables';
+@import '~sass/colors';
+@import '~sass/mixins';
+
+@include pinkGradientBackground();
+
+.bootcamp-graduate-signup-container {
+     @include center-item();
+
+     .bootcamp-graduate-signup-box {
+        text-align: center;
+        padding: 40px;
+        max-width: 400px;
+
+        button:disabled {
+            opacity:0.5;
+        }
+      
+        .continue-button {
+            @include button();
+        }
+    }
+}
