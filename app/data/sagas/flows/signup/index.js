@@ -12,7 +12,14 @@ export function* signupFlow({ signupData }) {
     const service = new ApiService();
     const response = yield call([service, 'signup'], signupData);
     const token = get(response, 'headers.access-token');
-    LocalStorage.set(KEYS.TOKEN, token);
+    const client = get(response, 'headers.client');
+    const { uid } = get(response, 'data.data');
+    const localStorageItems = {
+      [KEYS.TOKEN]: token,
+      [KEYS.CLIENT]: client,
+      [KEYS.UID]: uid,
+    };
+    LocalStorage.setAll(localStorageItems);
     yield put(push('/verify-role'));
     yield put(signupRequestSuccess(response));
   } catch (exception) {
