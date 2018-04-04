@@ -17,7 +17,6 @@
 
         .continue-to-dashboard-button {
             @include button;
-            margin-top: 20px;
 
             .continue-to-dashboard-link{
                 @include link();

@@ -1,5 +1,4 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
 import {
   ROLE_PICK_REQUEST,
   rolePickRequestSuccess,
@@ -16,7 +15,6 @@ export function* rolePick({ payload }) {
   try {
     const id = yield select(getId);
     const response = yield call(fetchResource, 'rolePick', id, payload);
-    yield put(push('/dashboard'));
     yield put(rolePickRequestSuccess(response));
   } catch (exception) {
     const errorMessage = get(
