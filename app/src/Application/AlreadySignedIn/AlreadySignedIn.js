@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 
 import { signoutRequest } from '~/data/actions/signout';
 import './styles.scss';
-
+import Header from '../Header';
 const AlreadySignedIn = ({ handleSignoutRequest }) => (
   <div className="already-signed-in-container">
     <Paper className="already-signed-in-box" elevation={24}>
-      <h1>You are already signed in</h1>
+      <Header text="You are already signed in" />
       <button className="continue-to-dashboard-button">
         <Link className="continue-to-dashboard-link"to="/dashboard"> Continue to Dashboard</Link>
       </button>
