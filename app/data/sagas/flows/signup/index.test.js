@@ -1,18 +1,18 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import { push } from 'react-router-redux';
-import ApiService from 'services';
 import sinon from 'sinon';
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 import {
   signupRequestSuccess,
   signupRequestFailure,
 } from '~/data/actions/signup';
+import fetchResource from '~/data/sagas/common/fetchResource';
 import { signupFlow } from './';
 
 
 describe('Signup flow', () => {
   const data = { signupData: 'test' };
-  const response = { headers: { 'access-token': 'test' } };
+  const response = { headers: { 'access-token': 'test' }, data: { data: {} } };
   const sandBox = sinon.sandbox.create();
   const error = { test: 'test' };
 
@@ -30,8 +30,8 @@ describe('Signup flow', () => {
       .provide({
         call({ fn, args }, next) {
           if (
-            fn === ApiService.prototype.signup &&
-            args[0] === data.signupData
+            fn === fetchResource &&
+            args[1] === data.signupData
           ) {
             return response;
           }
@@ -48,7 +48,7 @@ describe('Signup flow', () => {
     expectSaga(signupFlow, data)
       .provide({
         call({ fn }) {
-          if (fn === ApiService.prototype.signup) {
+          if (fn === fetchResource) {
             throw error;
           }
         },

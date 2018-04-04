@@ -1,12 +1,12 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects';
 import {
-    ROLE_PICK_REQUEST,
-    rolePickRequestSuccess,
-    rolePickRequestFailure,
-} from 'data/actions/rolePicker';
+  ROLE_PICK_REQUEST,
+  rolePickRequestSuccess,
+  rolePickRequestFailure,
+} from '~/data/actions/rolePicker';
 
 import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
-import ApiService from 'services';
+import fetchResource from '~/data/sagas/common/fetchResource';
 import { get } from 'lodash';
 import swal from 'sweetalert2/dist/sweetalert2';
 import { getId } from '~/data/reducers';
@@ -14,12 +14,7 @@ import { getId } from '~/data/reducers';
 export function* rolePick({ payload }) {
   try {
     const id = yield select(getId);
-    const service = new ApiService();
-    const response = yield call(
-      [service, 'rolePick'],
-      id,
-      payload
-    );
+    const response = yield call(fetchResource, 'rolePick', id, payload);
     yield put(rolePickRequestSuccess(response));
   } catch (exception) {
     const errorMessage = get(
@@ -33,7 +28,5 @@ export function* rolePick({ payload }) {
 }
 
 export default function*() {
-  yield [
-    takeEvery(ROLE_PICK_REQUEST, rolePick),
-  ];
+  yield [takeEvery(ROLE_PICK_REQUEST, rolePick)];
 }
