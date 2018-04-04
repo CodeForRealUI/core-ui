@@ -11,8 +11,8 @@ import {
 } from 'material-ui';
 import { Link } from 'react-router-dom';
 
+
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
-import Header from '../Header';
 import './styles.scss';
 
 class SignIn extends Component {
@@ -40,8 +40,6 @@ class SignIn extends Component {
   handleEmailChange = e => {
     this.setState({ email: e.target.value });
   };
-
-  shouldDisableSignIn = () => !this.state.email || !this.state.password
 
   handleLogIn = () => {
     const { email, password, rememberMe } = this.state;
@@ -82,9 +80,20 @@ class SignIn extends Component {
             Forgot your password?
           </Link>
         </FormGroup>
-        <Button variant="raised" className="login-button " disabled={this.shouldDisableSignIn()} onClick={this.handleLogIn}>
+        <FormGroup row>
+          <Button variant="raised" className="login-button " onClick={this.handleLogIn}>
             Log In
-        </Button>
+          </Button>
+        </FormGroup>
+        {/* <DividerWithText text={'or connect with'} />
+        <FormGroup row>
+          <Button variant="raised" className="sign-in-with-facebook-button">
+            Sign in with Facebook
+          </Button>
+          <Button variant="raised" className="sign-in-with-google-button">
+            Sign in with Google{' '}
+          </Button>
+        </FormGroup> */}
       </div>
     );
   }
@@ -93,7 +102,7 @@ class SignIn extends Component {
     return (
       <div className="sign-in-container">
         <Paper elevation={24} className="sign-in-box">
-          <Header text="Sign In" />
+          <h1>Sign In</h1>
           {this.renderForm()}
         </Paper>
         <Link className="sign-up-link" to="/sign-up">

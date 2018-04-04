@@ -15,4 +15,3 @@ export default function createReducer(injectedReducers) {
 
 export const getFirstName = state => fromUser.getFirstName(state.user);
 export const getId = state => fromUser.getId(state.user);
-export const getifMissingRole = state => fromUser.getifMissingRole(state.user);
