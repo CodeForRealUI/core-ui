@@ -1,6 +1,5 @@
 import { push } from 'react-router-redux';
 import { identity } from 'lodash';
-import ApiService from 'services';
 import sinon from 'sinon';
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import {
@@ -9,7 +8,7 @@ import {
   loginRequestFailure,
 } from '~/data/actions/login';
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
-
+import fetchResource from '~/data/sagas/common/fetchResource';
 import loginFlow, { authenticate } from './';
 
 
@@ -80,9 +79,9 @@ describe('Login flow', () => {
         .provide({
           call(effect, next) {
             return [
-              effect.fn === ApiService.prototype.login,
-              effect.args[0] === credentials.email,
-              effect.args[1] === credentials.password,
+              effect.fn === fetchResource,
+              effect.args[1] === credentials.email,
+              effect.args[2] === credentials.password,
             ].every(identity)
               ? response
               : next();
@@ -98,7 +97,7 @@ describe('Login flow', () => {
       return expectSaga(authenticate)
         .provide({
           call({ fn }) {
-            if (fn === ApiService.prototype.login) {
+            if (fn === fetchResource) {
               throw error;
             }
           },
