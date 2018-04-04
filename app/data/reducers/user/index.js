@@ -21,6 +21,8 @@ function isMissingRole(state = false, { type, response }) {
   switch (type) {
     case USER_REQUEST_SUCCESS:
       return !!(get(response, 'data.data.role'));
+    case ROLE_PICK_REQUEST_SUCCESS:
+      return false;
     default:
       return state;
   }
