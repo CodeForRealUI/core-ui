@@ -29,8 +29,6 @@ class NonProfitRoleSignup extends Component {
   handleSubmit= (e) => {
     e.preventDefault();
     const { organizationName, websiteAddress, contactNumber, address1, address2, city, state, zipcode, organizationEmail, category } = this.state;
-    // todo removing the +1 hack whenever we go international - this is to pass the backend validation.
-    // todo add organizationEmail
     const payload = {
       organization_attributes: {
         name: organizationName,
