@@ -24,6 +24,9 @@
         .login-button {
             @include button()
         }
+        button:disabled {
+            opacity:0.5
+        }
         .sign-in-with-facebook-button {
             color: $white-01;
             width: 100%;

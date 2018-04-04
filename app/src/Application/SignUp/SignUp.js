@@ -9,6 +9,7 @@ import { mustMatch, minLength, validName } from '~/validators';
 import { run, ruleRunner } from '~/validators/ruleRunner';
 import { signupRequest } from '../../../data/actions/signup';
 import './styles.scss';
+import Header from '../Header';
 
 const fieldValidations = [
   ruleRunner('firstName', 'name', validName),
@@ -149,7 +150,7 @@ class SignUp extends Component {
     return (
       <div className="sign-up-container">
         <Paper className="sign-up-box" elevation={24}>
-          <h1>Sign Up</h1>
+          <Header text="Sign Up" />
           {this.renderForm()}
         </Paper>
         <Link className="sign-in-link" to="/sign-in">
