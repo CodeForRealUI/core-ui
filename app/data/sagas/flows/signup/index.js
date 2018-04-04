@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { SIGNUP_REQUEST, signupRequestSuccess, signupRequestFailure } from 'data/actions/signup';
-import ApiService from 'services';
+import fetchResource from '~/data/sagas/common/fetchResource';
 import { push } from 'react-router-redux';
 import { get } from 'lodash';
 import swal from 'sweetalert2/dist/sweetalert2';
@@ -9,8 +9,7 @@ import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 
 export function* signupFlow({ signupData }) {
   try {
-    const service = new ApiService();
-    const response = yield call([service, 'signup'], signupData);
+    const response = yield call(fetchResource, 'signup', signupData);
     const token = get(response, 'headers.access-token');
     const client = get(response, 'headers.client');
     const { uid } = get(response, 'data.data');
