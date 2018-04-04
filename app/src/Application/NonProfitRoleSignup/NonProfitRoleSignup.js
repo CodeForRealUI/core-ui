@@ -122,7 +122,7 @@ class NonProfitRoleSignup extends Component {
           <Grid item xs={6}>
             <TextField
               onChange={this.handleFieldChanged('address1')}
-              value={this.state.addres1}
+              value={this.state.address1}
               label="Address 1"
               required
               fullWidth
