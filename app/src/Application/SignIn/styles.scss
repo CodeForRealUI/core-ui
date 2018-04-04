@@ -2,12 +2,8 @@
 @import '~sass/colors';
 @import '~sass/mixins';
 
-html, body {
-    background: $sign-in-background;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-}
+@include pinkGradientBackground();
+
 .sign-in-container {
     @include center-item();
 

@@ -106,10 +106,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 98,
-        "branches": 91,
-        "functions": 98,
-        "lines": 98
+        "statements": 0,
+        "branches": 0,
+        "functions": 0,
+        "lines": 90
       }
     },
     "moduleDirectories": [
@@ -117,11 +117,11 @@
       "app"
     ],
     "moduleNameMapper": {
+      "^~(.*)$": "<rootDir>/app$1",
       ".*\\.(css|less|styl|scss|sass)$": "<rootDir>/internals/mocks/cssModule.js",
       ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/image.js"
     },
-    "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js",
-    "testRegex": "tests/.*\\.test\\.js$"
+    "setupTestFrameworkScriptFile": "<rootDir>/internals/testing/test-bundler.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -152,9 +152,11 @@
     "react-router-redux": "5.0.0-alpha.6",
     "redux": "3.6.0",
     "redux-saga": "0.15.3",
+    "redux-saga-test-plan": "^3.6.0",
     "reselect": "3.0.1",
     "sanitize.css": "4.1.0",
     "sass-loader": "^6.0.7",
+    "sinon": "^4.4.8",
     "styled-components": "2.0.0",
     "sweetalert2": "^7.15.1",
     "typeface-roboto": "^0.0.54",

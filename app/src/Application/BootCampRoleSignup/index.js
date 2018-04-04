@@ -1,6 +1,6 @@
 import Loadable from 'react-loadable';
 
 export default Loadable({
-  loader: () => import('./SignUp'),
+  loader: () => import('./BootCampRoleSignup'),
   loading: () => null,
 });

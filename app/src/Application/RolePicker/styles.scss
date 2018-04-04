@@ -1,0 +1,37 @@
+@import '~sass/variables';
+@import '~sass/colors';
+@import '~sass/mixins';
+
+@include pinkGradientBackground();
+
+.verify-role-container {
+     @include center-item();
+
+     .title{
+         color: white
+     }
+  
+     .role-cards {
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        a:link {
+            text-decoration: none;
+        }
+        .role-card {
+            margin:10px;
+            height: 300px;
+            width: 240px;
+
+            .link {
+                color: black;
+                font-size: 18px;
+                text-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+            }
+        }
+   
+    }
+ 
+}

@@ -62,6 +62,20 @@ class AppService {
       })
       .then(response => response, error => Promise.reject(error.response));
   }
+
+  rolePick(id, payload) {
+    return this.client
+      .patch(`/users/${id}/verify`, {
+        user: payload,
+      })
+      .then(response => response, error => Promise.reject(error.response));
+  }
+
+  getUserObject() {
+    return this.client
+      .get('/users/me')
+      .then(response => response, error => Promise.reject(error.response));
+  }
 }
 
 export default AppService;

@@ -8,6 +8,13 @@
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
 
+import 'sanitize.css/sanitize.css';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+/* eslint-disable import/no-unresolved, import/extensions */
+import '!file-loader?name=[name].[ext]!./manifest.json';
+import 'file-loader?name=[name].[ext]!./.nginx.conf';
+
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -16,13 +23,6 @@ import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import { MuiThemeProvider } from 'material-ui/styles';
 import theme from './theme';
-
-import 'sanitize.css/sanitize.css';
-import 'sweetalert2/dist/sweetalert2.min.css';
-
-/* eslint-disable import/no-unresolved, import/extensions */
-import '!file-loader?name=[name].[ext]!./manifest.json';
-import 'file-loader?name=[name].[ext]!./.nginx.conf';
 
 /* eslint-enable import/no-unresolved, import/extensions */
 import configureStore from './configureStore';
