@@ -17,7 +17,6 @@ export const AlreadySignedIn = ({ handleSignoutRequest, isMissingRole }) => {
         <Header text="You are already signed in" />
         <button className="continue-to-dashboard-button">
           <Link className="continue-to-dashboard-link" to={redirectLink}>
-            {' '}
           Continue to Dashboard
         </Link>
         </button>

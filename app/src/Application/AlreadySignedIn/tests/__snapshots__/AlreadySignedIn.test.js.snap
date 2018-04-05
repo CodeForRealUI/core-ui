@@ -19,7 +19,6 @@ exports[`Component AlreadySignedIn should remain consistent if no change was int
         className="continue-to-dashboard-link"
         to="/verify-role"
       >
-         
         Continue to Dashboard
       </Link>
     </button>
