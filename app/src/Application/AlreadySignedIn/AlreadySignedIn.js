@@ -7,9 +7,9 @@ import { Link } from 'react-router-dom';
 import { signoutRequest } from '~/data/actions/signout';
 import { getifMissingRole } from '~/data/reducers';
 import './styles.scss';
-import Header from '../Header';
+import Header from '../Header/index';
 
-const AlreadySignedIn = ({ handleSignoutRequest, isMissingRole }) => {
+export const AlreadySignedIn = ({ handleSignoutRequest, isMissingRole }) => {
   const redirectLink = isMissingRole ? '/verify-role' : '/dashboard';
   return (
     <div className="already-signed-in-container">
