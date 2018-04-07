@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AppBar, Toolbar, Typography } from 'material-ui';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
-function NavBar() {
+function NavBarView({ children }) {
   return (
     <div className="nav-container">
       <AppBar position="static" color="inherit" elevation={2}>
@@ -22,10 +23,13 @@ function NavBar() {
           </Link>
         </Toolbar>
       </AppBar>
+      <div className="content-container">{children}</div>
     </div>
   );
 }
 
-NavBar.propTypes = {};
+NavBarView.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element),
+};
 
-export default NavBar;
+export default NavBarView;

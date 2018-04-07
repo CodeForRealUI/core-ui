@@ -12,6 +12,7 @@ export default createMuiTheme({
         paddingLeft: 45,
         paddingRight: 31,
         width: 300,
+        position: 'relative',
       },
     },
     MuiSelect: {

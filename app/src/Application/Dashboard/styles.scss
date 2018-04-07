@@ -4,3 +4,12 @@ html, body {
     background: none;
     background-color: $white-02;
 }
+
+.dashboard-container {
+    flex-grow: 1;
+    height: 430;
+    z-index: 1;
+    overflow: 'hidden';
+    position: 'relative';
+    display: 'flex';
+}
