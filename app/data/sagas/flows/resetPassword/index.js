@@ -9,14 +9,13 @@ import {
 } from 'data/actions/forgotPassword';
 
 import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
-import ApiService from 'services';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
 import { get } from 'lodash';
 import swal from 'sweetalert2/dist/sweetalert2';
 
 export function* passwordResetEmailRequest({ email }) {
   try {
-    const service = new ApiService();
-    const response = yield call([service, 'passwordResetEmail'], email);
+    const response = yield call(fetchResource, 'passwordResetEmail', email);
     yield put(passwordResetEmailRequestSuccess(response));
     swal('Success', 'An email has been sent to reset your password', 'success');
   } catch (exception) {
@@ -32,9 +31,9 @@ export function* passwordResetEmailRequest({ email }) {
 
 export function* passwordReset({ password, confirmedPassword }) {
   try {
-    const service = new ApiService();
     const response = yield call(
-      [service, 'passwordReset'],
+      fetchResource,
+      'passwordReset',
       password,
       confirmedPassword,
     );

@@ -6,7 +6,7 @@ import {
 } from '~/data/actions/rolePicker';
 
 import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
-import fetchResource from '~/data/sagas/common/fetchResource';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
 import { get } from 'lodash';
 import swal from 'sweetalert2/dist/sweetalert2';
 import { getId } from '~/data/reducers';

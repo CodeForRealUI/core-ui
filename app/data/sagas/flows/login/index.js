@@ -7,7 +7,7 @@ import {
   loginRequestSuccess,
   loginRequestFailure,
 } from 'data/actions/login';
-import fetchResource from '~/data/sagas/common/fetchResource';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
 import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 
