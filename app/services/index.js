@@ -7,7 +7,11 @@ const BASE_URL = 'https://damp-beyond-45634.herokuapp.com/';
 
 class AppService {
   constructor(baseURL) {
-    const [token, client, uid] = LocalStorage.getAll([KEYS.TOKEN, KEYS.CLIENT, KEYS.UID]);
+    const [token, client, uid] = LocalStorage.getAll([
+      KEYS.TOKEN,
+      KEYS.CLIENT,
+      KEYS.UID,
+    ]);
     this.client = axios.create({
       baseURL: baseURL || BASE_URL,
       headers: {
@@ -74,6 +78,12 @@ class AppService {
   getUserObject() {
     return this.client
       .get('/users/me')
+      .then(response => response, error => Promise.reject(error.response));
+  }
+
+  getProjects() {
+    return this.client
+      .get('/projects')
       .then(response => response, error => Promise.reject(error.response));
   }
 }
