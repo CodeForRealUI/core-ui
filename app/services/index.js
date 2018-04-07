@@ -84,7 +84,7 @@ class AppService {
   getProjects() {
     return this.client
       .get('/projects')
-      .then(response => response, error => Promise.reject(error.response));
+      .then(response => response.data, error => Promise.reject(error.response));
   }
 }
 
