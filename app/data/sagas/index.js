@@ -4,7 +4,7 @@ import signupFlow from './flows/signup';
 import resetPasswordFlow from './flows/resetPassword';
 import signoutFlow from './flows/signout';
 import rolePickFlow from './flows/rolePick';
-import userFlow from './flows/user';
+import dashboardFlow from './flows/dashboard';
 
 export default function* rootSaga() {
   yield all([
@@ -13,6 +13,6 @@ export default function* rootSaga() {
     resetPasswordFlow(),
     signoutFlow(),
     rolePickFlow(),
-    userFlow(),
+    dashboardFlow(),
   ]);
 }

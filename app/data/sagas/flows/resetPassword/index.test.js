@@ -9,6 +9,7 @@ import {
   passwordResetRequestFailure,
 } from '~/data/actions/forgotPassword';
 import LocalStorage from '~/utilities/LocalStorage';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
 import { passwordReset, passwordResetEmailRequest } from './';
 
 
@@ -39,8 +40,8 @@ describe('Reset password flow', () => {
     it('should yield the expected actions on error path', () =>
       expectSaga(passwordResetEmailRequest, request)
         .provide({
-          call({ fn }) {
-            if (fn === ApiService.prototype.passwordResetEmail) {
+          call({ fn, args }) {
+            if (fn === fetchResource && args[0] === 'passwordResetEmail') {
               throw error;
             }
           },
@@ -60,9 +61,10 @@ describe('Reset password flow', () => {
           call({ fn, args }) {
             return (
               [
-                fn === ApiService.prototype.passwordReset,
-                args[0] === request.password,
-                args[1] === request.confirmedPassword,
+                fn === fetchResource,
+                args[0] === 'passwordReset',
+                args[1] === request.password,
+                args[2] === request.confirmedPassword,
               ].every(identity) && response
             );
           },
@@ -75,8 +77,8 @@ describe('Reset password flow', () => {
     it('should yield the expected actions on error path', () =>
       expectSaga(passwordReset, request)
         .provide({
-          call({ fn }) {
-            if (fn === ApiService.prototype.passwordReset) {
+          call({ fn, args }) {
+            if (fn === fetchResource && args[0] === 'passwordReset') {
               throw error;
             }
           },

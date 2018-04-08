@@ -2,6 +2,8 @@
 
 .nav-container {
     flex-grow: 1;
+    position: absolute;
+    width: 100%;
 }
 
 .dashboard-title {
@@ -37,4 +39,8 @@
     font-weight: 600;
     text-decoration: none;
     margin: 15px;
+}
+
+.content-container {
+    display: flex;
 }

@@ -8,10 +8,11 @@ export default createMuiTheme({
     MuiDrawer: {
       paper: {
         zIndex: -1,
-        paddingTop: 80,
+        paddingTop: 20,
         paddingLeft: 45,
         paddingRight: 31,
         width: 300,
+        position: 'relative',
       },
     },
     MuiSelect: {

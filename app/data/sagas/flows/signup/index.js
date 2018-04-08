@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { SIGNUP_REQUEST, signupRequestSuccess, signupRequestFailure } from 'data/actions/signup';
-import fetchResource from '~/data/sagas/common/fetchResource';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
 import { push } from 'react-router-redux';
 import { get } from 'lodash';
 import swal from 'sweetalert2/dist/sweetalert2';

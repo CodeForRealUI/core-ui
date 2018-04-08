@@ -1,6 +1,6 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import { getId } from '~/data/reducers';
-import fetchResource from '~/data/sagas/common/fetchResource';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
 import {
   rolePickRequestSuccess,
   rolePickRequestFailure,
