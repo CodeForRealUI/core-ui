@@ -1,6 +1,6 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import fetchResource from '~/data/sagas/helpers/fetchResource';
-import { userRequestSuccess, userRequestFailure } from '~/data/actions/user';
+import { userRequestSuccess } from '~/data/actions/user';
 import loadUser from './';
 
 describe('loadUser saga', () => {
@@ -30,7 +30,6 @@ describe('loadUser saga', () => {
           }
         },
       })
-      .put(userRequestFailure(error))
       .run()
       .catch(err => {
         expect(err).toEqual(error);

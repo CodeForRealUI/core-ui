@@ -1,9 +1,6 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import fetchResource from '~/data/sagas/helpers/fetchResource';
-import {
-  projectRequestSuccess,
-  //   projectRequestFailure,
-} from '~/data/actions/project';
+import { projectRequestSuccess } from '~/data/actions/project';
 import loadProjects from './';
 
 describe('loadProjects saga', () => {
@@ -31,7 +28,6 @@ describe('loadProjects saga', () => {
           }
         },
       })
-      .put(projectRequestSuccess(response))
       .run()
       .catch(err => {
         expect(err).toEqual(error);
