@@ -1,7 +1,11 @@
 @import '~sass/colors';
 
-html, body {
+html {
     background: none;
+}
+
+body {
+    background: none;    
     background-color: $white-02;
 }
 
