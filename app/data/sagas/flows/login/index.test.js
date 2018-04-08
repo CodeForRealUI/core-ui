@@ -8,7 +8,7 @@ import {
   loginRequestFailure,
 } from '~/data/actions/login';
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
-import fetchResource from '~/data/sagas/common/fetchResource';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
 import loginFlow, { authenticate } from './';
 
 

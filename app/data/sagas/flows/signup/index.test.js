@@ -6,7 +6,7 @@ import {
   signupRequestSuccess,
   signupRequestFailure,
 } from '~/data/actions/signup';
-import fetchResource from '~/data/sagas/common/fetchResource';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
 import { signupFlow } from './';
 
 
