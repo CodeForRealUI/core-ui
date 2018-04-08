@@ -5,29 +5,42 @@ import { Paper } from 'material-ui';
 import { Link } from 'react-router-dom';
 
 import { signoutRequest } from '~/data/actions/signout';
+import { getIsMissingRole } from '~/data/reducers';
 import './styles.scss';
+import Header from '../Header/index';
 
-const AlreadySignedIn = ({ handleSignoutRequest }) => (
-  <div className="already-signed-in-container">
-    <Paper className="already-signed-in-box" elevation={24}>
-      <h1>You are already signed in</h1>
-      <button className="continue-to-dashboard-button">
-        <Link className="continue-to-dashboard-link"to="/dashboard"> Continue to Dashboard</Link>
-      </button>
-    </Paper>
-    <Link
-      onClick={handleSignoutRequest}
-      className="sign-out-link"
-      to="/sign-in"
-    >
-      Sign Out Instead
-    </Link>
-  </div>
-);
+export const AlreadySignedIn = ({ handleSignoutRequest, isMissingRole }) => {
+  const redirectLink = isMissingRole ? '/verify-role' : '/dashboard';
+  return (
+    <div className="already-signed-in-container">
+      <Paper className="already-signed-in-box" elevation={24}>
+        <Header text="You are already signed in" />
+        <button className="continue-to-dashboard-button">
+          <Link className="continue-to-dashboard-link" to={redirectLink}>
+            Continue to Dashboard
+          </Link>
+        </button>
+      </Paper>
+      <Link
+        onClick={handleSignoutRequest}
+        className="sign-out-link"
+        to="/sign-in"
+      >
+        Sign Out Instead
+      </Link>
+    </div>
+  );
+};
 AlreadySignedIn.propTypes = {
   handleSignoutRequest: PropTypes.func.isRequired,
+  isMissingRole: PropTypes.bool.isRequired,
 };
 
-export default connect(null, dispatch => ({
-  handleSignoutRequest: () => dispatch(signoutRequest()),
-}))(AlreadySignedIn);
+export default connect(
+  state => ({
+    isMissingRole: getIsMissingRole(state),
+  }),
+  {
+    handleSignoutRequest: signoutRequest,
+  },
+)(AlreadySignedIn);

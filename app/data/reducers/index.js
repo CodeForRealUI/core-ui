@@ -17,6 +17,7 @@ export default function createReducer(injectedReducers) {
 // Global User Selectors
 export const getFirstName = state => fromUser.getFirstName(state.user);
 export const getId = state => fromUser.getId(state.user);
+export const getIsMissingRole = state => fromUser.getIsMissingRole(state.user);
 
 // Global Project Selectors
 export const getProjects = state => fromProject.getProjects(state.project);

@@ -15,6 +15,7 @@ import ResetPassword from './ResetPassword';
 import AlreadySignedIn from './AlreadySignedIn';
 import RolePicker from './RolePicker';
 import BootCampRoleSignup from './BootCampRoleSignup';
+import NonProfitRoleSignup from './NonProfitRoleSignup';
 import { PublicRoute, PrivateRoute } from './Routes';
 
 // Compose the root level routes here
@@ -41,6 +42,10 @@ class Application extends Component {
           <PrivateRoute
             path="/bootcamp-grad-verify"
             component={BootCampRoleSignup}
+          />
+          <PrivateRoute
+            path="/non-profit-verify"
+            component={NonProfitRoleSignup}
           />
           <PrivateRoute path="" component={NotFound} />
         </Switch>

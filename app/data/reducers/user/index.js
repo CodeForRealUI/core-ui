@@ -16,11 +16,24 @@ function data(state = {}, { type, response }) {
   }
 }
 
+function isMissingRole(state = false, { type, response }) {
+  switch (type) {
+    case USER_REQUEST_SUCCESS:
+      return !!(get(response, 'data.role'));
+    case ROLE_PICK_REQUEST_SUCCESS:
+      return false;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   data,
+  isMissingRole,
 });
 
 /* eslint-disable dot-notation */
 export const getFirstName = state => state.data['first_name'];
 export const getId = state => state.data.id;
+export const getIsMissingRole = state => state.isMissingRole;
 

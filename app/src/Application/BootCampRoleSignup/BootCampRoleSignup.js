@@ -7,7 +7,7 @@ import { Paper, TextField, FormGroup } from 'material-ui';
 import { rolePickRequest } from '~/data/actions/rolePicker';
 import './styles.scss';
 
-class BootCampRoleSignup extends Component {
+export class BootCampRoleSignup extends Component {
   constructor(props) {
     super(props);
     this.state = {
