@@ -1,8 +1,12 @@
 import { createMuiTheme } from 'material-ui/styles';
+import { PRIMARY_ORANGE } from '~/theme/colors';
 
 export default createMuiTheme({
   palette: {
     type: 'light',
+    primary: {
+      main: PRIMARY_ORANGE,
+    },
   },
   overrides: {
     MuiDrawer: {
@@ -18,6 +22,11 @@ export default createMuiTheme({
     MuiSelect: {
       root: {
         width: 200,
+      },
+    },
+    MuiTab: {
+      root: {
+        backgroundColor: 'white',
       },
     },
   },
