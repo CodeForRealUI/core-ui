@@ -18,7 +18,6 @@ function data(state = [], { type, response }) {
 function isLoading(state = false, { type }) {
   switch (type) {
     case PROJECT_REQUEST_SUCCESS:
-      return false;
     case PROJECT_REQUEST_FAILURE:
       return false;
     case PROJECT_REQUEST:
