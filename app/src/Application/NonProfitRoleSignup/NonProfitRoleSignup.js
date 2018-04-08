@@ -26,7 +26,7 @@ class NonProfitRoleSignup extends Component {
     };
   }
 
-  handleSubmit= (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { organizationName, websiteAddress, contactNumber, address1, address2, city, state, zipcode, organizationEmail, category } = this.state;
     const payload = {
@@ -102,7 +102,7 @@ class NonProfitRoleSignup extends Component {
                 <MenuItem value={'Environmental'}>Environmental</MenuItem>
                 <MenuItem value={'Health'}>Health</MenuItem>
                 <MenuItem value={'Education'}>Education</MenuItem>
-                <MenuItem value={'Arts and Cultur'}>Arts and Culture</MenuItem>
+                <MenuItem value={'Arts and Culture'}>Arts and Culture</MenuItem>
                 <MenuItem value={'Other'}>Other</MenuItem>
               </Select>
             </FormControl>
@@ -164,15 +164,15 @@ class NonProfitRoleSignup extends Component {
           </Grid>
         </Grid>
         <button
-               // todo check for the entire form and dont rely on html validation
+          // todo check for the entire form and dont rely on html validation
           disabled={!this.state.category}
           className="submit-button"
         >
-            Submit
+          Submit
           </button>
       </FormGroup>
     </form>
-    )
+  )
 
   render() {
     return (
@@ -190,6 +190,6 @@ NonProfitRoleSignup.propTypes = {
   handleRolePickRequest: PropTypes.func.isRequired,
 };
 
-export default connect(null, (dispatch) => ({
-  handleRolePickRequest: payload => dispatch(rolePickRequest(payload)),
-}))(NonProfitRoleSignup);
+export default connect(null, {
+  handleRolePickRequest: rolePickRequest,
+})(NonProfitRoleSignup);

@@ -35,5 +35,5 @@ export default combineReducers({
 /* eslint-disable dot-notation */
 export const getFirstName = state => state.data['first_name'];
 export const getId = state => state.data.id;
-export const getifMissingRole = state => state.isMissingRole;
+export const getIsMissingRole = state => state.isMissingRole;
 
