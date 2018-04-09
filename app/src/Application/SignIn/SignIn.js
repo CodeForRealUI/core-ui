@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom';
 
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 import Header from '../Header';
+import DividerWithText from './DividerWithText';
+import OAuthButton from '../OAuthButton';
 import './styles.scss';
 
 class SignIn extends Component {
@@ -85,6 +87,9 @@ class SignIn extends Component {
         <Button variant="raised" className="login-button " disabled={this.shouldDisableSignIn()} onClick={this.handleLogIn}>
             Log In
         </Button>
+        <DividerWithText text={'or connect with'} />
+        <OAuthButton type="facebook" text="Sign in with Facebook" />
+        <OAuthButton type="google" text="Sign in with Google" />
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { CssBaseline } from 'material-ui';
 
 import LocalStorage from '~/utilities/LocalStorage';
 import { userRequest } from '~/data/actions/user';
@@ -16,6 +17,7 @@ import AlreadySignedIn from './AlreadySignedIn';
 import RolePicker from './RolePicker';
 import BootCampRoleSignup from './BootCampRoleSignup';
 import NonProfitRoleSignup from './NonProfitRoleSignup';
+import OAuthBootstrap from './OAuthBootstrap';
 import { PublicRoute, PrivateRoute } from './Routes';
 
 // Compose the root level routes here
@@ -26,7 +28,7 @@ class Application extends Component {
 
   render() {
     return (
-      <div className="application-container">
+      <CssBaseline>
         <Switch>
           <PublicRoute path="/sign-in" component={SignIn} />
           <PublicRoute path="/sign-up" component={SignUp} />
@@ -35,6 +37,7 @@ class Application extends Component {
             // todo move reset-password to isUathenticatned
           }
           <PublicRoute path="/reset-password" component={ResetPassword} />
+          <PublicRoute path="/oauth-sign-in" component={OAuthBootstrap} />
           {/* Routes not requiring authentication above this line */}
           <PrivateRoute path="/already-signed-in" component={AlreadySignedIn} />
           <PrivateRoute path="/verify-role" component={RolePicker} />
@@ -49,7 +52,7 @@ class Application extends Component {
           />
           <PrivateRoute path="" component={NotFound} />
         </Switch>
-      </div>
+      </CssBaseline>
     );
   }
 }

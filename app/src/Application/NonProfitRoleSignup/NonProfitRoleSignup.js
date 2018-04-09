@@ -131,7 +131,6 @@ class NonProfitRoleSignup extends Component {
           <Grid item xs={6}>
             <TextField
               label="Address 2"
-              required
               onChange={this.handleFieldChanged('address2')}
               value={this.state.address2}
               fullWidth

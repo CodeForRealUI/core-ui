@@ -46,12 +46,12 @@ class SignUp extends Component {
     const { password1, password2, firstName, lastName, email, phone } = this.state;
     // todo removing the +1 hack whenever we go international - this is to pass the backend validation.
     const signUpData = {
-      first_name: firstName,
-      last_name: lastName,
+      firstName,
+      lastName,
       email,
       password: password1,
-      password_confirmation: password2,
-      mobile_number: phone && `1${phone}`,
+      passwordConfirmation: password2,
+      mobileNumber: phone && `1${phone}`,
     };
     return this.props.signup(signUpData);
   };

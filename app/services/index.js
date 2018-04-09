@@ -18,6 +18,7 @@ class AppService {
         'access-token': token,
         client,
         uid,
+        'X-Key-Inflection': 'camel',
       },
     });
   }
@@ -47,6 +48,7 @@ class AppService {
       .then(response => response, error => Promise.reject(error.response));
   }
 
+  // todo dynamic redirect_url
   passwordResetEmail(email) {
     return this.client
       .post('/auth/password', {
