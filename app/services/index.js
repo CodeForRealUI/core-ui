@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
-import { getJsonFromUrl } from '../utilities/browser';
+import { getOrigin } from '~/utilities/browser';
 
 const BASE_URL = 'https://damp-beyond-45634.herokuapp.com/';
 
 class AppService {
-  constructor(baseURL) {
+  constructor(baseURL, headers) {
     const [token, client, uid] = LocalStorage.getAll([
       KEYS.TOKEN,
       KEYS.CLIENT,
@@ -19,6 +19,7 @@ class AppService {
         client,
         uid,
         'X-Key-Inflection': 'camel',
+        ...headers,
       },
     });
   }
@@ -48,23 +49,20 @@ class AppService {
       .then(response => response, error => Promise.reject(error.response));
   }
 
-  // todo dynamic redirect_url
   passwordResetEmail(email) {
     return this.client
       .post('/auth/password', {
         email,
-        redirect_url: 'http://localhost:3000/reset-password',
+        redirect_url: `${getOrigin()}/reset-password`,
       })
       .then(response => response, error => Promise.reject(error.response));
   }
 
   passwordReset(password1, password2) {
-    const queryParams = getJsonFromUrl();
     return this.client
       .put('/auth/password', {
         password: password1,
         password_confirmation: password2,
-        ...queryParams,
       })
       .then(response => response, error => Promise.reject(error.response));
   }

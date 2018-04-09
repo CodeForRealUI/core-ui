@@ -19,7 +19,7 @@ export function* oauthFlow() {
     yield put(oauthBootstrapRequestSuccess());
     yield put(push('/dashboard'));
   } catch (exception) {
-    const errorMessage = get(exception, 'data.errors.full_messages[0]', 'Something went wrong');
+    const errorMessage = get(exception, 'data.errors.fullMessages[0]', 'Something went wrong');
     swal('Oops', errorMessage, 'error');
     yield put(oauthBootstrapRequestFailure(exception));
   }

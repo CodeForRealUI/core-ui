@@ -21,7 +21,7 @@ export function* rolePick({ payload }) {
   } catch (exception) {
     const errorMessage = get(
       exception,
-      'data.errors.full_messages[0]',
+      'data.errors.fullMessages[0]',
       DEFAULT_ERROR_MESSAGE,
     );
     swal('Oops', errorMessage, 'error');

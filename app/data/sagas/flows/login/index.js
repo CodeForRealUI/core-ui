@@ -17,7 +17,7 @@ export function* authenticate(email, password) {
     yield put(loginRequestSuccess(response));
     return response;
   } catch (error) {
-    const errorMessage = get(error, 'data.errors.full_messages[0]', DEFAULT_ERROR_MESSAGE);
+    const errorMessage = get(error, 'data.errors.fullMessages[0]', DEFAULT_ERROR_MESSAGE);
     swal('Oops', errorMessage, 'error');
     yield put(loginRequestFailure(error));
     return false;
