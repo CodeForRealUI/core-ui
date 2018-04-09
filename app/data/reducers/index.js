@@ -20,7 +20,6 @@ export default function createReducer(injectedReducers) {
 export const getFirstName = state => fromUser.getFirstName(state.user);
 export const getId = state => fromUser.getId(state.user);
 export const getIsMissingRole = state => fromUser.getIsMissingRole(state.user);
-export const getIsLoadingUser = state => fromUser.getIsLoading(state.user);
 
 // Global Project Selectors
 export const getProjects = state => fromProject.getProjects(state.project);
