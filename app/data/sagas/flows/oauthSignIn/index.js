@@ -17,6 +17,7 @@ export function* oauthFlow() {
     };
     LocalStorage.setAll(localStorageItems);
     yield put(oauthBootstrapRequestSuccess());
+    // todo check if has role otherwise redirect to verifyRole
     yield put(push('/dashboard'));
   } catch (exception) {
     const errorMessage = get(exception, 'data.errors.fullMessages[0]', 'Something went wrong');
