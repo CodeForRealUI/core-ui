@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CssBaseline } from 'material-ui';
 
-import LocalStorage from '~/utilities/LocalStorage';
 import { userRequest } from '~/data/actions/user';
 
 import NotFound from 'src/shared/NotFound';
@@ -19,50 +18,38 @@ import BootCampRoleSignup from './BootCampRoleSignup';
 import NonProfitRoleSignup from './NonProfitRoleSignup';
 import OAuthBootstrap from './OAuthBootstrap';
 import { PublicRoute, PrivateRoute } from './Routes';
-
 // Compose the root level routes here
-class Application extends Component {
-  componentDidMount() {
-    LocalStorage.isAuthenticated() && this.props.dispatchUserRequest();
-  }
-
-  render() {
-    return (
-      <CssBaseline>
-        <Switch>
-          <PublicRoute path="/sign-in" component={SignIn} />
-          <PublicRoute path="/sign-up" component={SignUp} />
-          <PublicRoute path="/forgot-password" component={ForgotPassword} />
-          {
-            // todo move reset-password to isUathenticatned
-          }
-          <PublicRoute path="/reset-password" component={ResetPassword} />
-          <PublicRoute path="/oauth-sign-in" component={OAuthBootstrap} />
-          {/* Routes not requiring authentication above this line */}
-          <PrivateRoute path="/already-signed-in" component={AlreadySignedIn} />
-          <PrivateRoute path="/verify-role" component={RolePicker} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute
-            path="/bootcamp-grad-verify"
-            component={BootCampRoleSignup}
-          />
-          <PrivateRoute
-            path="/non-profit-verify"
-            component={NonProfitRoleSignup}
-          />
-          <PrivateRoute path="" component={NotFound} />
-        </Switch>
-      </CssBaseline>
-    );
-  }
-}
+const Application = () => (
+  <CssBaseline>
+    <Switch>
+      <PublicRoute path="/sign-in" component={SignIn} />
+      <PublicRoute path="/sign-up" component={SignUp} />
+      <PublicRoute path="/forgot-password" component={ForgotPassword} />
+      {
+        // todo move reset-password to isUathenticatned
+      }
+      <PublicRoute path="/reset-password" component={ResetPassword} />
+      <PublicRoute path="/oauth-sign-in" component={OAuthBootstrap} />
+      {/* Routes not requiring authentication above this line */}
+      <PrivateRoute path="/already-signed-in" component={AlreadySignedIn} />
+      <PrivateRoute path="/verify-role" component={RolePicker} />
+      <PrivateRoute path="/dashboard" component={Dashboard} />
+      <PrivateRoute
+        path="/bootcamp-grad-verify"
+        component={BootCampRoleSignup}
+      />
+      <PrivateRoute path="/non-profit-verify" component={NonProfitRoleSignup} />
+      <PrivateRoute path="" component={NotFound} />
+    </Switch>
+  </CssBaseline>
+);
 
 Application.propTypes = {
   dispatchUserRequest: PropTypes.func.isRequired,
 };
 
 export default withRouter(
-  connect(null, dispatch => ({
-    dispatchUserRequest: () => dispatch(userRequest()),
-  }))(Application),
+  connect(null, {
+    dispatchUserRequest: userRequest,
+  })(Application),
 );

@@ -1,9 +1,13 @@
-import { put, takeEvery, call, select } from 'redux-saga/effects';
+import { put, takeEvery, call, select, all } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
+import loadUser from '~/data/sagas/loaders/loadUser';
 import {
   ROLE_PICK_REQUEST,
+  BOOTSTRAP_ROLE_PICK,
   rolePickRequestSuccess,
   rolePickRequestFailure,
+  rolePickBootstrapSuccess,
+  rolePickBootstrapFailure,
 } from '~/data/actions/rolePicker';
 
 import { DEFAULT_ERROR_MESSAGE } from '~/constants/errorMessages';
@@ -29,6 +33,16 @@ export function* rolePick({ payload }) {
   }
 }
 
+export function* bootstrapRolePick() {
+  try {
+    yield all([call(loadUser)]);
+    yield put(rolePickBootstrapSuccess());
+  } catch (exception) {
+    yield put(rolePickBootstrapFailure(exception));
+  }
+}
+
 export default function*() {
   yield [takeEvery(ROLE_PICK_REQUEST, rolePick)];
+  yield [takeEvery(BOOTSTRAP_ROLE_PICK, bootstrapRolePick)];
 }
