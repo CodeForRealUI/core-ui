@@ -29,5 +29,12 @@ export default createMuiTheme({
         backgroundColor: 'white',
       },
     },
+    MuiButton: {
+      root: {
+        backgroundColor: PRIMARY_ORANGE,
+        color: 'white',
+        textTransform: 'none',
+      },
+    },
   },
 });
