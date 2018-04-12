@@ -4,17 +4,16 @@ import PropTypes from 'prop-types';
 import { CardContent, Typography, Card } from 'material-ui';
 import { Link } from 'react-router-dom';
 
-import loadUser from '~/data/sagas/loaders/loadUser';
 import npo from '~/public/images/npo.png';
 import dev from '~/public/images/dev.png';
 import { getFirstName } from '~/data/reducers';
-import { bootstrap } from '~/data/actions/bootstrap';
+import { rolePickBootstrapRequest } from '~/data/actions/bootstrap';
 import './styles.scss';
 
 class RolePicker extends Component {
 
   componentWillMount() {
-    this.props.handleBootstrap([loadUser]);
+    this.props.handleBootstrap();
   }
 
   render() {
@@ -47,7 +46,7 @@ class RolePicker extends Component {
 }
 
 RolePicker.propTypes = {
-  firstName: PropTypes.string.isRequired,
+  firstName: PropTypes.string,
   handleBootstrap: PropTypes.func.isRequired,
 
 };
@@ -57,5 +56,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  handleBootstrap: bootstrap,
+  handleBootstrap: rolePickBootstrapRequest,
 })(RolePicker);

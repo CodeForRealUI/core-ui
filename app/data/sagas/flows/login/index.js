@@ -32,14 +32,15 @@ export default function* loginFlow() {
     if (response) {
       const token = get(response, 'headers.access-token');
       const client = get(response, 'headers.client');
-      const { uid } = get(response, 'data.data');
+      const { uid, role } = get(response, 'data.data');
       const localStorageItems = {
         [KEYS.TOKEN]: token,
         [KEYS.CLIENT]: client,
         [KEYS.UID]: uid,
       };
       LocalStorage.setAll(localStorageItems);
-      yield put(push('/dashboard'));
+      const nextRoute = role ? '/dashboard' : 'verify-role';
+      yield put(push(nextRoute));
     }
   }
 }

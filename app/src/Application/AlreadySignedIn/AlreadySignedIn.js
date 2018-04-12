@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { Paper } from 'material-ui';
 import { Link } from 'react-router-dom';
 
-import loadUser from '~/data/sagas/loaders/loadUser';
 import { signoutRequest } from '~/data/actions/signout';
-import { bootstrap } from '~/data/actions/bootstrap';
+import { alreadySignedInBootstrapRequest } from '~/data/actions/bootstrap';
 import { getIsMissingRole } from '~/data/reducers';
 import './styles.scss';
 import Header from '../Header/index';
@@ -14,7 +13,7 @@ import Header from '../Header/index';
 
 class AlreadySignedIn extends Component {
   componentWillMount() {
-    this.props.handleBootstrap([loadUser]);
+    this.props.handleBootstrap();
   }
   render() {
     const { isMissingRole, handleSignoutRequest } = this.props;
@@ -52,6 +51,6 @@ export default connect(
   }),
   {
     handleSignoutRequest: signoutRequest,
-    handleBootstrap: bootstrap,
+    handleBootstrap: alreadySignedInBootstrapRequest,
   },
 )(AlreadySignedIn);
