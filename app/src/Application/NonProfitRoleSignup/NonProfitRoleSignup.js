@@ -49,7 +49,7 @@ class NonProfitRoleSignup extends Component {
     return (e) => {
       this.setState({
         ...this.state,
-        [field]: e.target.value.trim(),
+        [field]: e.target.value,
       });
     };
   }
