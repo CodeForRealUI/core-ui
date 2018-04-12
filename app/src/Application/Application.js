@@ -16,7 +16,7 @@ import AlreadySignedIn from './AlreadySignedIn';
 import RolePicker from './RolePicker';
 import BootCampRoleSignup from './BootCampRoleSignup';
 import NonProfitRoleSignup from './NonProfitRoleSignup';
-import OAuthBootstrap from './OAuthBootstrap';
+import OAuthSignin from './OAuthSignIn';
 import { PublicRoute, PrivateRoute } from './Routes';
 // Compose the root level routes here
 const Application = () => (
@@ -25,11 +25,8 @@ const Application = () => (
       <PublicRoute path="/sign-in" component={SignIn} />
       <PublicRoute path="/sign-up" component={SignUp} />
       <PublicRoute path="/forgot-password" component={ForgotPassword} />
-      {
-        // todo move reset-password to isUathenticatned
-      }
       <PublicRoute path="/reset-password" component={ResetPassword} />
-      <PublicRoute path="/oauth-sign-in" component={OAuthBootstrap} />
+      <PublicRoute path="/oauth-sign-in" component={OAuthSignin} />
       {/* Routes not requiring authentication above this line */}
       <PrivateRoute path="/already-signed-in" component={AlreadySignedIn} />
       <PrivateRoute path="/verify-role" component={RolePicker} />
