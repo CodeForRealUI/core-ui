@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid } from 'material-ui';
 
-import { getOrigin } from '~/utilities/browser';
 import facebookIcon from '~/public/images/facebook-logo.png';
 import googleIcon from '~/public/images/google-logo.png';
 import './styles.scss';
@@ -26,7 +25,7 @@ const typeMap = {
 
 export const OAuthButton = ({ type, text }) => {
   const { link, img, style } = typeMap[type];
-  const callBackUrl = link(getOrigin());
+  const callBackUrl = link(window.origin);
   return (
     <Button href={callBackUrl} className={style} variant="raised">
       <Grid container>

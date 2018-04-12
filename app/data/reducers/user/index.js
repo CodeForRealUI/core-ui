@@ -33,8 +33,7 @@ export default combineReducers({
   isMissingRole,
 });
 
-/* eslint-disable dot-notation */
-export const getFirstName = state => state.data['firstName'];
+export const getFirstName = state => state.data.firstName;
 export const getId = state => state.data.id;
 export const getIsMissingRole = state => state.isMissingRole;
 

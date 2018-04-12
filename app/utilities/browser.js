@@ -8,4 +8,3 @@ export const getJsonFromUrl = () => {
   return result;
 };
 
-export const getOrigin = () => window.origin;

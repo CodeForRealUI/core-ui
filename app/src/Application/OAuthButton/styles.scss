@@ -10,7 +10,7 @@
     max-width:300px;
     text-transform: none;	
     font-size: 14px;
-    background-color: #3B5998;
+    background-color: $facebook-blue-01;
    	
 }
 .google-button{
@@ -21,10 +21,7 @@
     max-width:300px;
     color: #535352;
     font-size: 14px;
-    background-color: #FFFFFE;	
-    :hover {
-        opacity:0.9;
-    }
+    background-color: $google-white-01;
 }
 
 .vl {

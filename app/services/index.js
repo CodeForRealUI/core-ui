@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
-import { getOrigin } from '~/utilities/browser';
 
 const BASE_URL = 'https://damp-beyond-45634.herokuapp.com/';
 
@@ -53,7 +52,7 @@ class AppService {
     return this.client
       .post('/auth/password', {
         email,
-        redirect_url: `${getOrigin()}/reset-password`,
+        redirect_url: `${window.origin}/reset-password`,
       })
       .then(response => response, error => Promise.reject(error.response));
   }

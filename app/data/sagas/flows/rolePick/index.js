@@ -33,16 +33,6 @@ export function* rolePick({ payload }) {
   }
 }
 
-export function* bootstrapRolePick() {
-  try {
-    yield all([call(loadUser)]);
-    yield put(rolePickBootstrapSuccess());
-  } catch (exception) {
-    yield put(rolePickBootstrapFailure(exception));
-  }
-}
-
 export default function*() {
   yield [takeEvery(ROLE_PICK_REQUEST, rolePick)];
-  yield [takeEvery(BOOTSTRAP_ROLE_PICK, bootstrapRolePick)];
 }
