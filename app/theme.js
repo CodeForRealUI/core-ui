@@ -20,5 +20,23 @@ export default createMuiTheme({
         width: 200,
       },
     },
+
+    MuiInput: {
+      formControl: {
+        'label + &': {
+          marginTop: 35,
+        },
+      },
+      underline: {
+        '&:before': {
+          height: 2,
+          backgroundColor: '#D9D9D9',
+        },
+        '&:hover:not($disabled):before': {
+          backgroundColor: '#f3f3f3',
+          height: 2,
+        },
+      },
+    },
   },
 });
