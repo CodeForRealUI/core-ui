@@ -15,6 +15,7 @@
     .sign-up-box {
         text-align: center;
         padding: 40px;
+        max-width: 810px;
 
         .sign-up-button {
            @include button();
@@ -22,6 +23,10 @@
         }
         button:disabled {
             opacity:0.5
+        }
+        .legal-text {
+            font-size: 14px;
+            color: $dark-grey-01;
         }
     }
 }

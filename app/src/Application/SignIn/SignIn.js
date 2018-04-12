@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
 import Header from '../Header';
-import DividerWithText from './DividerWithText';
+import DividerWithText from '../DividerWithText';
 import OAuthButton from '../OAuthButton';
 import './styles.scss';
 

@@ -16,6 +16,7 @@ class RolePicker extends Component {
     this.props.handleBootstrap();
   }
 
+   /* eslint-disable react/no-unescaped-entities */
   render() {
     return (<div className="verify-role-container">
       <h1 className="title">Hi {this.props.firstName}, choose your role </h1>
@@ -35,7 +36,7 @@ class RolePicker extends Component {
             <CardContent>
               <img className="image" src={npo} alt="bootcamp graduate" />
               <Typography className="link" component="p">
-                {"I'm a Non-Profit organization"}
+                I'm a Non-Profit organization
               </Typography>
             </CardContent>
           </Card>

@@ -5,11 +5,14 @@ import { Paper, TextField, FormGroup, Grid } from 'material-ui';
 import { isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
 
+
 import { mustMatch, minLength, validName } from '~/validators';
 import { run, ruleRunner } from '~/validators/ruleRunner';
 import { signupRequest } from '../../../data/actions/signup';
-import './styles.scss';
 import Header from '../Header';
+import DividerWithText from '../DividerWithText';
+import OAuthButton from '../OAuthButton';
+import './styles.scss';
 
 const fieldValidations = [
   ruleRunner('firstName', 'name', validName),
@@ -70,81 +73,92 @@ class SignUp extends Component {
   errorFor(field) {
     return this.state.validationErrors[field];
   }
-
+ /* eslint-disable react/no-unescaped-entities */
   renderForm = () => (
     <div className="sign-up-fields">
       <form onSubmit={this.handleSignUp}>
-        <FormGroup>
-          <TextField
-            autoFocus
-            onChange={this.handleFieldChanged('firstName')}
-            value={this.state.firstName}
-            id="first-name"
-            fullWidth
-            label="First name"
-            error={!!this.errorFor('firstName')}
-            required
-          />
-          <TextField
-            onChange={this.handleFieldChanged('lastName')}
-            error={!!this.errorFor('lastName')}
-            value={this.state.lastName}
-            id="last-name"
-            fullWidth
-            label="Last Name"
-            required
-          />
-          <TextField
-            onChange={this.handleFieldChanged('email')}
-            value={this.state.email}
-            id="email-address"
-            fullWidth
-            label="Email Address"
-            type="email"
-            required
-          />
-          <TextField
-            onChange={this.handleFieldChanged('phone')}
-            value={this.state.phone}
-            id="mobile-number"
-            type="tel"
-            fullWidth
-            label="Mobile Number"
-          />
-          <Grid container>
-            <Grid item xs={6}>
+        <Grid container>
+          <Grid item xs={6}>
+            <FormGroup>
               <TextField
-                id="password"
-                type="password"
-                label="Password"
+                autoFocus
+                onChange={this.handleFieldChanged('firstName')}
+                value={this.state.firstName}
+                id="first-name"
+                fullWidth
+                label="First name"
+                error={!!this.errorFor('firstName')}
                 required
-                onChange={this.handleFieldChanged('password1')}
-                error={!!this.errorFor('password1')}
-                value={this.state.password1}
               />
-            </Grid>
-            <Grid item xs={6}>
               <TextField
-                id="confirmed-password"
-                type="password"
-                label="Confirm"
+                onChange={this.handleFieldChanged('lastName')}
+                error={!!this.errorFor('lastName')}
+                value={this.state.lastName}
+                id="last-name"
+                fullWidth
+                label="Last Name"
                 required
-                onChange={this.handleFieldChanged('password2')}
-                error={!!this.errorFor('password2')}
-                value={this.state.password2}
               />
-            </Grid>
+              <TextField
+                onChange={this.handleFieldChanged('email')}
+                value={this.state.email}
+                id="email-address"
+                fullWidth
+                label="Email Address"
+                type="email"
+                required
+              />
+              <TextField
+                onChange={this.handleFieldChanged('phone')}
+                value={this.state.phone}
+                id="mobile-number"
+                type="tel"
+                fullWidth
+                label="Mobile Number"
+              />
+              <Grid container>
+                <Grid item xs={6}>
+                  <TextField
+                    id="password"
+                    type="password"
+                    label="Password"
+                    required
+                    onChange={this.handleFieldChanged('password1')}
+                    error={!!this.errorFor('password1')}
+                    value={this.state.password1}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    id="confirmed-password"
+                    type="password"
+                    label="Confirm"
+                    required
+                    onChange={this.handleFieldChanged('password2')}
+                    error={!!this.errorFor('password2')}
+                    value={this.state.password2}
+                  />
+                </Grid>
+              </Grid>
+            </FormGroup>
           </Grid>
-          <button
-            disabled={this.getIfShouldDisableSignUp()}
-            className="sign-up-button"
-          >
+          <Grid item xs={6}>
+            <DividerWithText text={'or connect with'} />
+            <OAuthButton type="facebook" text="Sign up with Facebook" />
+            <OAuthButton type="google" text="Sign up with Google" />
+            <p className="legal-text"> By signing in, I acknowledge and agree to Codeforreal's <strong> Terms of Use </strong>and <strong>Privacy Policy.</strong></p>
+            <button
+              disabled={this.getIfShouldDisableSignUp()}
+              className="sign-up-button"
+            >
             Sign Up
           </button>
-        </FormGroup>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );
+
 
   render() {
     return (
