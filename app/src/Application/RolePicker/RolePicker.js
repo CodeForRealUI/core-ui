@@ -26,7 +26,7 @@ class RolePicker extends Component {
             <CardContent>
               <img className="image" src={dev} alt="non profit" />
               <Typography className="link" component="p">
-                {"I'm a Bootcamp graduate"}
+                I'm a Bootcamp graduate
               </Typography>
             </CardContent>
           </Card>
