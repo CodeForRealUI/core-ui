@@ -30,7 +30,7 @@ class NonProfitRoleSignup extends Component {
     e.preventDefault();
     const { organizationName, websiteAddress, contactNumber, address1, address2, city, state, zipcode, organizationEmail, category } = this.state;
     const payload = {
-      organization_attributes: {
+      organizationAttributes: {
         name: organizationName,
         address: `${address1} ${address2}`,
         city,
