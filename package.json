@@ -36,14 +36,15 @@
     "lint:staged": "lint-staged",
     "pretest": "npm run test:clean",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test": "cross-env NODE_ENV=test jest",
+    "test:coverage": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "heroku-postbuild": "npm run build"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm lint",
+      "pre-commit": "npm run lint",
       "pre-push": "npm test"
     }
   },
