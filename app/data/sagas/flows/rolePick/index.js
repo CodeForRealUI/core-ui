@@ -24,6 +24,7 @@ export function* rolePick({ payload }) {
   try {
     const id = yield select(getId);
     const response = yield call(fetchResource, 'rolePick', id, payload);
+    swal('Success', 'Your account have been successfully verified', 'success');
     yield put(push('/dashboard'));
     yield put(rolePickRequestSuccess(response));
   } catch (exception) {

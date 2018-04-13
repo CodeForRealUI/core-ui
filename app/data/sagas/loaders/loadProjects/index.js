@@ -11,6 +11,5 @@ export default function* loadProjects() {
     yield put(projectRequestSuccess(response));
   } catch (exception) {
     yield put(projectRequestFailure(exception));
-    throw exception;
   }
 }
