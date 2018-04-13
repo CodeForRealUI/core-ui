@@ -22,7 +22,7 @@ export function* signupFlow({ signupData }) {
     yield put(push('/verify-role'));
     yield put(signupRequestSuccess(response));
   } catch (exception) {
-    const errorMessage = get(exception, 'data.errors.full_messages[0]', 'Something went wrong');
+    const errorMessage = get(exception, 'data.errors.fullMessages[0]', 'Something went wrong');
     swal('Oops', errorMessage, 'error');
     yield put(signupRequestFailure(exception));
   }

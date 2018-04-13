@@ -1,0 +1,33 @@
+@import '~sass/variables';
+@import '~sass/colors';
+@import '~sass/mixins';
+
+.facebook-button{
+    min-height: 50px;
+    margin: 10px;
+    color: $white-01;
+    width: 100%;
+    max-width:300px;
+    text-transform: none;	
+    font-size: 14px;
+    background-color: $facebook-blue-01;
+   	
+}
+.google-button{
+    margin: 10px;
+    min-height: 50px;
+    width: 100%;
+    text-transform: none;
+    max-width:300px;
+    color: #535352;
+    font-size: 14px;
+    background-color: $google-white-01;
+}
+
+.vl {
+    box-sizing: border-box;
+    height: 21px;
+    width: 1px;
+    border: 0.5px solid #0E0D0C;
+    opacity: 0.3;
+}

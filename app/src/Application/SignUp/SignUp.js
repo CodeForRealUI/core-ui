@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom';
 import { mustMatch, minLength, validName } from '~/validators';
 import { run, ruleRunner } from '~/validators/ruleRunner';
 import { signupRequest } from '../../../data/actions/signup';
-import './styles.scss';
 import Header from '../Header';
+import DividerWithText from '../DividerWithText';
+import OAuthButton from '../OAuthButton';
+import './styles.scss';
 
 const fieldValidations = [
   ruleRunner('firstName', 'name', validName),
@@ -37,27 +39,34 @@ class SignUp extends Component {
     return false;
   };
 
-  handleSignUp = (e) => {
+  handleSignUp = e => {
     e.preventDefault();
     this.setState({ showErrors: true });
     if (!isEmpty(this.state.validationErrors)) {
       return null;
     }
-    const { password1, password2, firstName, lastName, email, phone } = this.state;
+    const {
+      password1,
+      password2,
+      firstName,
+      lastName,
+      email,
+      phone,
+    } = this.state;
     // todo removing the +1 hack whenever we go international - this is to pass the backend validation.
     const signUpData = {
-      first_name: firstName,
-      last_name: lastName,
+      firstName,
+      lastName,
       email,
       password: password1,
-      password_confirmation: password2,
-      mobile_number: phone && `1${phone}`,
+      passwordConfirmation: password2,
+      mobileNumber: phone && `1${phone}`,
     };
     return this.props.signup(signUpData);
   };
 
   handleFieldChanged(field) {
-    return (e) => {
+    return e => {
       const newState = {
         ...this.state,
         [field]: e.target.value.trim(),
@@ -70,78 +79,93 @@ class SignUp extends Component {
   errorFor(field) {
     return this.state.validationErrors[field];
   }
-
+  /* eslint-disable react/no-unescaped-entities */
   renderForm = () => (
     <div className="sign-up-fields">
       <form onSubmit={this.handleSignUp}>
-        <FormGroup>
-          <TextField
-            autoFocus
-            onChange={this.handleFieldChanged('firstName')}
-            value={this.state.firstName}
-            id="first-name"
-            fullWidth
-            label="First name"
-            error={!!this.errorFor('firstName')}
-            required
-          />
-          <TextField
-            onChange={this.handleFieldChanged('lastName')}
-            error={!!this.errorFor('lastName')}
-            value={this.state.lastName}
-            id="last-name"
-            fullWidth
-            label="Last Name"
-            required
-          />
-          <TextField
-            onChange={this.handleFieldChanged('email')}
-            value={this.state.email}
-            id="email-address"
-            fullWidth
-            label="Email Address"
-            type="email"
-            required
-          />
-          <TextField
-            onChange={this.handleFieldChanged('phone')}
-            value={this.state.phone}
-            id="mobile-number"
-            type="tel"
-            fullWidth
-            label="Mobile Number"
-          />
-          <Grid container>
-            <Grid item xs={6}>
+        <Grid container>
+          <Grid item xs={6}>
+            <FormGroup>
               <TextField
-                id="password"
-                type="password"
-                label="Password"
+                autoFocus
+                onChange={this.handleFieldChanged('firstName')}
+                value={this.state.firstName}
+                id="first-name"
+                fullWidth
+                label="First name"
+                error={!!this.errorFor('firstName')}
                 required
-                onChange={this.handleFieldChanged('password1')}
-                error={!!this.errorFor('password1')}
-                value={this.state.password1}
               />
-            </Grid>
-            <Grid item xs={6}>
               <TextField
-                id="confirmed-password"
-                type="password"
-                label="Confirm"
+                onChange={this.handleFieldChanged('lastName')}
+                error={!!this.errorFor('lastName')}
+                value={this.state.lastName}
+                id="last-name"
+                fullWidth
+                label="Last Name"
                 required
-                onChange={this.handleFieldChanged('password2')}
-                error={!!this.errorFor('password2')}
-                value={this.state.password2}
               />
-            </Grid>
+              <TextField
+                onChange={this.handleFieldChanged('email')}
+                value={this.state.email}
+                id="email-address"
+                fullWidth
+                label="Email Address"
+                type="email"
+                required
+              />
+              <TextField
+                onChange={this.handleFieldChanged('phone')}
+                value={this.state.phone}
+                id="mobile-number"
+                type="tel"
+                fullWidth
+                label="Mobile Number"
+              />
+              <Grid container>
+                <Grid item xs={6}>
+                  <TextField
+                    id="password"
+                    type="password"
+                    label="Password"
+                    required
+                    onChange={this.handleFieldChanged('password1')}
+                    error={!!this.errorFor('password1')}
+                    value={this.state.password1}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    id="confirmed-password"
+                    type="password"
+                    label="Confirm"
+                    required
+                    onChange={this.handleFieldChanged('password2')}
+                    error={!!this.errorFor('password2')}
+                    value={this.state.password2}
+                  />
+                </Grid>
+              </Grid>
+            </FormGroup>
           </Grid>
-          <button
-            disabled={this.getIfShouldDisableSignUp()}
-            className="sign-up-button"
-          >
-            Sign Up
-          </button>
-        </FormGroup>
+          <Grid item xs={6}>
+            <DividerWithText text={'or connect with'} />
+            <OAuthButton type="facebook" text="Sign up with Facebook" />
+            <OAuthButton type="google" text="Sign up with Google" />
+            <p className="legal-text">
+              By signing in, I acknowledge and agree to Codeforreal's{' '}
+              <strong> Terms of Use </strong>and{' '}
+              <strong>Privacy Policy.</strong>
+            </p>
+            <button
+              disabled={this.getIfShouldDisableSignUp()}
+              className="sign-up-button"
+              onSubmit={this.handleSignUp}
+            >
+              Sign Up
+            </button>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );
@@ -165,6 +189,6 @@ SignUp.propTypes = {
   signup: PropTypes.func.isRequired,
 };
 
-export default connect(null, (dispatch) => ({
-  signup: (signupData) => dispatch(signupRequest(signupData)),
+export default connect(null, dispatch => ({
+  signup: signupData => dispatch(signupRequest(signupData)),
 }))(SignUp);

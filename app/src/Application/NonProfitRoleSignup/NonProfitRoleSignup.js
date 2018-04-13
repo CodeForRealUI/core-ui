@@ -30,7 +30,7 @@ class NonProfitRoleSignup extends Component {
     e.preventDefault();
     const { organizationName, websiteAddress, contactNumber, address1, address2, city, state, zipcode, organizationEmail, category } = this.state;
     const payload = {
-      organization_attributes: {
+      organizationAttributes: {
         name: organizationName,
         address: `${address1} ${address2}`,
         city,
@@ -49,7 +49,7 @@ class NonProfitRoleSignup extends Component {
     return (e) => {
       this.setState({
         ...this.state,
-        [field]: e.target.value.trim(),
+        [field]: e.target.value,
       });
     };
   }
@@ -131,7 +131,6 @@ class NonProfitRoleSignup extends Component {
           <Grid item xs={6}>
             <TextField
               label="Address 2"
-              required
               onChange={this.handleFieldChanged('address2')}
               value={this.state.address2}
               fullWidth
@@ -165,6 +164,7 @@ class NonProfitRoleSignup extends Component {
         </Grid>
         <button
           // todo check for the entire form and dont rely on html validation
+          onSubmit={this.handleSubmit}
           disabled={!this.state.category}
           className="submit-button"
         >

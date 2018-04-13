@@ -25,7 +25,12 @@ const ForgotPassword = ({ handlePasswordResetEmailRequest }) => {
             required
             type="email"
           />
-          <button className="forgot-password-button">Reset</button>
+          <button
+            onSubmit={handleForgotPassword}
+            className="forgot-password-button"
+          >
+            Reset
+          </button>
         </FormGroup>
       </form>
     </div>

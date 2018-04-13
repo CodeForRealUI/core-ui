@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import user, * as fromUser from './user';
 import project, * as fromProject from './project';
+import bootstrap, * as fromBootstrap from './bootstrap';
 import routeReducer from './route';
 
 
@@ -9,6 +10,7 @@ export default function createReducer(injectedReducers) {
   return combineReducers({
     user,
     project,
+    bootstrap,
     routing: routeReducer,
     ...injectedReducers,
   });
@@ -22,3 +24,6 @@ export const getIsMissingRole = state => fromUser.getIsMissingRole(state.user);
 // Global Project Selectors
 export const getProjects = state => fromProject.getProjects(state.project);
 export const getIsProjectsLoading = state => fromProject.getIsLoading(state.project);
+
+// Global Bootstrap Selectors
+export const getIsBootstrapping = state => fromBootstrap.getIsBootstrapping(state.bootstrap);

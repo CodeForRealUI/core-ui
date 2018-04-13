@@ -15,6 +15,7 @@
     .sign-up-box {
         text-align: center;
         padding: 40px;
+        max-width: 810px;
 
         .sign-up-button {
            @include button();
@@ -22,27 +23,10 @@
         }
         button:disabled {
             opacity:0.5
-        }
-        .sign-in-with-facebook-button {
-            color: $white-01;
-            width: 100%;
-            border-radius: 3px;
-            padding: 15px;
-            text-transform: none;	
+        }	border: 1px solid #979797;	color: #9B9B9B;
+        .legal-text {
             font-size: 14px;
-            background-color: #3B5998;	
+            color: $dark-grey-01;
         }
-        .sign-in-with-google-button {
-            margin-top:20px;
-            width: 100%;
-            color: #535352;
-            border-radius: 3px;
-            padding: 15px;
-            text-transform: none;	
-            font-size: 14px;
-            background-color: #FFFFFE;	
-        }
-     
     }
-  
 }
