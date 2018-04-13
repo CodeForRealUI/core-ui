@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import NavBarView from '~/src/shared/NavBarView';
 import { BOOTSTRAP_DASHBOARD } from '~/data/actions//dashboard';
 import LeftFilterBar from './LeftFilterBar';
-import ProjectViewer from './ProjectViewer';
+import ProjectsExplorer from './ProjectsExplorer';
 import './styles.scss';
 
 export class Dashboard extends Component {
@@ -22,7 +22,7 @@ export class Dashboard extends Component {
       <div className="dashboard-container">
         <NavBarView>
           <Route path="/" component={LeftFilterBar} />
-          <Route path="/" component={ProjectViewer} />
+          <Route path="/" component={ProjectsExplorer} />
         </NavBarView>
       </div>
     );

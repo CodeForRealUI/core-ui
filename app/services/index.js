@@ -18,6 +18,7 @@ class AppService {
         'access-token': token,
         client,
         uid,
+        'X-Key-Inflection': 'camel',
       },
     });
   }

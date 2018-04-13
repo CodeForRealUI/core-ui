@@ -2,13 +2,13 @@
 
 .nav-container {
     flex-grow: 1;
-    position: absolute;
+    position: fixed;
     width: 100%;
 }
 
-.dashboard-title {
-    line-height: 19px;
-    flex: 1;
+.right-nav-links {
+    position: absolute;
+    right: 0px;
 }
 
 .dashboard-type {
