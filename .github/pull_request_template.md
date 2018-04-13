@@ -1,4 +1,4 @@
-## Desciption
+## Description
 
 ## Type
 - [ ] Bug fix (non-breaking change which fixes an issue)
