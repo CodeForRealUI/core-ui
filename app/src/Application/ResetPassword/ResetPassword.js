@@ -94,6 +94,7 @@ class ResetPassword extends Component {
           <button
             disabled={this.getIfShouldDisableResetButton()}
             className="reset-password-button"
+            onSubmit={this.handleResetPassword}
           >
             Reset
           </button>

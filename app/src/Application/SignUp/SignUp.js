@@ -5,7 +5,6 @@ import { Paper, TextField, FormGroup, Grid } from 'material-ui';
 import { isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
 
-
 import { mustMatch, minLength, validName } from '~/validators';
 import { run, ruleRunner } from '~/validators/ruleRunner';
 import { signupRequest } from '../../../data/actions/signup';
@@ -40,13 +39,20 @@ class SignUp extends Component {
     return false;
   };
 
-  handleSignUp = (e) => {
+  handleSignUp = e => {
     e.preventDefault();
     this.setState({ showErrors: true });
     if (!isEmpty(this.state.validationErrors)) {
       return null;
     }
-    const { password1, password2, firstName, lastName, email, phone } = this.state;
+    const {
+      password1,
+      password2,
+      firstName,
+      lastName,
+      email,
+      phone,
+    } = this.state;
     // todo removing the +1 hack whenever we go international - this is to pass the backend validation.
     const signUpData = {
       firstName,
@@ -60,7 +66,7 @@ class SignUp extends Component {
   };
 
   handleFieldChanged(field) {
-    return (e) => {
+    return e => {
       const newState = {
         ...this.state,
         [field]: e.target.value.trim(),
@@ -73,7 +79,7 @@ class SignUp extends Component {
   errorFor(field) {
     return this.state.validationErrors[field];
   }
- /* eslint-disable react/no-unescaped-entities */
+  /* eslint-disable react/no-unescaped-entities */
   renderForm = () => (
     <div className="sign-up-fields">
       <form onSubmit={this.handleSignUp}>
@@ -146,19 +152,23 @@ class SignUp extends Component {
             <DividerWithText text={'or connect with'} />
             <OAuthButton type="facebook" text="Sign up with Facebook" />
             <OAuthButton type="google" text="Sign up with Google" />
-            <p className="legal-text"> By signing in, I acknowledge and agree to Codeforreal's <strong> Terms of Use </strong>and <strong>Privacy Policy.</strong></p>
+            <p className="legal-text">
+              By signing in, I acknowledge and agree to Codeforreal's{' '}
+              <strong> Terms of Use </strong>and{' '}
+              <strong>Privacy Policy.</strong>
+            </p>
             <button
               disabled={this.getIfShouldDisableSignUp()}
               className="sign-up-button"
+              onSubmit={this.handleSignUp}
             >
-            Sign Up
-          </button>
+              Sign Up
+            </button>
           </Grid>
         </Grid>
       </form>
     </div>
   );
-
 
   render() {
     return (
@@ -179,6 +189,6 @@ SignUp.propTypes = {
   signup: PropTypes.func.isRequired,
 };
 
-export default connect(null, (dispatch) => ({
-  signup: (signupData) => dispatch(signupRequest(signupData)),
+export default connect(null, dispatch => ({
+  signup: signupData => dispatch(signupRequest(signupData)),
 }))(SignUp);

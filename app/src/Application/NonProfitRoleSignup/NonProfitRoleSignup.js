@@ -164,6 +164,7 @@ class NonProfitRoleSignup extends Component {
         </Grid>
         <button
           // todo check for the entire form and dont rely on html validation
+          onSubmit={this.handleSubmit}
           disabled={!this.state.category}
           className="submit-button"
         >

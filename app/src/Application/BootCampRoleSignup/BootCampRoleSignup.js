@@ -43,7 +43,7 @@ export class BootCampRoleSignup extends Component {
           <button
             className="continue-button"
             disabled={this.state.code.length < 24}
-            onClick={this.onHandleRolePickRequest}
+            onSubmit={this.onHandleRolePickRequest}
           >
             Continue
           </button>

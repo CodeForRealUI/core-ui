@@ -7,7 +7,6 @@ import {
   Checkbox,
   FormGroup,
   FormControlLabel,
-  Button,
 } from 'material-ui';
 import { Link } from 'react-router-dom';
 
@@ -43,21 +42,23 @@ class SignIn extends Component {
     this.setState({ email: e.target.value });
   };
 
-  shouldDisableSignIn = () => !this.state.email || !this.state.password
+  shouldDisableSignIn = () => !this.state.email || !this.state.password;
 
-  handleLogIn = () => {
+  handleLogIn = e => {
+    e.preventDefault();
     const { email, password, rememberMe } = this.state;
     rememberMe && this.handleRememberMe(email);
-    this.props.login(email, password);
+    return this.props.login(email, password);
   };
 
-  renderForm() {
-    return (
-      <div>
+  renderForm = () => (
+    <div>
+      <form onSubmit={this.handleLogIn}>
         <FormGroup row>
           <TextField
             autoFocus
             id="email"
+            type="email"
             value={this.state.email}
             onChange={this.handleEmailChange}
             fullWidth
@@ -81,18 +82,22 @@ class SignIn extends Component {
             control={<Checkbox color="primary" />}
           />
           <Link className="forgot-password-link" to="/forgot-password">
-            Forgot your password?
-          </Link>
+              Forgot your password?
+            </Link>
         </FormGroup>
-        <Button variant="raised" className="login-button " disabled={this.shouldDisableSignIn()} onClick={this.handleLogIn}>
+        <button
+          className="login-button "
+          disabled={this.shouldDisableSignIn()}
+          onSubmit={this.handleLogIn}
+        >
             Log In
-        </Button>
-        <DividerWithText text={'or connect with'} />
-        <OAuthButton type="facebook" text="Sign in with Facebook" />
-        <OAuthButton type="google" text="Sign in with Google" />
-      </div>
-    );
-  }
+          </button>
+      </form>
+      <DividerWithText text={'or connect with'} />
+      <OAuthButton type="facebook" text="Sign in with Facebook" />
+      <OAuthButton type="google" text="Sign in with Google" />
+    </div>
+    )
 
   render() {
     return (
