@@ -31,7 +31,7 @@ describe('Login flow', () => {
         email: credentials.email,
         password: credentials.password,
       })
-      .run()
+      .silentRun()
   );
 
   it('should yield the expected effects when a response is recieved', () => {
@@ -43,6 +43,7 @@ describe('Login flow', () => {
       data: {
         data: {
           uid: 'test',
+          role: undefined,
         },
       },
     };
@@ -54,7 +55,8 @@ describe('Login flow', () => {
       .next({ email: credentials.email, password: credentials.password })
       .call(authenticate, credentials.email, credentials.password)
       .next(response)
-      .put(push('/dashboard'));
+      .put(push('/verify-role'))
+      .finish();
 
     sinon.assert.callCount(stub, 1);
     sinon.assert.calledWith(stub, {
@@ -62,6 +64,26 @@ describe('Login flow', () => {
       [KEYS.CLIENT]: response.headers.client,
       [KEYS.UID]: response.data.data.uid,
     });
+  });
+  it('should navigate to /dashboard if role is defined', () => {
+    const response = {
+      data: {
+        data: {
+          uid: 'test',
+          role: true,
+        },
+      },
+    };
+    sandBox.stub(LocalStorage, 'setAll');
+
+    testSaga(loginFlow)
+      .next()
+      .take(LOGIN_REQUEST)
+      .next({ email: credentials.email, password: credentials.password })
+      .call(authenticate, credentials.email, credentials.password)
+      .next(response)
+      .put(push('/dashboard'))
+      .finish();
   });
 
   describe('authenticate', () => {
@@ -89,7 +111,7 @@ describe('Login flow', () => {
         })
         .put(loginRequestSuccess(response))
         .returns(response)
-        .run();
+        .silentRun();
     });
 
     it('should yield the expected effects on failure path', () => {

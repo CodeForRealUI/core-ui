@@ -39,7 +39,7 @@ export default function* loginFlow() {
         [KEYS.UID]: uid,
       };
       LocalStorage.setAll(localStorageItems);
-      const nextRoute = role ? '/dashboard' : 'verify-role';
+      const nextRoute = role ? '/dashboard' : '/verify-role';
       yield put(push(nextRoute));
     }
   }
