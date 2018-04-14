@@ -17,6 +17,7 @@ import RolePicker from './RolePicker';
 import BootCampRoleSignup from './BootCampRoleSignup';
 import NonProfitRoleSignup from './NonProfitRoleSignup';
 import OAuthSignin from './OAuthSignIn';
+import NewProjectForm from './NewProjectForm';
 import { PublicRoute, PrivateRoute } from './Routes';
 // Compose the root level routes here
 const Application = () => (
@@ -35,6 +36,7 @@ const Application = () => (
         path="/bootcamp-grad-verify"
         component={BootCampRoleSignup}
       />
+      <PrivateRoute path="/new-project-form" component={NewProjectForm} />
       <PrivateRoute path="/non-profit-verify" component={NonProfitRoleSignup} />
       <PrivateRoute path="" component={NotFound} />
     </Switch>
