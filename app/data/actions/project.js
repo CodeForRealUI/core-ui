@@ -1,7 +1,6 @@
 export const PROJECT_REQUEST = 'PROJECT_REQUEST';
 export const PROJECT_REQUEST_SUCCESS = 'PROJECT_REQUEST_SUCCESS';
 export const PROJECT_REQUEST_FAILURE = 'PROJECT_REQUEST_FAILURE';
-
 export const projectRequest = filter => ({ type: PROJECT_REQUEST, filter });
 export const projectRequestSuccess = response => ({
   type: PROJECT_REQUEST_SUCCESS,
@@ -10,4 +9,10 @@ export const projectRequestSuccess = response => ({
 export const projectRequestFailure = error => ({
   type: PROJECT_REQUEST_FAILURE,
   error,
+});
+
+export const FAVORITE_PROJECT_REQUEST = 'FAVORITE_PROJECT_REQUEST';
+export const favoriteProjectRequest = id => ({
+  type: FAVORITE_PROJECT_REQUEST,
+  id,
 });

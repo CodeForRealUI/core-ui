@@ -96,6 +96,12 @@ class AppService {
       .get('/projects/favorites')
       .then(response => response.data, error => Promise.reject(error.response));
   }
+
+  favoriteProject(id) {
+    return this.client
+      .put(`/projects/${id}/favorite`)
+      .then(response => response.data, error => Promise.reject(error.response));
+  }
 }
 
 export default AppService;

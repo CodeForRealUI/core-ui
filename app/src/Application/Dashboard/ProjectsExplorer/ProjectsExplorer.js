@@ -5,7 +5,7 @@ import { Tabs, Tab } from 'material-ui';
 import Spinner from '~/src/shared/Spinner';
 import { getProjects, getIsProjectsLoading } from '~/data/reducers';
 import { ALL, MY_PROJECTS, FAVORITED } from '~/constants/projectFilters';
-import { projectRequest } from '~/data/actions/project';
+import { projectRequest, favoriteProjectRequest } from '~/data/actions/project';
 import Project from './Project';
 import './styles.scss';
 
@@ -14,6 +14,7 @@ class ProjectsExplorer extends Component {
     projects: PropTypes.array,
     projectsLoading: PropTypes.bool,
     loadProjects: PropTypes.bool,
+    favoriteProject: PropTypes.func,
   };
 
   state = {
@@ -29,7 +30,7 @@ class ProjectsExplorer extends Component {
   };
 
   render() {
-    const { projects, projectsLoading } = this.props;
+    const { projects, projectsLoading, favoriteProject } = this.props;
     return (
       <div className="project-viewer">
         <Tabs
@@ -47,7 +48,13 @@ class ProjectsExplorer extends Component {
           <Spinner />
         ) : (
           <div className="projects-container">
-            {projects.map(project => <Project key={project.id} {...project} />)}
+            {projects.map(project => (
+              <Project
+                key={project.id}
+                favoriteProject={favoriteProject}
+                {...project}
+              />
+            ))}
           </div>
         )}
       </div>
@@ -55,9 +62,13 @@ class ProjectsExplorer extends Component {
   }
 }
 
-export default connect(state => ({
-  projects: getProjects(state),
-  projectsLoading: getIsProjectsLoading(state),
-}), dispatch => ({
-  loadProjects: filter => dispatch(projectRequest(filter)),
-}))(ProjectsExplorer);
+export default connect(
+  state => ({
+    projects: getProjects(state),
+    projectsLoading: getIsProjectsLoading(state),
+  }),
+  dispatch => ({
+    loadProjects: filter => dispatch(projectRequest(filter)),
+    favoriteProject: id => dispatch(favoriteProjectRequest(id)),
+  }),
+)(ProjectsExplorer);
