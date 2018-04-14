@@ -10,8 +10,7 @@
     margin-top: 25px;
     overflow-y: scroll;
     height: 1000px;
-
-    &:last-child {
-        margin-bottom: 500px;
-    }
+    padding-bottom: 500px;
+    display: flex;
+    flex-direction: column;
 }
