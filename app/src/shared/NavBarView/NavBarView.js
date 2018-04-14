@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, Typography } from 'material-ui';
+import { AppBar, Toolbar } from 'material-ui';
 import { Link } from 'react-router-dom';
 import logo from '~/public/images/Logo.png';
 import './styles.scss';
@@ -11,7 +11,7 @@ function NavBarView({ children }) {
       <AppBar position="static" color="inherit" elevation={2}>
         <Toolbar>
           <div className="logo-placeholder">
-            <img src={logo} />
+            <img alt="logo" src={logo} />
           </div>
           <div className="right-nav-links">
             <Link className="nav-bar-link" to="/dashboard">

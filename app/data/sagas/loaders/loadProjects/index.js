@@ -4,10 +4,17 @@ import {
   projectRequestSuccess,
   projectRequestFailure,
 } from '~/data/actions/project';
+import { ALL, MY_PROJECTS, FAVORITED } from '~/constants/projectFilters';
 
-export default function* loadProjects() {
+const RESOURCES = {
+  [ALL]: 'getProjects',
+  [MY_PROJECTS]: 'getMyProjects',
+  [FAVORITED]: 'getFavoriteProjects', // todo
+};
+
+export default function* loadProjects({ filter }) {
   try {
-    const response = yield call(fetchResource, 'getProjects');
+    const response = yield call(fetchResource, RESOURCES[filter]);
     yield put(projectRequestSuccess(response));
   } catch (exception) {
     yield put(projectRequestFailure(exception));
