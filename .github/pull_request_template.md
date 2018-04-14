@@ -1,5 +1,3 @@
-## Description
-
 ## Features
 
 ## Bug Fixes
