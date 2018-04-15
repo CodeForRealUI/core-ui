@@ -3,6 +3,7 @@ import fetchResource from '~/data/sagas/helpers/fetchResource';
 import {
   projectRequestSuccess,
   projectRequestFailure,
+  clearProjects,
 } from '~/data/actions/project';
 import { ALL, MY_PROJECTS, FAVORITED } from '~/constants/projectFilters';
 
@@ -12,9 +13,12 @@ const RESOURCES = {
   [FAVORITED]: 'getFavoriteProjects', // todo
 };
 
-export default function* loadProjects({ filter }) {
+export default function* loadProjects({ filter, page, perPage }) {
   try {
-    const response = yield call(fetchResource, RESOURCES[filter]);
+    if (page === 1) {
+      yield put(clearProjects());
+    }
+    const response = yield call(fetchResource, RESOURCES[filter], page, perPage);
     yield put(projectRequestSuccess(response));
   } catch (exception) {
     yield put(projectRequestFailure(exception));

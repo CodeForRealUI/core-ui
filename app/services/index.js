@@ -80,27 +80,27 @@ class AppService {
       .then(response => response, error => Promise.reject(error.response));
   }
 
-  getProjects() {
+  getProjects(page, perPage) {
     return this.client
-      .get('/projects')
-      .then(response => response.data, error => Promise.reject(error.response));
+      .get(`/projects?per_page=${perPage}&page=${page}`)
+      .then(response => response, error => Promise.reject(error.response));
   }
 
-  getMyProjects() {
+  getMyProjects(page, perPage) {
     return this.client
-      .get('/projects/me')
-      .then(response => response.data, error => Promise.reject(error.response));
+      .get(`/projects/me?per_page=${perPage}&page=${page}`)
+      .then(response => response, error => Promise.reject(error.response));
   }
-  getFavoriteProjects() {
+  getFavoriteProjects(page, perPage) {
     return this.client
-      .get('/projects/favorites')
-      .then(response => response.data, error => Promise.reject(error.response));
+      .get(`/projects/favorites?per_page=${perPage}&page=${page}`)
+      .then(response => response, error => Promise.reject(error.response));
   }
 
   favoriteProject(id) {
     return this.client
       .put(`/projects/${id}/favorite`)
-      .then(response => response.data, error => Promise.reject(error.response));
+      .then(response => response, error => Promise.reject(error.response));
   }
 }
 

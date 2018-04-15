@@ -9,10 +9,19 @@ import {
 function data(state = [], { type, response }) {
   switch (type) {
     case PROJECT_REQUEST_SUCCESS:
-      return get(response, 'data', []);
+      return state.concat(get(response.data, 'data', []));
+    case 'CLEAR_PROJECTS':
+      return [];
     default:
       return state;
   }
+}
+
+function total(state = 0, { type, response }) {
+  if (type === PROJECT_REQUEST_SUCCESS) {
+    return parseInt(get(response, 'headers.total'), 10);
+  }
+  return state;
 }
 
 function isLoading(state = false, { type }) {
@@ -29,8 +38,10 @@ function isLoading(state = false, { type }) {
 
 export const getProjects = state => state.data;
 export const getIsLoading = state => state.isLoading;
+export const getTotal = state => state.total;
 
 export default combineReducers({
   data,
   isLoading,
+  total,
 });

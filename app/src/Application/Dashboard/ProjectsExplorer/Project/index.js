@@ -55,7 +55,7 @@ const Project = ({
 
 Project.propTypes = {
   name: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
+  tags: PropTypes.array.isRequired,
   teamSize: PropTypes.number,
   pitch: PropTypes.string,
   completionDate: PropTypes.string,
