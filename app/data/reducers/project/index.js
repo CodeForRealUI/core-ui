@@ -4,6 +4,9 @@ import {
   PROJECT_REQUEST_SUCCESS,
   PROJECT_REQUEST_FAILURE,
   PROJECT_REQUEST,
+  FAVORITE_IDS_REQUEST_SUCCESS,
+  FAVORITE_PROJECT_REQUEST_SUCCESS,
+  UNFAVORITE_PROJECT_REQUEST_SUCCESS,
 } from '~/data/actions/project';
 
 function data(state = [], { type, response }) {
@@ -12,6 +15,19 @@ function data(state = [], { type, response }) {
       return state.concat(get(response.data, 'data', []));
     case 'CLEAR_PROJECTS':
       return [];
+    default:
+      return state;
+  }
+}
+
+function favoriteIds(state = [], { type, ids, id }) {
+  switch (type) {
+    case FAVORITE_IDS_REQUEST_SUCCESS:
+      return ids;
+    case FAVORITE_PROJECT_REQUEST_SUCCESS:
+      return state.concat(id);
+    case UNFAVORITE_PROJECT_REQUEST_SUCCESS:
+      return state.filter(projectId => projectId !== id);
     default:
       return state;
   }
@@ -39,9 +55,11 @@ function isLoading(state = false, { type }) {
 export const getProjects = state => state.data;
 export const getIsLoading = state => state.isLoading;
 export const getTotal = state => state.total;
+export const getFavoriteIds = state => state.favoriteIds;
 
 export default combineReducers({
   data,
   isLoading,
   total,
+  favoriteIds,
 });

@@ -25,6 +25,7 @@ export const getIsMissingRole = state => fromUser.getIsMissingRole(state.user);
 export const getProjects = state => fromProject.getProjects(state.project);
 export const getIsProjectsLoading = state => fromProject.getIsLoading(state.project);
 export const getProjectCount = state => fromProject.getTotal(state.project);
+export const getFavoriteProjectIds = state => fromProject.getFavoriteIds(state.project);
 
 // Global Bootstrap Selectors
 export const getIsBootstrapping = state => fromBootstrap.getIsBootstrapping(state.bootstrap);

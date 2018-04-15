@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { throttle } from 'lodash';
+import { throttle, includes } from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Tabs, Tab, CircularProgress } from 'material-ui';
@@ -7,9 +7,10 @@ import {
   getProjects,
   getIsProjectsLoading,
   getProjectCount,
+  getFavoriteProjectIds,
 } from '~/data/reducers';
 import { ALL, MY_PROJECTS, FAVORITED } from '~/constants/projectFilters';
-import { projectRequest, favoriteProjectRequest } from '~/data/actions/project';
+import { projectRequest, favoriteProjectRequest, unfavoriteProjectRequest } from '~/data/actions/project';
 import Project from './Project';
 import './styles.scss';
 
@@ -22,6 +23,8 @@ class ProjectsExplorer extends Component {
     loadProjects: PropTypes.func,
     favoriteProject: PropTypes.func,
     projectCount: PropTypes.number,
+    favoriteProjectIds: PropTypes.arrayOf(PropTypes.number),
+    unfavoriteProject: PropTypes.func,
   };
 
   constructor(props) {
@@ -86,7 +89,7 @@ class ProjectsExplorer extends Component {
   };
 
   render() {
-    const { projects, projectsLoading, favoriteProject } = this.props;
+    const { projects, projectsLoading, favoriteProject, unfavoriteProject, favoriteProjectIds } = this.props;
     return (
       <div className="project-viewer">
         <Tabs
@@ -108,7 +111,9 @@ class ProjectsExplorer extends Component {
           {projects.map(project => (
             <Project
               key={project.id}
+              isFavorited={includes(favoriteProjectIds, project.id)}
               favoriteProject={favoriteProject}
+              unfavoriteProject={unfavoriteProject}
               {...project}
             />
           ))}
@@ -131,10 +136,12 @@ export default connect(
     projects: getProjects(state),
     projectsLoading: getIsProjectsLoading(state),
     projectCount: getProjectCount(state),
+    favoriteProjectIds: getFavoriteProjectIds(state),
   }),
   dispatch => ({
     loadProjects: (filter, page, perPage) =>
       dispatch(projectRequest(filter, page, perPage)),
     favoriteProject: id => dispatch(favoriteProjectRequest(id)),
+    unfavoriteProject: id => dispatch(unfavoriteProjectRequest(id)),
   }),
 )(ProjectsExplorer);

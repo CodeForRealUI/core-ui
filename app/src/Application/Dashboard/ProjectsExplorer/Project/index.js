@@ -12,9 +12,11 @@ const Project = ({
   pitch,
   completionDate,
   favoriteProject,
+  unfavoriteProject,
+  isFavorited,
 }) => {
   function handleFavoriteClick() {
-    favoriteProject(id);
+    return isFavorited ? unfavoriteProject(id) : favoriteProject(id);
   }
   return (
     <div className="project">
@@ -42,7 +44,7 @@ const Project = ({
               {`By ${format(completionDate, 'MM/DD/YY')}`}
               <Button>Status</Button>
               <div>
-                <Icon onClick={handleFavoriteClick}>favorite</Icon>
+                <Icon color={isFavorited ? 'secondary' : 'disabled'} onClick={handleFavoriteClick}>favorite</Icon>
                 <Icon>people</Icon>
               </div>
             </div>
@@ -61,6 +63,8 @@ Project.propTypes = {
   completionDate: PropTypes.string,
   favoriteProject: PropTypes.func,
   id: PropTypes.number,
+  isFavorited: PropTypes.bool,
+  unfavoriteProject: PropTypes.func,
 };
 
 export default Project;

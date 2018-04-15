@@ -97,10 +97,22 @@ class AppService {
       .then(response => response, error => Promise.reject(error.response));
   }
 
+  getFavoriteProjectIds() {
+    return this.client
+      .get('/projects/favorite_ids')
+      .then(response => response, error => Promise.reject(error.response));
+  }
+
   favoriteProject(id) {
     return this.client
       .put(`/projects/${id}/favorite`)
-      .then(response => response, error => Promise.reject(error.response));
+      .then(response => response.data, error => Promise.reject(error.response));
+  }
+
+  unfavoriteProject(id) {
+    return this.client
+      .put(`/projects/${id}/unfavorite`)
+      .then(response => response.data, error => Promise.reject(error.response));
   }
 }
 

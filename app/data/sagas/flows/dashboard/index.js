@@ -1,7 +1,7 @@
 import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { get } from 'lodash';
 import loadUser from '~/data/sagas/loaders/loadUser';
 import loadProjects from '~/data/sagas/loaders/loadProjects';
+import loadFavoriteProjectIds from '~/data/sagas/loaders/loadFavoriteProjectIds';
 import fetchResource from '~/data/sagas/helpers/fetchResource';
 import {
   BOOTSTRAP_DASHBOARD,
@@ -11,12 +11,15 @@ import {
 import {
   PROJECT_REQUEST,
   FAVORITE_PROJECT_REQUEST,
+  UNFAVORITE_PROJECT_REQUEST,
+  favoriteProjectRequestSuccess,
+  unfavoriteProjectRequestSuccess,
 } from '~/data/actions/project';
 import swal from 'sweetalert2/dist/sweetalert2';
 
 export function* bootstrapDashboard() {
   try {
-    yield all([call(loadUser)]);
+    yield all([call(loadUser), call(loadFavoriteProjectIds)]);
     yield put(dashboardBootstrapSuccess());
   } catch (exception) {
     yield put(dashboardBootstrapFailure(exception));
@@ -26,8 +29,18 @@ export function* bootstrapDashboard() {
 export function* handleFavorite({ id }) {
   try {
     yield call(fetchResource, 'favoriteProject', id);
+    yield put(favoriteProjectRequestSuccess(id));
+  } catch (e) {
+    swal('Unable to favorite project, please try again later.');
+  }
+}
+
+export function* handleUnfavorite({ id }) {
+  try {
+    yield call(fetchResource, 'unfavoriteProject', id);
+    yield put(unfavoriteProjectRequestSuccess(id));
   } catch (exception) {
-    swal(get(exception, 'data.errors.fullMessages[0]'));
+    swal('Unable to unfavorite project, please try again later.');
   }
 }
 
@@ -36,5 +49,6 @@ export default function*() {
     takeEvery(BOOTSTRAP_DASHBOARD, bootstrapDashboard),
     takeLatest(PROJECT_REQUEST, loadProjects),
     takeEvery(FAVORITE_PROJECT_REQUEST, handleFavorite),
+    takeEvery(UNFAVORITE_PROJECT_REQUEST, handleUnfavorite),
   ]);
 }
