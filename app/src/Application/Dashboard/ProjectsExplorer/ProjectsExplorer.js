@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { throttle } from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Tabs, Tab } from 'material-ui';
-import Spinner from '~/src/shared/Spinner';
+import { Tabs, Tab, CircularProgress } from 'material-ui';
 import {
   getProjects,
   getIsProjectsLoading,
@@ -29,7 +28,7 @@ class ProjectsExplorer extends Component {
     super(props);
     this.checkScrollPosition = throttle(
       this.checkScrollPosition.bind(this),
-      500,
+      100,
     );
   }
 
@@ -57,21 +56,25 @@ class ProjectsExplorer extends Component {
     this.projectScroller = element;
   };
 
+  noMoreProjects() {
+    const { projects, projectCount } = this.props;
+    return projects.length === projectCount;
+  }
+
   handleScroll = event => {
     event.persist();
-    this.checkScrollPosition(event);
+    if (!this.noMoreProjects()) {
+      this.checkScrollPosition(event);
+    }
   };
 
   checkScrollPosition({ target }) {
-    const { projects, projectCount } = this.props;
-    if (projects.length === projectCount) {
+    if (this.props.projectsLoading) {
       return;
     }
     const max = target.scrollHeight - target.offsetHeight;
-    if (max === target.scrollTop) {
-      const { currentPage } = this.state;
-      const nextPage = currentPage + 1;
-      this.setState({ currentPage: nextPage });
+    if (max - target.scrollTop <= 1000) {
+      this.setState({ currentPage: this.state.currentPage + 1 });
     }
   }
 
@@ -109,7 +112,14 @@ class ProjectsExplorer extends Component {
               {...project}
             />
           ))}
-          {projectsLoading && <Spinner />}
+          {!this.noMoreProjects() && <div className="test">test</div>}
+          {projectsLoading && (
+            <div className="project-spinner">
+              <div className="project-spinner">
+                <CircularProgress size={50} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
