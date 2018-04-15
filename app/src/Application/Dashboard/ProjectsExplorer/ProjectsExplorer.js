@@ -10,7 +10,12 @@ import {
   getFavoriteProjectIds,
 } from '~/data/reducers';
 import { ALL, MY_PROJECTS, FAVORITED } from '~/constants/projectFilters';
-import { projectRequest, favoriteProjectRequest, unfavoriteProjectRequest } from '~/data/actions/project';
+import {
+  projectRequest,
+  favoriteProjectRequest,
+  unfavoriteProjectRequest,
+} from '~/data/actions/project';
+import noProjectsLogo from '~/public/images/icon-no-project.svg';
 import Project from './Project';
 import './styles.scss';
 
@@ -89,7 +94,13 @@ class ProjectsExplorer extends Component {
   };
 
   render() {
-    const { projects, projectsLoading, favoriteProject, unfavoriteProject, favoriteProjectIds } = this.props;
+    const {
+      projects,
+      projectsLoading,
+      favoriteProject,
+      unfavoriteProject,
+      favoriteProjectIds,
+    } = this.props;
     return (
       <div className="project-viewer">
         <Tabs
@@ -108,6 +119,9 @@ class ProjectsExplorer extends Component {
           onScroll={this.handleScroll}
           ref={this.setScrollerRef}
         >
+          {projects.length === 0 && (
+            <img src={noProjectsLogo} alt="no projects found" />
+          )}
           {projects.map(project => (
             <Project
               key={project.id}
@@ -117,7 +131,6 @@ class ProjectsExplorer extends Component {
               {...project}
             />
           ))}
-          {!this.noMoreProjects() && <div className="test">test</div>}
           {projectsLoading && (
             <div className="project-spinner">
               <div className="project-spinner">
