@@ -15,8 +15,8 @@ function NavBarView({ children }) {
           <Typography className="dashboard-title" color="inherit">
             <span className="dashboard-type">graduate dashboard</span>
           </Typography>
-          <Link to="/new-project-form">
-                npo
+          <Link className="nav-bar-link" to="/new-project-form">
+                New Project
             </Link>
           <Link className="nav-bar-link" to="/dashboard">
             Projects
