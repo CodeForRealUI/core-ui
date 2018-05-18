@@ -7,15 +7,16 @@ import {
 import reducer, * as fromBootstrap from '../';
 
 describe('Bootstrap reducer', () => {
+  let initialState = {};
   describe('isBootstrapping reducer', () => {
     it('should return false as default', () => {
-      const initialState = {};
+      initialState = {};
       const action = { type: 'RANDO' };
       const newState = reducer(initialState, action);
       expect(fromBootstrap.getIsBootstrapping(newState)).toEqual(false);
     });
     it('should return previous state if no type match', () => {
-      const initialState = {
+      initialState = {
         isBootstrapping: true,
       };
       const action = { type: 'RANDO' };
@@ -23,7 +24,7 @@ describe('Bootstrap reducer', () => {
       expect(fromBootstrap.getIsBootstrapping(newState)).toEqual(true);
     });
     it('should return false on BOOTSTRAP_SUCCESS', () => {
-      const initialState = {
+      initialState = {
         isBootstrapping: true,
       };
       const action = { type: BOOTSTRAP_SUCCESS };
@@ -31,7 +32,7 @@ describe('Bootstrap reducer', () => {
       expect(fromBootstrap.getIsBootstrapping(newState)).toEqual(false);
     });
     it('should return false on BOOTSTRAP_FAILURE', () => {
-      const initialState = {
+      initialState = {
         isBootstrapping: true,
       };
       const action = { type: BOOTSTRAP_FAILURE };
@@ -39,7 +40,7 @@ describe('Bootstrap reducer', () => {
       expect(fromBootstrap.getIsBootstrapping(newState)).toEqual(false);
     });
     it('should return true on ALREADY_SIGNED_IN_BOOTSTRAP_REQUEST', () => {
-      const initialState = {
+      initialState = {
         isBootstrapping: false,
       };
       const action = { type: ALREADY_SIGNED_IN_BOOTSTRAP_REQUEST };
@@ -47,7 +48,7 @@ describe('Bootstrap reducer', () => {
       expect(fromBootstrap.getIsBootstrapping(newState)).toEqual(true);
     });
     it('should return true on ROLE_PICK_BOOTSTRAP_REQUEST', () => {
-      const initialState = {
+      initialState = {
         isBootstrapping: false,
       };
       const action = { type: ROLE_PICK_BOOTSTRAP_REQUEST };
