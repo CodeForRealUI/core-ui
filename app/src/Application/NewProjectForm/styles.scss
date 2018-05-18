@@ -18,11 +18,30 @@
     
             .card-content{
                 display: flex;
+                font-size: 14px;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 margin-top: 30px;
+
+                .images{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
             }
+        }
+    }
+    .tags-button{
+      margin-top:30px;
+      margin-bottom: 30px;
+      
+        .tag-content {
+            display:flex;
+            flex-direction: column;
+            z-index:100;
+            padding: 30px;
+            width: 260px;
         }
     }
 
