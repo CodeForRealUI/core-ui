@@ -25,6 +25,24 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
+const cards = [
+  {
+    label: 'Website',
+    alt: 'Website',
+    img: webLogo,
+  },
+  {
+    label: 'Mobile',
+    alt: 'Mobile',
+    img: smartPhone,
+  },
+  {
+    label: 'Other',
+    alt: 'Other',
+    img: programmingCode,
+  },
+];
+
 class FullScreenDialog extends React.Component {
   state = {
     open: false,
@@ -33,6 +51,21 @@ class FullScreenDialog extends React.Component {
   handleClose = () => {
     // todo
   };
+
+  renderProjectCards = () =>
+    cards.map(({ label, alt, img }) => (
+      <Card className="card" key={label}>
+        <div className="card-content">
+          <img className="img" src={img} alt={alt} />
+          <CardActions>
+            <FormControlLabel
+              control={<Radio color="primary" />}
+              label={label}
+            />
+          </CardActions>
+        </div>
+      </Card>
+    ));
 
   render() {
     return (
@@ -53,47 +86,12 @@ class FullScreenDialog extends React.Component {
           <Header text="New Project Form" />
           <div>
             <div className="form-container">
-              <div className="cards-container">
-                <Card className="card">
-                  <div className="card-content">
-                    <img className="img" src={webLogo} alt="website" />
-                    <CardActions>
-                      <FormControlLabel
-                        control={<Radio color="primary" />}
-                        label="Website"
-                      />
-                    </CardActions>
-                  </div>
-                </Card>
-                <Card className="card">
-                  <div className="card-content">
-                    <img className="img" src={smartPhone} alt="smart phone" />
-                    <CardActions>
-                      <FormControlLabel
-                        control={<Radio color="primary" />}
-                        label="Mobile"
-                      />
-                    </CardActions>
-                  </div>
-                </Card>
-                <Card className="card">
-                  <div className="card-content">
-                    <img className="img" src={programmingCode} alt="code" />
-                    <CardActions>
-                      <FormControlLabel
-                        control={<Radio color="primary" />}
-                        label="Other"
-                      />
-                    </CardActions>
-                  </div>
-                </Card>
-              </div>
+              <div className="cards-container">{this.renderProjectCards()}</div>
               <TextField fullWidth label="Enter Your Project Name" />
             </div>
           </div>
         </Dialog>
       </div>
-
     );
   }
 }
