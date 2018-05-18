@@ -1,7 +1,13 @@
+@import '~sass/mixins';
+@import '~sass/variables';
+@import '~sass/colors';
 
 .form-container {
-    max-width: 500px;
-    margin: auto;
+     @include center-item();
+
+    .submit-project-button{
+        @include button()
+    }
 
     .cards-container{
         display: flex;
@@ -11,7 +17,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 15px;
+            margin-right: 30px;
+            margin-top: 10px;
             margin-bottom: 30px;
             width: 150px;
             height: 150px;

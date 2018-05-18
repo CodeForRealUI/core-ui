@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Button,
   Dialog,
+  AppBar,
   Toolbar,
   Slide,
   Card,
@@ -79,14 +80,20 @@ class FullScreenDialog extends React.Component {
           onClose={this.handleClose}
           transition={Transition}
         >
-          <Toolbar>
-            <Link to="/dashboard">
-              <Button onClick={this.handleClose}>go back</Button>
-            </Link>
-          </Toolbar>
-          <Header text="New Project Form" />
-          <div>
-            <div className="form-container">
+          <AppBar color="default">
+            <Toolbar>
+              <Link to="/dashboard">
+                <Button className="go-back-button" onClick={this.handleClose}>
+                  go back
+                </Button>
+              </Link>
+            </Toolbar>
+          </AppBar>
+
+          <div className="form-container">
+            <Header text="New Project Form" />
+            <div className="new-project-form-content">
+              <strong> Project Type </strong>
               <div className="cards-container">{this.renderProjectCards()}</div>
               <TextField fullWidth label="Enter Your Project Name" />
               <TextField fullWidth label="Description" />
