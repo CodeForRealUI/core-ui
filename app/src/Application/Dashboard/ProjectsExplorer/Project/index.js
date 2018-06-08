@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Paper, Typography, Grid, Chip, Button, Icon } from 'material-ui';
 import { format } from 'date-fns';
 import './styles.scss';
@@ -42,7 +43,7 @@ const Project = ({
           <Grid item xs={2}>
             <div className="user-actions">
               {`By ${format(completionDate, 'MM/DD/YY')}`}
-              <Button>Status</Button>
+              <Link className="status-link" to={`/project-status/${id}`}><Button>Status</Button></Link>
               <div>
                 <Icon color={isFavorited ? 'secondary' : 'disabled'} onClick={handleFavoriteClick}>favorite</Icon>
                 <Icon>people</Icon>

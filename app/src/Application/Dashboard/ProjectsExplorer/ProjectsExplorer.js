@@ -119,9 +119,6 @@ class ProjectsExplorer extends Component {
           onScroll={this.handleScroll}
           ref={this.setScrollerRef}
         >
-          {projects.length === 0 && (
-            <img src={noProjectsLogo} alt="no projects found" />
-          )}
           {projects.map(project => (
             <Project
               key={project.id}
@@ -131,6 +128,9 @@ class ProjectsExplorer extends Component {
               {...project}
             />
           ))}
+          {projects.length === 0 && !projectsLoading && (
+            <img src={noProjectsLogo} alt="no projects found" />
+          )}
           {projectsLoading && (
             <div className="project-spinner">
               <div className="project-spinner">
