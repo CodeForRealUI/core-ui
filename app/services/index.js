@@ -1,19 +1,24 @@
 import axios from 'axios';
 
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
-import { getJsonFromUrl } from '../utilities/browser';
 
 const BASE_URL = 'https://damp-beyond-45634.herokuapp.com/';
 
 class AppService {
-  constructor(baseURL) {
-    const [token, client, uid] = LocalStorage.getAll([KEYS.TOKEN, KEYS.CLIENT, KEYS.UID]);
+  constructor(baseURL, headers) {
+    const [token, client, uid] = LocalStorage.getAll([
+      KEYS.TOKEN,
+      KEYS.CLIENT,
+      KEYS.UID,
+    ]);
     this.client = axios.create({
       baseURL: baseURL || BASE_URL,
       headers: {
         'access-token': token,
         client,
         uid,
+        'X-Key-Inflection': 'camel',
+        ...headers,
       },
     });
   }
@@ -47,18 +52,16 @@ class AppService {
     return this.client
       .post('/auth/password', {
         email,
-        redirect_url: 'http://localhost:3000/reset-password',
+        redirect_url: `${window.origin}/reset-password`,
       })
       .then(response => response, error => Promise.reject(error.response));
   }
 
   passwordReset(password1, password2) {
-    const queryParams = getJsonFromUrl();
     return this.client
       .put('/auth/password', {
         password: password1,
         password_confirmation: password2,
-        ...queryParams,
       })
       .then(response => response, error => Promise.reject(error.response));
   }
@@ -75,6 +78,41 @@ class AppService {
     return this.client
       .get('/users/me')
       .then(response => response, error => Promise.reject(error.response));
+  }
+
+  getProjects(page, perPage) {
+    return this.client
+      .get(`/projects?per_page=${perPage}&page=${page}`)
+      .then(response => response, error => Promise.reject(error.response));
+  }
+
+  getMyProjects(page, perPage) {
+    return this.client
+      .get(`/projects/me?per_page=${perPage}&page=${page}`)
+      .then(response => response, error => Promise.reject(error.response));
+  }
+  getFavoriteProjects(page, perPage) {
+    return this.client
+      .get(`/projects/favorites?per_page=${perPage}&page=${page}`)
+      .then(response => response, error => Promise.reject(error.response));
+  }
+
+  getFavoriteProjectIds() {
+    return this.client
+      .get('/projects/favorite_ids')
+      .then(response => response, error => Promise.reject(error.response));
+  }
+
+  favoriteProject(id) {
+    return this.client
+      .put(`/projects/${id}/favorite`)
+      .then(response => response.data, error => Promise.reject(error.response));
+  }
+
+  unfavoriteProject(id) {
+    return this.client
+      .put(`/projects/${id}/unfavorite`)
+      .then(response => response.data, error => Promise.reject(error.response));
   }
 }
 

@@ -7,7 +7,7 @@ import { Paper, TextField, FormGroup } from 'material-ui';
 import { rolePickRequest } from '~/data/actions/rolePicker';
 import './styles.scss';
 
-class BootCampRoleSignup extends Component {
+export class BootCampRoleSignup extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +43,7 @@ class BootCampRoleSignup extends Component {
           <button
             className="continue-button"
             disabled={this.state.code.length < 24}
-            onClick={this.onHandleRolePickRequest}
+            onSubmit={this.onHandleRolePickRequest}
           >
             Continue
           </button>

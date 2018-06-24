@@ -27,6 +27,7 @@ import theme from './theme';
 /* eslint-enable import/no-unresolved, import/extensions */
 import configureStore from './configureStore';
 import Application from './src/Application';
+import BootstrapSpinner from './src/Application/BootstrapSpinner';
 
 // Create redux store with history
 const initialState = {};
@@ -39,7 +40,10 @@ const render = () => {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <MuiThemeProvider theme={theme}>
-          <Application />
+          <div>
+            <Application />
+            <BootstrapSpinner />
+          </div>
         </MuiThemeProvider>
       </ConnectedRouter>
     </Provider>,

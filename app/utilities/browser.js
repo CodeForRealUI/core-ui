@@ -6,5 +6,5 @@ export const getJsonFromUrl = () => {
     result[item[0]] = decodeURIComponent(item[1]);
   });
   return result;
-}
-;
+};
+

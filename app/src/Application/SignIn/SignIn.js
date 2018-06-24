@@ -7,12 +7,13 @@ import {
   Checkbox,
   FormGroup,
   FormControlLabel,
-  Button,
 } from 'material-ui';
 import { Link } from 'react-router-dom';
 
-
 import LocalStorage, { KEYS } from '~/utilities/LocalStorage';
+import Header from '../Header';
+import DividerWithText from '../DividerWithText';
+import OAuthButton from '../OAuthButton';
 import './styles.scss';
 
 class SignIn extends Component {
@@ -41,19 +42,23 @@ class SignIn extends Component {
     this.setState({ email: e.target.value });
   };
 
-  handleLogIn = () => {
+  shouldDisableSignIn = () => !this.state.email || !this.state.password;
+
+  handleLogIn = e => {
+    e.preventDefault();
     const { email, password, rememberMe } = this.state;
     rememberMe && this.handleRememberMe(email);
-    this.props.login(email, password);
+    return this.props.login(email, password);
   };
 
-  renderForm() {
-    return (
-      <div>
+  renderForm = () => (
+    <div>
+      <form onSubmit={this.handleLogIn}>
         <FormGroup row>
           <TextField
             autoFocus
             id="email"
+            type="email"
             value={this.state.email}
             onChange={this.handleEmailChange}
             fullWidth
@@ -77,32 +82,28 @@ class SignIn extends Component {
             control={<Checkbox color="primary" />}
           />
           <Link className="forgot-password-link" to="/forgot-password">
-            Forgot your password?
-          </Link>
+              Forgot your password?
+            </Link>
         </FormGroup>
-        <FormGroup row>
-          <Button variant="raised" className="login-button " onClick={this.handleLogIn}>
+        <button
+          className="login-button "
+          disabled={this.shouldDisableSignIn()}
+          onSubmit={this.handleLogIn}
+        >
             Log In
-          </Button>
-        </FormGroup>
-        {/* <DividerWithText text={'or connect with'} />
-        <FormGroup row>
-          <Button variant="raised" className="sign-in-with-facebook-button">
-            Sign in with Facebook
-          </Button>
-          <Button variant="raised" className="sign-in-with-google-button">
-            Sign in with Google{' '}
-          </Button>
-        </FormGroup> */}
-      </div>
-    );
-  }
+          </button>
+      </form>
+      <DividerWithText text={'or connect with'} />
+      <OAuthButton type="facebook" text="Sign in with Facebook" />
+      <OAuthButton type="google" text="Sign in with Google" />
+    </div>
+    )
 
   render() {
     return (
       <div className="sign-in-container">
         <Paper elevation={24} className="sign-in-box">
-          <h1>Sign In</h1>
+          <Header text="Sign In" />
           {this.renderForm()}
         </Paper>
         <Link className="sign-up-link" to="/sign-up">

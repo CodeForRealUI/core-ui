@@ -1,4 +1,4 @@
-import ApiService from 'services';
+import { push } from 'react-router-redux';
 import { expectSaga } from 'redux-saga-test-plan';
 import sinon from 'sinon';
 import { identity } from 'lodash';
@@ -9,6 +9,8 @@ import {
   passwordResetRequestFailure,
 } from '~/data/actions/forgotPassword';
 import LocalStorage from '~/utilities/LocalStorage';
+import fetchResource from '~/data/sagas/helpers/fetchResource';
+import ApiService from '~/services';
 import { passwordReset, passwordResetEmailRequest } from './';
 
 
@@ -25,22 +27,22 @@ describe('Reset password flow', () => {
       expectSaga(passwordResetEmailRequest, request)
         .provide({
           call({ fn, args }, next) {
-            return fn === ApiService.prototype.passwordResetEmail &&
-              args[0] === request.email
+            return fn === fetchResource &&
+              args[1] === request.email
               ? response
               : next();
           },
         })
         .put(passwordResetEmailRequestSuccess(response))
-        .returns(undefined)
+        .put(push('/sign-in'))
         .run()
     );
 
     it('should yield the expected actions on error path', () =>
       expectSaga(passwordResetEmailRequest, request)
         .provide({
-          call({ fn }) {
-            if (fn === ApiService.prototype.passwordResetEmail) {
+          call({ fn, args }) {
+            if (fn === fetchResource && args[0] === 'passwordResetEmail') {
               throw error;
             }
           },
@@ -68,6 +70,7 @@ describe('Reset password flow', () => {
           },
         })
         .put(passwordResetRequestSuccess(response))
+        .put(push('/sign-in'))
         .returns(undefined)
         .run()
     );

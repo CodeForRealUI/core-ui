@@ -1,0 +1,35 @@
+@import '~sass/variables';
+@import '~sass/colors';
+@import '~sass/mixins';
+
+@include pinkGradientBackground();
+
+.non-profit-role-sign-up-container {
+    @include center-item();
+
+    
+    .sign-in-link {
+        @include link();
+    }
+
+    .subheading {
+        color: $dark-grey-01;
+        margin-top: 60px;
+        margin-bottom: 10px;
+    }
+    .non-profit-role-sign-up-box {
+        text-align: left;
+        padding: 75px;
+        max-width:800px;
+
+        .submit-button {
+           @include button();
+           margin-top: 45px;
+        }
+        button:disabled {
+            opacity:0.5
+        }
+    
+    }
+  
+}
