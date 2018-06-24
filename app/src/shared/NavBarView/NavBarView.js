@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, Typography } from 'material-ui';
+import { AppBar, Toolbar } from 'material-ui';
 import { Link } from 'react-router-dom';
+import logo from '~/public/images/Logo.png';
 import './styles.scss';
 
 function NavBarView({ children }) {
@@ -10,7 +11,15 @@ function NavBarView({ children }) {
       <AppBar position="static" color="inherit" elevation={2}>
         <Toolbar>
           <div className="logo-placeholder">
-            <div className="logo">LOGO</div>
+            <img alt="logo" src={logo} />
+          </div>
+          <div className="right-nav-links">
+            <Link className="nav-bar-link" to="/dashboard">
+              Projects
+            </Link>
+            <Link className="nav-bar-link" to="/groups">
+              Groups
+            </Link>
           </div>
           <Typography className="dashboard-title" color="inherit">
             <span className="dashboard-type">graduate dashboard</span>
