@@ -11,7 +11,7 @@ import './styles.scss';
 import Header from '../Header/index';
 
 
-class AlreadySignedIn extends Component {
+export class AlreadySignedIn extends Component {
   componentWillMount() {
     this.props.handleBootstrap();
   }

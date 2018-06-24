@@ -23,7 +23,7 @@ class RolePicker extends Component {
       <div className="role-cards">
         <Link to="/bootcamp-grad-verify">
           <Card className="role-card" >
-            <CardContent>
+            <CardContent className="card-content">
               <img className="image" src={dev} alt="non profit" />
               <Typography className="link" component="p">
                 I'm a Bootcamp graduate
@@ -33,7 +33,7 @@ class RolePicker extends Component {
         </Link>
         <Link to="/non-profit-verify">
           <Card className="role-card">
-            <CardContent>
+            <CardContent className="card-content">
               <img className="image" src={npo} alt="bootcamp graduate" />
               <Typography className="link" component="p">
                 I'm a Non-Profit organization

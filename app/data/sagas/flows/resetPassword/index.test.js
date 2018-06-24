@@ -1,4 +1,4 @@
-import ApiService from 'services';
+import { push } from 'react-router-redux';
 import { expectSaga } from 'redux-saga-test-plan';
 import sinon from 'sinon';
 import { identity } from 'lodash';
@@ -10,6 +10,7 @@ import {
 } from '~/data/actions/forgotPassword';
 import LocalStorage from '~/utilities/LocalStorage';
 import fetchResource from '~/data/sagas/helpers/fetchResource';
+import ApiService from '~/services';
 import { passwordReset, passwordResetEmailRequest } from './';
 
 
@@ -26,14 +27,14 @@ describe('Reset password flow', () => {
       expectSaga(passwordResetEmailRequest, request)
         .provide({
           call({ fn, args }, next) {
-            return fn === ApiService.prototype.passwordResetEmail &&
-              args[0] === request.email
+            return fn === fetchResource &&
+              args[1] === request.email
               ? response
               : next();
           },
         })
         .put(passwordResetEmailRequestSuccess(response))
-        .returns(undefined)
+        .put(push('/sign-in'))
         .run()
     );
 
@@ -61,15 +62,15 @@ describe('Reset password flow', () => {
           call({ fn, args }) {
             return (
               [
-                fn === fetchResource,
-                args[0] === 'passwordReset',
-                args[1] === request.password,
-                args[2] === request.confirmedPassword,
+                fn === ApiService.prototype.passwordReset,
+                args[0] === request.password,
+                args[1] === request.confirmedPassword,
               ].every(identity) && response
             );
           },
         })
         .put(passwordResetRequestSuccess(response))
+        .put(push('/sign-in'))
         .returns(undefined)
         .run()
     );
@@ -77,8 +78,8 @@ describe('Reset password flow', () => {
     it('should yield the expected actions on error path', () =>
       expectSaga(passwordReset, request)
         .provide({
-          call({ fn, args }) {
-            if (fn === fetchResource && args[0] === 'passwordReset') {
+          call({ fn }) {
+            if (fn === ApiService.prototype.passwordReset) {
               throw error;
             }
           },
