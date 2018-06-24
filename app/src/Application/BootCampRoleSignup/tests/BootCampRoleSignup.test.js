@@ -60,7 +60,7 @@ describe('Component BootCampRoleSignup', () => {
     wrapper.setState({
       code: '321',
     });
-    wrapper.find('button').simulate('click', {
+    wrapper.find('button').simulate('submit', {
       preventDefault() {
         return '';
       },

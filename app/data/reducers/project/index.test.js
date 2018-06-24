@@ -14,10 +14,10 @@ describe('Project reducer', () => {
     it('should return the data property of the response when recieving PROJECT_REQUEST_SUCCESS', () => {
       const action = {
         type: PROJECT_REQUEST_SUCCESS,
-        response: { data: [{ test: 'test' }] },
+        response: { data: { data: [{ test: 'test' }] } },
       };
       const state = reducer(initialState, action);
-      expect(fromProject.getProjects(state)).toEqual(action.response.data);
+      expect(fromProject.getProjects(state)).toEqual(action.response.data.data);
     });
   });
 

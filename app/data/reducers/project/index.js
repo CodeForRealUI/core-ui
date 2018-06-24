@@ -12,6 +12,7 @@ import {
 function data(state = [], { type, response }) {
   switch (type) {
     case PROJECT_REQUEST_SUCCESS:
+      // TODO: change this so state is not mutated
       return state.concat(get(response.data, 'data', []));
     case 'CLEAR_PROJECTS':
       return [];

@@ -1,5 +1,6 @@
 import ApiService from 'services';
 import { expectSaga } from 'redux-saga-test-plan';
+import { push } from 'react-router-redux';
 import sinon from 'sinon';
 import { identity } from 'lodash';
 import {
@@ -70,6 +71,7 @@ describe('Reset password flow', () => {
           },
         })
         .put(passwordResetRequestSuccess(response))
+        .put(push('/sign-in'))
         .returns(undefined)
         .run()
     );
@@ -78,7 +80,7 @@ describe('Reset password flow', () => {
       expectSaga(passwordReset, request)
         .provide({
           call({ fn, args }) {
-            if (fn === fetchResource && args[0] === 'passwordReset') {
+            if (fn === ApiService.prototype.passwordReset && args[0] === request.password) {
               throw error;
             }
           },

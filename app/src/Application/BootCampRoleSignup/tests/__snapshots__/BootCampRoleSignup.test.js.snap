@@ -55,7 +55,7 @@ exports[`Component BootCampRoleSignup should remain consistent if no change was 
           <button
             className="continue-button"
             disabled={true}
-            onClick={[Function]}
+            onSubmit={[Function]}
           >
             Continue
           </button>

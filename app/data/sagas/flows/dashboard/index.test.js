@@ -1,6 +1,6 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import loadUser from '~/data/sagas/loaders/loadUser';
-import loadProjects from '~/data/sagas/loaders/loadProjects';
+import loadFavoriteProjectIds from '~/data/sagas/loaders/loadFavoriteProjectIds';
 import { dashboardBootstrapSuccess, dashboardBootstrapFailure } from '~/data/actions//dashboard';
 import { bootstrapDashboard } from './';
 
@@ -12,7 +12,7 @@ describe('bootstrapDashboard', () => {
       .provide({
         call({ fn }) {
           // throw error unless the expected resources are loaded
-          if (fn === loadUser || fn === loadProjects) {
+          if (fn === loadUser || fn === loadFavoriteProjectIds) {
             return true;
           }
           throw Error('test');

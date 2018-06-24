@@ -43,6 +43,7 @@ describe('Login flow', () => {
       data: {
         data: {
           uid: 'test',
+          role: 'admin',
         },
       },
     };
