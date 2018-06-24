@@ -17,7 +17,8 @@ function data(state = {}, { type, response }) {
   }
 }
 
-function isMissingRole(state = true, { type, response }) {
+// defaulting to false is more optimistic for reoccuring users
+function isMissingRole(state = false, { type, response }) {
   switch (type) {
     case USER_REQUEST_SUCCESS:
       return !(get(response, 'data.data.role'));
@@ -33,6 +34,7 @@ export default combineReducers({
   isMissingRole,
 });
 
+export const getUserData = state => state.data;
 export const getFirstName = state => state.data.firstName;
 export const getId = state => state.data.id;
 export const getIsMissingRole = state => state.isMissingRole;

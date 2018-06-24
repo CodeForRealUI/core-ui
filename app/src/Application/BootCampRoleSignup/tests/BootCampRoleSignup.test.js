@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
 
 import { BootCampRoleSignup } from '../BootCampRoleSignup';
 
@@ -69,9 +68,5 @@ describe('Component BootCampRoleSignup', () => {
     expect(handleRolePickRequest.mock.calls[0][0]).toEqual({
       school_code: '321',
     });
-  });
-  it('should remain consistent if no change was intended', () => {
-    const tree = renderer.create(<BootCampRoleSignup {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
   });
 });

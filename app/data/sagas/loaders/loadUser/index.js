@@ -8,7 +8,6 @@ export default function* loadUser() {
     yield put(userRequestSuccess(response));
   } catch (exception) {
     yield put(userRequestFailure(exception));
-    throw exception;
   }
 }
 

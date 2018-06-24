@@ -21,6 +21,18 @@ function NavBarView({ children }) {
               Groups
             </Link>
           </div>
+          <Typography className="dashboard-title" color="inherit">
+            <span className="dashboard-type">graduate dashboard</span>
+          </Typography>
+          <Link to="/new-project-form">
+                npo
+            </Link>
+          <Link className="nav-bar-link" to="/dashboard">
+            Projects
+          </Link>
+          <Link className="nav-bar-link" to="/groups">
+            Groups
+          </Link>
         </Toolbar>
       </AppBar>
       <div className="content-container">{children}</div>

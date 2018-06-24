@@ -1,0 +1,29 @@
+
+.form-container {
+    max-width: 500px;
+    margin: auto;
+
+    .cards-container{
+        display: flex;
+        justify-content: center;
+    
+        .card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px;
+            margin-bottom: 30px;
+            width: 150px;
+            height: 150px;
+    
+            .card-content{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-top: 30px;
+            }
+        }
+    }
+
+}
