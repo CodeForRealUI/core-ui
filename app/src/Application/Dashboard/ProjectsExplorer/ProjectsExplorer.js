@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { throttle, includes } from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Tabs, Tab, CircularProgress } from 'material-ui';
+import { Tabs, Tab } from 'material-ui';
 import {
   getProjects,
   getIsProjectsLoading,
@@ -15,11 +14,8 @@ import {
   favoriteProjectRequest,
   unfavoriteProjectRequest,
 } from '~/data/actions/project';
-import noProjectsLogo from '~/public/images/icon-no-project.svg';
-import Project from './Project';
+import ProjectScroller from './ProjectScroller';
 import './styles.scss';
-
-const ITEMS_PER_PAGE = 15;
 
 class ProjectsExplorer extends Component {
   static propTypes = {
@@ -27,79 +23,29 @@ class ProjectsExplorer extends Component {
     projectsLoading: PropTypes.bool,
     loadProjects: PropTypes.func,
     favoriteProject: PropTypes.func,
-    projectCount: PropTypes.number,
     favoriteProjectIds: PropTypes.arrayOf(PropTypes.number),
     unfavoriteProject: PropTypes.func,
   };
 
-  constructor(props) {
-    super(props);
-    this.checkScrollPosition = throttle(
-      this.checkScrollPosition.bind(this),
-      100,
-    );
-  }
-
   state = {
     activeTab: ALL,
-    currentPage: 1,
   };
-
-  componentDidMount() {
-    const { activeTab, currentPage } = this.state;
-    this.props.loadProjects(activeTab, currentPage, ITEMS_PER_PAGE);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { activeTab, currentPage } = this.state;
-    if (
-      prevState.activeTab !== activeTab ||
-      prevState.currentPage === currentPage - 1
-    ) {
-      this.props.loadProjects(activeTab, currentPage, ITEMS_PER_PAGE);
-    }
-  }
-
-  setScrollerRef = element => {
-    this.projectScroller = element;
-  };
-
-  noMoreProjects() {
-    const { projects, projectCount } = this.props;
-    return projects.length === projectCount;
-  }
-
-  handleScroll = event => {
-    event.persist();
-    if (!this.noMoreProjects()) {
-      this.checkScrollPosition(event);
-    }
-  };
-
-  checkScrollPosition({ target }) {
-    if (this.props.projectsLoading) {
-      return;
-    }
-    const max = target.scrollHeight - target.offsetHeight;
-    if (max - target.scrollTop <= 1000) {
-      this.setState({ currentPage: this.state.currentPage + 1 });
-    }
-  }
 
   handleTabChange = (event, value) => {
-    this.projectScroller.scrollTo(0, 0);
     setTimeout(() => {
-      this.setState({ activeTab: value, currentPage: 1 });
+      this.setState({ activeTab: value });
     }, 0);
   };
 
   render() {
     const {
       projects,
+      projectCount,
       projectsLoading,
       favoriteProject,
       unfavoriteProject,
       favoriteProjectIds,
+      loadProjects,
     } = this.props;
     return (
       <div className="project-viewer">
@@ -114,31 +60,16 @@ class ProjectsExplorer extends Component {
           <Tab label="My Projects" value={MY_PROJECTS} />
           <Tab label="Favorite Projects" value={FAVORITED} />
         </Tabs>
-        <div
-          className="projects-container"
-          onScroll={this.handleScroll}
-          ref={this.setScrollerRef}
-        >
-          {projects.map(project => (
-            <Project
-              key={project.id}
-              isFavorited={includes(favoriteProjectIds, project.id)}
-              favoriteProject={favoriteProject}
-              unfavoriteProject={unfavoriteProject}
-              {...project}
-            />
-          ))}
-          {projects.length === 0 && !projectsLoading && (
-            <img src={noProjectsLogo} alt="no projects found" />
-          )}
-          {projectsLoading && (
-            <div className="project-spinner">
-              <div className="project-spinner">
-                <CircularProgress size={50} />
-              </div>
-            </div>
-          )}
-        </div>
+        <ProjectScroller
+          projects={projects}
+          projectCount={projectCount}
+          isProjectsLoading={projectsLoading}
+          favoriteProject={favoriteProject}
+          unfavoriteProject={unfavoriteProject}
+          favoriteProjectIds={favoriteProjectIds}
+          category={this.state.activeTab}
+          loadProjects={loadProjects}
+        />
       </div>
     );
   }

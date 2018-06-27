@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar } from 'material-ui';
+import { AppBar, Toolbar, Typography } from 'material-ui';
 import { Link } from 'react-router-dom';
 import logo from '~/public/images/Logo.png';
 import './styles.scss';
