@@ -8,7 +8,7 @@ import {
   getProjectCount,
   getFavoriteProjectIds,
 } from '~/data/reducers';
-import { ALL, MY_PROJECTS, FAVORITED } from '~/constants/projectFilters';
+import { ALL, MY_PROJECTS, FAVORITED, REQUESTED } from '~/constants/projectFilters';
 import {
   projectRequest,
   favoriteProjectRequest,
@@ -58,6 +58,7 @@ class ProjectsExplorer extends Component {
         >
           <Tab label="All Projects" value={ALL} />
           <Tab label="My Projects" value={MY_PROJECTS} />
+          <Tab label="Requested Projects" value={REQUESTED} />          
           <Tab label="Favorite Projects" value={FAVORITED} />
         </Tabs>
         <ProjectScroller

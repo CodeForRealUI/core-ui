@@ -9,12 +9,10 @@ const Project = ({
   id,
   name,
   tags,
-  teamSize,
-  pitch,
-  completionDate,
   favoriteProject,
   unfavoriteProject,
   isFavorited,
+  quickBlurb,
 }) => {
   function handleFavoriteClick() {
     return isFavorited ? unfavoriteProject(id) : favoriteProject(id);
@@ -33,16 +31,14 @@ const Project = ({
               <Typography variant="title">{name}</Typography>
             </Grid>
             <Grid item xs={12}>
-              {`${teamSize} developers`}
               {tags.map(tag => <Chip label={tag.name} key={tag.id} />)}
             </Grid>
             <Grid item xs={12}>
-              <Typography>{pitch}</Typography>
+              <Typography>{quickBlurb}</Typography>
             </Grid>
           </Grid>
           <Grid item xs={2}>
             <div className="user-actions">
-              {`By ${format(completionDate, 'MM/DD/YY')}`}
               <Link className="status-link" to={`/project-status/${id}`}><Button>Status</Button></Link>
               <div>
                 <Icon color={isFavorited ? 'secondary' : 'disabled'} onClick={handleFavoriteClick}>favorite</Icon>
@@ -59,9 +55,7 @@ const Project = ({
 Project.propTypes = {
   name: PropTypes.string.isRequired,
   tags: PropTypes.array.isRequired,
-  teamSize: PropTypes.number,
-  pitch: PropTypes.string,
-  completionDate: PropTypes.string,
+  quickBlurb: PropTypes.string,
   favoriteProject: PropTypes.func,
   id: PropTypes.number,
   isFavorited: PropTypes.bool,

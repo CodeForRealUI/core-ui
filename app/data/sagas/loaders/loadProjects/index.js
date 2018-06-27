@@ -5,12 +5,13 @@ import {
   projectRequestFailure,
   clearProjects,
 } from '~/data/actions/project';
-import { ALL, MY_PROJECTS, FAVORITED } from '~/constants/projectFilters';
+import { ALL, MY_PROJECTS, FAVORITED, REQUESTED } from '~/constants/projectFilters';
 
 const RESOURCES = {
   [ALL]: 'getProjects',
   [MY_PROJECTS]: 'getMyProjects',
   [FAVORITED]: 'getFavoriteProjects', // todo
+  [REQUESTED]: 'getRequestedProjects', // todo
 };
 
 export default function* loadProjects({ filter, page, perPage }) {

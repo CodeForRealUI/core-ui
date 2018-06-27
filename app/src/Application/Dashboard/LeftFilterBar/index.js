@@ -15,19 +15,6 @@ const LeftFilterBar = () => (
     <div>
       <div className="drawer-input">
         <FormControl fullWidth>
-          <InputLabel>Completed By</InputLabel>
-          <Input
-            type="text"
-            endAdornment={
-              <InputAdornment position="end">
-                <Icon>date_range</Icon>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </div>
-      <div className="drawer-input">
-        <FormControl fullWidth>
           <InputLabel>Project Name</InputLabel>
           <Input
             type="text"
@@ -40,15 +27,16 @@ const LeftFilterBar = () => (
         </FormControl>
       </div>
       <div className="drawer-input">
-        <FormControl>
-          <InputLabel>Team Size</InputLabel>
-          <Select value="Test" />
-        </FormControl>
-      </div>
-      <div className="drawer-input">
-        <FormControl>
-          <InputLabel>Project Length</InputLabel>
-          <Select value="Test" />
+        <FormControl fullWidth>
+          <InputLabel>Organization Name</InputLabel>
+          <Input
+            type="text"
+            endAdornment={
+              <InputAdornment position="end">
+                <Icon>search</Icon>
+              </InputAdornment>
+            }
+          />
         </FormControl>
       </div>
       <div className="drawer-input">
