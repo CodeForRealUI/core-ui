@@ -17,11 +17,13 @@ export class Dashboard extends Component {
     this.props.bootstrapDashboard();
   }
 
+  renderLeftNav = () => <LeftFilterBar />;
+
   render() {
     return (
       <div className="dashboard-container">
         <NavBarView>
-          <Route path="/" component={LeftFilterBar} />
+          <Route path="/" render={this.renderLeftNav} />
           <Route path="/" component={ProjectsExplorer} />
         </NavBarView>
       </div>

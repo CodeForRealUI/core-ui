@@ -1,3 +1,17 @@
+@import '~sass/colors';
+
+
+.left-nav {
+    width: 350px;
+    background-color: $white-01;
+    padding: 40px;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.nav-content {
+    margin-top: 50px;
+}
+
 .drawer-input {
     margin-top: 15px;
 }
