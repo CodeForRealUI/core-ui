@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
-import NavBarView from '~/src/shared/NavBarView';
 import { BOOTSTRAP_DASHBOARD } from '~/data/actions/dashboard';
-import LeftFilterBar from './LeftFilterBar';
-import ProjectsExplorer from './ProjectsExplorer';
+import DashboardContent from './DashboardContent';
 import './styles.scss';
 
 export class Dashboard extends Component {
@@ -17,15 +14,11 @@ export class Dashboard extends Component {
     this.props.bootstrapDashboard();
   }
 
-  renderLeftNav = () => <LeftFilterBar />;
 
   render() {
     return (
       <div className="dashboard-container">
-        <NavBarView>
-          <Route path="/" render={this.renderLeftNav} />
-          <Route path="/" component={ProjectsExplorer} />
-        </NavBarView>
+        <DashboardContent />
       </div>
     );
   }
