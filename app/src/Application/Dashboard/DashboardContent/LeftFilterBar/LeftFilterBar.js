@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   FormControl,
@@ -14,12 +15,18 @@ import LeftNav from '~/src/shared/LeftNav';
 import './styles.scss';
 
 class LeftFilterBar extends React.Component {
-  state = {
-    name: '',
+  static propTypes = {
+    filters: PropTypes.shape({
+      name: PropTypes.string,
+      organizationName: PropTypes.string,
+      tags: PropTypes.arrayOf(PropTypes.string),
+      type: PropTypes.string,
+    }).isRequired,
+    onFilterChange: PropTypes.func.isRequired,
   };
 
   handleNameChange = e => {
-    this.setState({ name: e.target.value });
+    this.props.onFilterChange('name', e.target.value);
   };
 
   render() {
@@ -30,7 +37,7 @@ class LeftFilterBar extends React.Component {
             <InputLabel>Project Name</InputLabel>
             <Input
               type="text"
-              value={this.state.name}
+              value={this.props.filters.name}
               onChange={this.handleNameChange}
               endAdornment={
                 <InputAdornment position="end">

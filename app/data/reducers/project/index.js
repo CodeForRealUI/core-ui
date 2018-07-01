@@ -12,8 +12,7 @@ import {
 function data(state = [], { type, response }) {
   switch (type) {
     case PROJECT_REQUEST_SUCCESS:
-      // TODO: change this so state is not mutated
-      return state.concat(get(response.data, 'data', []));
+      return state.concat(get(response, 'data', []));
     case 'CLEAR_PROJECTS':
       return [];
     default:
@@ -36,7 +35,7 @@ function favoriteIds(state = [], { type, ids, id }) {
 
 function total(state = 0, { type, response }) {
   if (type === PROJECT_REQUEST_SUCCESS) {
-    return parseInt(get(response, 'headers.total'), 10);
+    return parseInt(get(response, 'headers.total', 0), 10);
   }
   return state;
 }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { includes, throttle } from 'lodash';
+import { includes, throttle, isEqual, debounce } from 'lodash';
 import { CircularProgress } from 'material-ui';
 import noProjectsLogo from '~/public/images/icon-no-project.svg';
 import { ITEMS_PER_PAGE } from '~/constants/pagination';
 import Project from './Project';
-
 
 class ProjectScroller extends Component {
   static propTypes = {
@@ -17,6 +16,12 @@ class ProjectScroller extends Component {
     favoriteProject: PropTypes.func.isRequired,
     unfavoriteProject: PropTypes.func.isRequired,
     favoriteProjectIds: PropTypes.array.isRequired,
+    filters: PropTypes.shape({
+      name: PropTypes.string,
+      organizationName: PropTypes.string,
+      tags: PropTypes.arrayOf(PropTypes.string),
+      type: PropTypes.string,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -25,6 +30,10 @@ class ProjectScroller extends Component {
       this.checkScrollPosition.bind(this),
       100,
     );
+
+    this.loadFilteredProjects = debounce(this.loadFilteredProjects, 1000, {
+      trailing: true,
+    });
   }
 
   state = {
@@ -32,19 +41,40 @@ class ProjectScroller extends Component {
   };
 
   componentDidMount() {
-    const { category } = this.props;
-    this.props.loadProjects(category, {}, this.state.currentPage, ITEMS_PER_PAGE);
+    const { category, filters } = this.props;
+    this.props.loadProjects(
+      category,
+      filters,
+      this.state.currentPage,
+      ITEMS_PER_PAGE,
+    );
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.category !== nextProps.category) {
-      this.setState({ currentPage: 1 });
-      this.props.loadProjects(nextProps.category, {}, 1, ITEMS_PER_PAGE);
-    }
+  componentWillReceiveProps({ category, filters }) {
+    this.handleCategoryChanged(category, filters);
+    this.handleFiltersChanged(category, filters);
   }
 
   setScrollerRef = element => {
     this.projectScroller = element;
+  };
+
+  loadFilteredProjects = filters => {
+    this.props.loadProjects(this.props.category, filters, 1, ITEMS_PER_PAGE);
+  };
+
+  handleFiltersChanged = (category, filters) => {
+    if (!isEqual(this.props.filters, filters)) {
+      this.setState({ currentPage: 1 });
+      this.loadFilteredProjects(filters);
+    }
+  };
+
+  handleCategoryChanged = (category, filters) => {
+    if (this.props.category !== category) {
+      this.setState({ currentPage: 1 });
+      this.props.loadProjects(category, filters, 1, ITEMS_PER_PAGE);
+    }
   };
 
   noMoreProjects() {
@@ -60,7 +90,12 @@ class ProjectScroller extends Component {
     if (max - target.scrollTop <= 1000) {
       const nextPage = this.state.currentPage + 1;
       this.setState({ currentPage: nextPage });
-      this.props.loadProjects(this.props.category, {}, nextPage, ITEMS_PER_PAGE);
+      this.props.loadProjects(
+        this.props.category,
+        this.props.filters,
+        nextPage,
+        ITEMS_PER_PAGE,
+      );
     }
   }
 
