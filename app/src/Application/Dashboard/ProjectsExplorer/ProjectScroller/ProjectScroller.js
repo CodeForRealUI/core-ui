@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { includes, throttle } from 'lodash';
 import { CircularProgress } from 'material-ui';
 import noProjectsLogo from '~/public/images/icon-no-project.svg';
-
+import { ITEMS_PER_PAGE } from '~/constants/pagination';
 import Project from './Project';
 
-const ITEMS_PER_PAGE = 15;
 
 class ProjectScroller extends Component {
   static propTypes = {
@@ -34,13 +33,13 @@ class ProjectScroller extends Component {
 
   componentDidMount() {
     const { category } = this.props;
-    this.props.loadProjects(category, this.state.currentPage, ITEMS_PER_PAGE);
+    this.props.loadProjects(category, {}, this.state.currentPage, ITEMS_PER_PAGE);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.category !== nextProps.category) {
       this.setState({ currentPage: 1 });
-      this.props.loadProjects(nextProps.category, 1, ITEMS_PER_PAGE);
+      this.props.loadProjects(nextProps.category, {}, 1, ITEMS_PER_PAGE);
     }
   }
 
@@ -61,7 +60,7 @@ class ProjectScroller extends Component {
     if (max - target.scrollTop <= 1000) {
       const nextPage = this.state.currentPage + 1;
       this.setState({ currentPage: nextPage });
-      this.props.loadProjects(this.props.category, nextPage, ITEMS_PER_PAGE);
+      this.props.loadProjects(this.props.category, {}, nextPage, ITEMS_PER_PAGE);
     }
   }
 

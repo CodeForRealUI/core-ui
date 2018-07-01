@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   FormControl,
   InputLabel,
@@ -8,6 +9,8 @@ import {
   Select,
 } from 'material-ui';
 import './styles.scss';
+import { projectRequest } from '~/data/actions/project';
+import { ITEMS_PER_PAGE } from '~/constants/pagination';
 
 class LeftFilterBar extends React.Component {
   state = {
@@ -68,4 +71,6 @@ class LeftFilterBar extends React.Component {
   }
 }
 
-export default LeftFilterBar;
+export default connect(null, dispatch => ({
+  loadProjects: () => dispatch(projectRequest(category, filters, page, ITEMS_PER_PAGE)),
+}))(LeftFilterBar);

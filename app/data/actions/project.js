@@ -1,9 +1,10 @@
 export const PROJECT_REQUEST = 'PROJECT_REQUEST';
 export const PROJECT_REQUEST_SUCCESS = 'PROJECT_REQUEST_SUCCESS';
 export const PROJECT_REQUEST_FAILURE = 'PROJECT_REQUEST_FAILURE';
-export const projectRequest = (filter, page, perPage) => ({
+export const projectRequest = (category, filters, page, perPage) => ({
   type: PROJECT_REQUEST,
-  filter,
+  category,
+  filters,
   page,
   perPage,
 });

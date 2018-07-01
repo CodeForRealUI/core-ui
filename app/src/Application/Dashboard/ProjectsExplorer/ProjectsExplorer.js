@@ -25,6 +25,7 @@ class ProjectsExplorer extends Component {
     favoriteProject: PropTypes.func,
     favoriteProjectIds: PropTypes.arrayOf(PropTypes.number),
     unfavoriteProject: PropTypes.func,
+    projectCount: PropTypes.number,
   };
 
   state = {
@@ -84,8 +85,8 @@ export default connect(
     favoriteProjectIds: getFavoriteProjectIds(state),
   }),
   dispatch => ({
-    loadProjects: (filter, page, perPage) =>
-      dispatch(projectRequest(filter, page, perPage)),
+    loadProjects: (category, filters, page, perPage) =>{ console.log(category, filters, page, perPage)
+      dispatch(projectRequest(category, filters, page, perPage))},
     favoriteProject: id => dispatch(favoriteProjectRequest(id)),
     unfavoriteProject: id => dispatch(unfavoriteProjectRequest(id)),
   }),
