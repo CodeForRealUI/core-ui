@@ -18,7 +18,8 @@ export const projectRequestFailure = error => ({
 });
 
 export const FAVORITE_PROJECT_REQUEST = 'FAVORITE_PROJECT_REQUEST';
-export const FAVORITE_PROJECT_REQUEST_SUCCESS = 'FAVORITE_PROJECT_REQUEST_SUCCESS';
+export const FAVORITE_PROJECT_REQUEST_SUCCESS =
+  'FAVORITE_PROJECT_REQUEST_SUCCESS';
 export const favoriteProjectRequest = id => ({
   type: FAVORITE_PROJECT_REQUEST,
   id,
@@ -29,7 +30,8 @@ export const favoriteProjectRequestSuccess = id => ({
 });
 
 export const UNFAVORITE_PROJECT_REQUEST = 'UNFAVORITE_PROJECT_REQUEST';
-export const UNFAVORITE_PROJECT_REQUEST_SUCCESS = 'UNFAVORITE_PROJECT_REQUEST_SUCCESS';
+export const UNFAVORITE_PROJECT_REQUEST_SUCCESS =
+  'UNFAVORITE_PROJECT_REQUEST_SUCCESS';
 export const unfavoriteProjectRequest = id => ({
   type: UNFAVORITE_PROJECT_REQUEST,
   id,
@@ -43,4 +45,13 @@ export const CLEAR_PROJECTS = 'CLEAR_PROJECTS';
 export const clearProjects = () => ({ type: CLEAR_PROJECTS });
 
 export const FAVORITE_IDS_REQUEST_SUCCESS = 'FAVORITE_IDS_REQUEST_SUCCESS';
-export const favoriteIdsRequestSuccess = ids => ({ type: FAVORITE_IDS_REQUEST_SUCCESS, ids });
+export const favoriteIdsRequestSuccess = ids => ({
+  type: FAVORITE_IDS_REQUEST_SUCCESS,
+  ids,
+});
+
+export const PROJECT_TYPES_REQUEST_SUCCESS = 'PROJECT_TYPES_REQUEST_SUCCESS';
+export const projectTypesRequestSuccess = types => ({
+  type: PROJECT_TYPES_REQUEST_SUCCESS,
+  types,
+});

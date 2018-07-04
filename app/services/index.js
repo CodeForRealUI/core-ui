@@ -80,6 +80,12 @@ class AppService {
       .then(response => response, error => Promise.reject(error.response));
   }
 
+  getProjectTypes() {
+    return this.client
+      .get('/projects/types')
+      .then(response => response, error => Promise.reject(error.response));
+  }
+
   getProjects({ page, perPage }) {
     return this.client
       .get(`/projects?per_page=${perPage}&page=${page}`)

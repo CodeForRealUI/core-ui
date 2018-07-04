@@ -5,7 +5,7 @@ import { CircularProgress } from 'material-ui';
 import noProjectsLogo from '~/public/images/icon-no-project.svg';
 import { ITEMS_PER_PAGE } from '~/constants/pagination';
 import Project from './Project';
-import { ALL, FILTERED } from '~/constants/projectFilters';
+import { FILTERED } from '~/constants/projectFilters';
 
 class ProjectScroller extends Component {
   static propTypes = {

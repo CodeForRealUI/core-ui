@@ -2,6 +2,7 @@ import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import loadUser from '~/data/sagas/loaders/loadUser';
 import loadProjects from '~/data/sagas/loaders/loadProjects';
 import loadFavoriteProjectIds from '~/data/sagas/loaders/loadFavoriteProjectIds';
+import loadProjectTypes from '~/data/sagas/loaders/loadProjectTypes';
 import fetchResource from '~/data/sagas/helpers/fetchResource';
 import {
   BOOTSTRAP_DASHBOARD,
@@ -19,7 +20,11 @@ import swal from 'sweetalert2/dist/sweetalert2';
 
 export function* bootstrapDashboard() {
   try {
-    yield all([call(loadUser), call(loadFavoriteProjectIds)]);
+    yield all([
+      call(loadUser),
+      call(loadFavoriteProjectIds),
+      call(loadProjectTypes),
+    ]);
     yield put(dashboardBootstrapSuccess());
   } catch (exception) {
     yield put(dashboardBootstrapFailure(exception));

@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { omitBy, isEmpty } from 'lodash';
 import fetchResource from '~/data/sagas/helpers/fetchResource';
 import {
   projectRequestSuccess,
@@ -27,7 +28,7 @@ export default function* loadProjects({ category, filters, page, perPage }) {
       yield put(clearProjects());
     }
     const response = yield call(fetchResource, RESOURCES[category], {
-      filters,
+      filters: omitBy(filters, isEmpty),
       page,
       perPage,
     });

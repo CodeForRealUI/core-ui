@@ -7,6 +7,7 @@ import {
   FAVORITE_IDS_REQUEST_SUCCESS,
   FAVORITE_PROJECT_REQUEST_SUCCESS,
   UNFAVORITE_PROJECT_REQUEST_SUCCESS,
+  PROJECT_TYPES_REQUEST_SUCCESS,
 } from '~/data/actions/project';
 
 function data(state = [], { type, response }) {
@@ -52,14 +53,24 @@ function isLoading(state = false, { type }) {
   }
 }
 
+function types(state = [], { type, types }) {
+  if (type === PROJECT_TYPES_REQUEST_SUCCESS) {
+    return types;
+  }
+
+  return state;
+}
+
 export const getProjects = state => state.data;
 export const getIsLoading = state => state.isLoading;
 export const getTotal = state => state.total;
 export const getFavoriteIds = state => state.favoriteIds;
+export const getTypes = state => state.types;
 
 export default combineReducers({
   data,
   isLoading,
   total,
   favoriteIds,
+  types,
 });

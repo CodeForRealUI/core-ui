@@ -22,23 +22,26 @@ class DashboardContent extends Component {
   };
 
   handleCategoryChange = (event, value) => {
-    this.setState({ activeCategory: value, filters: initialFilterState  });
+    this.setState({ activeCategory: value, filters: initialFilterState });
   };
 
   handleFilterChange = (filter, value) => {
     if (this.state.activeCategory !== FILTERED) {
       this.setState(() => ({ activeCategory: FILTERED }));
     }
-    this.setState(previous => ({
-      filters: {
-        ...previous.filters,
-        [filter]: value,
+    this.setState(
+      previous => ({
+        filters: {
+          ...previous.filters,
+          [filter]: value,
+        },
+      }),
+      () => {
+        if (isEqual(this.state.filters, initialFilterState)) {
+          this.setState({ activeCategory: ALL });
+        }
       },
-    }), () => {
-      if (isEqual(this.state.filters, initialFilterState)) {
-        this.setState({ activeCategory: ALL });
-      }
-    });
+    );
   };
 
   renderLeftNav = () => (
