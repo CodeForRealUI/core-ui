@@ -53,7 +53,7 @@ function isLoading(state = false, { type }) {
   }
 }
 
-function types(state = [], { type, types }) {
+function projectTypes(state = [], { type, types }) {
   if (type === PROJECT_TYPES_REQUEST_SUCCESS) {
     return types;
   }
@@ -65,12 +65,12 @@ export const getProjects = state => state.data;
 export const getIsLoading = state => state.isLoading;
 export const getTotal = state => state.total;
 export const getFavoriteIds = state => state.favoriteIds;
-export const getTypes = state => state.types;
+export const getTypes = state => state.projectTypes;
 
 export default combineReducers({
   data,
   isLoading,
   total,
   favoriteIds,
-  types,
+  projectTypes,
 });

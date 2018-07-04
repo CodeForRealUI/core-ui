@@ -4,8 +4,8 @@ import { includes, throttle, isEqual, debounce } from 'lodash';
 import { CircularProgress } from 'material-ui';
 import noProjectsLogo from '~/public/images/icon-no-project.svg';
 import { ITEMS_PER_PAGE } from '~/constants/pagination';
-import Project from './Project';
 import { FILTERED } from '~/constants/projectFilters';
+import Project from './Project';
 
 class ProjectScroller extends Component {
   static propTypes = {

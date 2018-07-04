@@ -12,8 +12,8 @@ import {
   MenuItem,
 } from 'material-ui';
 import LeftNav from '~/src/shared/LeftNav';
-import './styles.scss';
 import { getProjectTypes } from '~/data/reducers';
+import './styles.scss';
 
 class LeftFilterBar extends React.Component {
   static propTypes = {
