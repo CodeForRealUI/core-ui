@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import {
   FormControl,
   InputLabel,
@@ -9,8 +8,6 @@ import {
   InputAdornment,
   Select,
 } from 'material-ui';
-import { projectRequest } from '~/data/actions/project';
-import { ITEMS_PER_PAGE } from '~/constants/pagination';
 import LeftNav from '~/src/shared/LeftNav';
 import './styles.scss';
 
@@ -27,6 +24,10 @@ class LeftFilterBar extends React.Component {
 
   handleNameChange = e => {
     this.props.onFilterChange('name', e.target.value);
+  };
+
+  handleOrganizationNameChange = e => {
+    this.props.onFilterChange('organizationName', e.target.value);
   };
 
   render() {
@@ -52,6 +53,8 @@ class LeftFilterBar extends React.Component {
             <InputLabel>Organization Name</InputLabel>
             <Input
               type="text"
+              value={this.props.filters.organizationName}
+              onChange={this.handleOrganizationNameChange}
               endAdornment={
                 <InputAdornment position="end">
                   <Icon>search</Icon>
@@ -77,10 +80,4 @@ class LeftFilterBar extends React.Component {
   }
 }
 
-export default connect(
-  null,
-  dispatch => ({
-    loadProjects: () =>
-      dispatch(projectRequest(category, filters, page, ITEMS_PER_PAGE)),
-  }),
-)(LeftFilterBar);
+export default LeftFilterBar;

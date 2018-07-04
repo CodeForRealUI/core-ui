@@ -5,6 +5,7 @@ import { CircularProgress } from 'material-ui';
 import noProjectsLogo from '~/public/images/icon-no-project.svg';
 import { ITEMS_PER_PAGE } from '~/constants/pagination';
 import Project from './Project';
+import { ALL, FILTERED } from '~/constants/projectFilters';
 
 class ProjectScroller extends Component {
   static propTypes = {
@@ -71,7 +72,7 @@ class ProjectScroller extends Component {
   };
 
   handleCategoryChanged = (category, filters) => {
-    if (this.props.category !== category) {
+    if (this.props.category !== category && category !== FILTERED) {
       this.setState({ currentPage: 1 });
       this.props.loadProjects(category, filters, 1, ITEMS_PER_PAGE);
     }

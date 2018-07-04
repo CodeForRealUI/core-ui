@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { isEqual } from 'lodash';
 import NavBarView from '~/src/shared/NavBarView';
 import { ALL, FILTERED } from '~/constants/projectFilters';
 import LeftFilterBar from './LeftFilterBar';
@@ -21,7 +22,7 @@ class DashboardContent extends Component {
   };
 
   handleCategoryChange = (event, value) => {
-    this.setState({ activeCategory: value });
+    this.setState({ activeCategory: value, filters: initialFilterState  });
   };
 
   handleFilterChange = (filter, value) => {
@@ -33,7 +34,11 @@ class DashboardContent extends Component {
         ...previous.filters,
         [filter]: value,
       },
-    }));
+    }), () => {
+      if (isEqual(this.state.filters, initialFilterState)) {
+        this.setState({ activeCategory: ALL });
+      }
+    });
   };
 
   renderLeftNav = () => (
