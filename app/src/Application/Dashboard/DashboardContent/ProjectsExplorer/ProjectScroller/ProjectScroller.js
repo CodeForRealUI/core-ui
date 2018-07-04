@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { includes, throttle, isEqual, debounce } from 'lodash';
+import { includes, throttle, isEqual, debounce, isEmpty } from 'lodash';
 import { CircularProgress } from 'material-ui';
 import noProjectsLogo from '~/public/images/icon-no-project.svg';
 import { ITEMS_PER_PAGE } from '~/constants/pagination';
@@ -64,8 +64,11 @@ class ProjectScroller extends Component {
     this.props.loadProjects(this.props.category, filters, 1, ITEMS_PER_PAGE);
   };
 
+  hasNoFilters = filters =>
+    Object.keys(filters).every(filter => isEmpty(filters[filter]));
+
   handleFiltersChanged = (category, filters) => {
-    if (!isEqual(this.props.filters, filters)) {
+    if (!isEqual(this.props.filters, filters) && !this.hasNoFilters(filters)) {
       this.setState({ currentPage: 1 });
       this.loadFilteredProjects(filters);
     }
