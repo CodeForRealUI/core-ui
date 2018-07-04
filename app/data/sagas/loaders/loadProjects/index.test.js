@@ -7,7 +7,7 @@ import loadProjects from './';
 describe('loadProjects saga', () => {
   const response = {};
   const error = { test: 'test' };
-  const options = { filter: ALL, page: 1, perPage: 25 };
+  const options = { filters: {}, page: 1, perPage: 25, category: ALL };
   it('should yield the expected effects on happy path', () =>
     expectSaga(loadProjects, options)
       .put(clearProjects())
@@ -21,6 +21,8 @@ describe('loadProjects saga', () => {
       })
       .put(projectRequestSuccess(response))
       .run());
+
+  // it('should not put clearProjects when page is not equal to one') todo
 
   it('should yield the expected effects on error path', () =>
     expectSaga(loadProjects, options)

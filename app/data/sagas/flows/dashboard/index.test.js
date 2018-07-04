@@ -1,9 +1,12 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import loadUser from '~/data/sagas/loaders/loadUser';
 import loadFavoriteProjectIds from '~/data/sagas/loaders/loadFavoriteProjectIds';
-import { dashboardBootstrapSuccess, dashboardBootstrapFailure } from '~/data/actions//dashboard';
+import loadProjectTypes from '~/data/sagas/loaders/loadProjectTypes';
+import {
+  dashboardBootstrapSuccess,
+  dashboardBootstrapFailure,
+} from '~/data/actions//dashboard';
 import { bootstrapDashboard } from './';
-
 
 describe('bootstrapDashboard', () => {
   const error = { test: 'test' };
@@ -12,15 +15,19 @@ describe('bootstrapDashboard', () => {
       .provide({
         call({ fn }) {
           // throw error unless the expected resources are loaded
-          if (fn === loadUser || fn === loadFavoriteProjectIds) {
+          const isExpectedFunction = [
+            loadUser,
+            loadFavoriteProjectIds,
+            loadProjectTypes,
+          ].some(func => func === fn);
+          if (isExpectedFunction) {
             return true;
           }
           throw Error('test');
         },
       })
       .put(dashboardBootstrapSuccess())
-      .run()
-  );
+      .run());
 
   it('should yield the expected effect on error path', () =>
     expectSaga(bootstrapDashboard)
@@ -30,6 +37,5 @@ describe('bootstrapDashboard', () => {
         },
       })
       .put(dashboardBootstrapFailure(error))
-      .run()
-  );
+      .run());
 });
